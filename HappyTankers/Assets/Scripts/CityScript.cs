@@ -49,7 +49,7 @@ public class CityScript : BlockScript
 
         SetBreakCity(false);
 
-        StartCoroutine(TestBreak());
+        //StartCoroutine(TestBreak());
     }
 
     private IEnumerator TestBreak()

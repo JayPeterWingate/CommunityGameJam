@@ -7,7 +7,7 @@ public class GenerateLevel : MonoBehaviour
     private LevelManager m_manager;
     [SerializeField] private Texture2D m_levelMap;
     private int xSize = 24;
-    private int ySize = 14;
+    private int ySize = 18;
     private List<BlockScript> m_levelBlocks;
 
     // Start is called before the first frame update
@@ -25,7 +25,6 @@ public class GenerateLevel : MonoBehaviour
                 }
             }
         }
-        Destroy(GetComponent<MeshRenderer>());
         //SetActiveLevel(false);
         SetFilterMode(true, true);
     }
