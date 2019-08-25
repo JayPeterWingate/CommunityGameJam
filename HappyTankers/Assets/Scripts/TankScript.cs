@@ -21,9 +21,8 @@ public class TankScript : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-		m_body.AddTorque(0, m_rotatePower * ( m_controller.leftDrive - m_controller.rightDrive), 0);
+		m_body.AddTorque( transform.up * m_rotatePower * ( m_controller.leftDrive - m_controller.rightDrive));
 		m_body.AddForceAtPosition(transform.TransformDirection(new Vector3(0,0, m_controller.leftDrive * m_horsePower)), m_leftTread.position);
-
 		m_body.AddForceAtPosition(transform.TransformDirection(new Vector3(0, 0, m_controller.rightDrive * m_horsePower)), m_rightTread.position);
 	}
 }

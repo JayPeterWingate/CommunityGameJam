@@ -1,6 +1,8 @@
-﻿using System.Collections;
+﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.InputSystem;
 
 public class TankController : MonoBehaviour
 {
@@ -10,9 +12,22 @@ public class TankController : MonoBehaviour
 
 public class PlayerScript : TankController
 {
+	public MasterControl controls;
 
-	private void Update()
+	private void Awake()
 	{
-		
+
+		print("THIS OCCURED");
+		controls = new MasterControl();
+		controls.Enable();
+		controls.Player.LeftTrack.performed += ctr => leftDrive = ctr.ReadValue<float>();
+		controls.Player.RightTrack.performed += ctr => rightDrive = ctr.ReadValue<float>();
+		controls.Player.LeftTrack.canceled += ctr => { leftDrive = 0; };
+		controls.Player.RightTrack.canceled += ctr => { rightDrive = 0; };
+		controls.Player.RotateTurret.performed += ctr =>
+		{
+			Vector2 pos = ctr.ReadValue<Vector2>();
+
+		};
 	}
 }
