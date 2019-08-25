@@ -27,7 +27,7 @@ public class GenerateLevel : MonoBehaviour
         }
         Destroy(GetComponent<MeshRenderer>());
         //SetActiveLevel(false);
-        SetFilterMode(false, true);
+        SetFilterMode(true, true);
     }
 
     public void SetFilterMode(bool happy, bool dark)
