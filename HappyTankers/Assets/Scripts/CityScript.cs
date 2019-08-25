@@ -6,6 +6,10 @@ public class CityScript : BlockScript
 {
     [SerializeField] private GameObject[] m_healthyCityPrefabs;
     [SerializeField] private GameObject[] m_brokenCityPrefabs;
+    [SerializeField] private ParticleSystem m_fire;
+    [SerializeField] private ParticleSystem m_smoke;
+    [SerializeField] private ParticleSystem m_explosion;
+
 
     private GameObject[] m_healthyBuildings;
     private GameObject[] m_brokenBuildings;
@@ -44,6 +48,14 @@ public class CityScript : BlockScript
         m_brokenBuildings[3].transform.parent = m_dark.transform;
 
         SetBreakCity(false);
+
+        //StartCoroutine(TestBreak());
+    }
+
+    private IEnumerator TestBreak()
+    {
+        yield return new WaitForSeconds(5);
+        SetBreakCity(true);
     }
 
     private void SetBreakCity(bool broken)
@@ -57,5 +69,12 @@ public class CityScript : BlockScript
         m_brokenBuildings[1].SetActive(broken);
         m_brokenBuildings[2].SetActive(broken);
         m_brokenBuildings[3].SetActive(broken);
+
+        if (broken)
+        {
+            m_fire.Play();
+            m_smoke.Play();
+            m_explosion.Play();
+        }
     }
 }
