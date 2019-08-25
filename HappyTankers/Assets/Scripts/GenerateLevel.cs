@@ -8,13 +8,13 @@ public class GenerateLevel : MonoBehaviour
     [SerializeField] private Texture2D m_levelMap;
     private int xSize = 24;
     private int ySize = 14;
-    private List<GameObject> m_levelObjects;
+    private List<BlockScript> m_levelBlocks;
 
     // Start is called before the first frame update
     void Start()
     {
         m_manager = transform.root.GetComponent<LevelManager>();
-        m_levelObjects = new List<GameObject>();
+        m_levelBlocks = new List<BlockScript>();
         if (m_levelMap != null)
         {
             for (int x = 0; x < xSize; x++)
@@ -27,6 +27,15 @@ public class GenerateLevel : MonoBehaviour
         }
         Destroy(GetComponent<MeshRenderer>());
         //SetActiveLevel(false);
+        SetFilterMode(false, true);
+    }
+
+    public void SetFilterMode(bool happy, bool dark)
+    {
+        for (int i = 0; i < m_levelBlocks.Count; i++)
+        {
+            m_levelBlocks[i].SetFilterModes(happy, dark);
+        }
     }
 
     private void SpawnObject(int x, int y)
@@ -34,15 +43,15 @@ public class GenerateLevel : MonoBehaviour
         GameObject prefab = m_manager.GetPrefabFromColor(m_levelMap.GetPixel(x, y));
         if (prefab != null)
         {
-            m_levelObjects.Add(Instantiate(prefab, transform.position + new Vector3(x - xSize / 2, 0, y - ySize / 2), transform.rotation));
+            m_levelBlocks.Add(Instantiate(prefab, transform.position + new Vector3(x - xSize / 2, 0, y - ySize / 2), transform.rotation).GetComponent<BlockScript>());
         }
     }
 
     public void SetActiveLevel(bool setting)
     {
-        for (int i = 0; i < m_levelObjects.Count; i++)
+        for (int i = 0; i < m_levelBlocks.Count; i++)
         {
-            m_levelObjects[i].SetActive(setting);
+            m_levelBlocks[i].gameObject.SetActive(setting);
         }
     }
 
