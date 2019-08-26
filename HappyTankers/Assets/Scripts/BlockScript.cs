@@ -9,7 +9,10 @@ public class BlockScript : MonoBehaviour
 
     public void SetFilterModes(bool happy, bool dark)
     {
-        m_happy.SetActive(happy);
-        m_dark.SetActive(dark);
+        if (m_happy != null && m_dark != null)
+        {
+            m_happy.SetActive(happy);
+            m_dark.SetActive(dark);
+        }
     }
 }
