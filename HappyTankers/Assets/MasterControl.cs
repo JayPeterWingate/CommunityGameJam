@@ -48,6 +48,14 @@ public class MasterControl : IInputActionCollection
                     ""expectedControlType"": """",
                     ""processors"": """",
                     ""interactions"": """"
+                },
+                {
+                    ""name"": ""Fire"",
+                    ""type"": ""Button"",
+                    ""id"": ""42f4e971-fcc5-4be8-b65e-ef3a98e1b2b5"",
+                    ""expectedControlType"": """",
+                    ""processors"": """",
+                    ""interactions"": """"
                 }
             ],
             ""bindings"": [
@@ -248,6 +256,28 @@ public class MasterControl : IInputActionCollection
                     ""action"": ""XBoxRotateTurret"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": true
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""8ad7e5fa-17e2-46ea-bc82-4eec9137c2a7"",
+                    ""path"": ""<Mouse>/leftButton"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": "";Keyboard&Mouse"",
+                    ""action"": ""Fire"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""cc2b1b0c-87a0-4dc8-9150-4146e1b08891"",
+                    ""path"": ""<XInputController>/buttonSouth"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": "";XBox"",
+                    ""action"": ""Fire"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
                 }
             ]
         }
@@ -290,6 +320,7 @@ public class MasterControl : IInputActionCollection
         m_Player_RightTrack = m_Player.GetAction("RightTrack");
         m_Player_RotateTurret = m_Player.GetAction("RotateTurret");
         m_Player_XBoxRotateTurret = m_Player.GetAction("XBoxRotateTurret");
+        m_Player_Fire = m_Player.GetAction("Fire");
     }
 
     ~MasterControl()
@@ -343,6 +374,7 @@ public class MasterControl : IInputActionCollection
     private readonly InputAction m_Player_RightTrack;
     private readonly InputAction m_Player_RotateTurret;
     private readonly InputAction m_Player_XBoxRotateTurret;
+    private readonly InputAction m_Player_Fire;
     public struct PlayerActions
     {
         private MasterControl m_Wrapper;
@@ -351,6 +383,7 @@ public class MasterControl : IInputActionCollection
         public InputAction @RightTrack => m_Wrapper.m_Player_RightTrack;
         public InputAction @RotateTurret => m_Wrapper.m_Player_RotateTurret;
         public InputAction @XBoxRotateTurret => m_Wrapper.m_Player_XBoxRotateTurret;
+        public InputAction @Fire => m_Wrapper.m_Player_Fire;
         public InputActionMap Get() { return m_Wrapper.m_Player; }
         public void Enable() { Get().Enable(); }
         public void Disable() { Get().Disable(); }
@@ -372,6 +405,9 @@ public class MasterControl : IInputActionCollection
                 XBoxRotateTurret.started -= m_Wrapper.m_PlayerActionsCallbackInterface.OnXBoxRotateTurret;
                 XBoxRotateTurret.performed -= m_Wrapper.m_PlayerActionsCallbackInterface.OnXBoxRotateTurret;
                 XBoxRotateTurret.canceled -= m_Wrapper.m_PlayerActionsCallbackInterface.OnXBoxRotateTurret;
+                Fire.started -= m_Wrapper.m_PlayerActionsCallbackInterface.OnFire;
+                Fire.performed -= m_Wrapper.m_PlayerActionsCallbackInterface.OnFire;
+                Fire.canceled -= m_Wrapper.m_PlayerActionsCallbackInterface.OnFire;
             }
             m_Wrapper.m_PlayerActionsCallbackInterface = instance;
             if (instance != null)
@@ -388,6 +424,9 @@ public class MasterControl : IInputActionCollection
                 XBoxRotateTurret.started += instance.OnXBoxRotateTurret;
                 XBoxRotateTurret.performed += instance.OnXBoxRotateTurret;
                 XBoxRotateTurret.canceled += instance.OnXBoxRotateTurret;
+                Fire.started += instance.OnFire;
+                Fire.performed += instance.OnFire;
+                Fire.canceled += instance.OnFire;
             }
         }
     }
@@ -416,5 +455,6 @@ public class MasterControl : IInputActionCollection
         void OnRightTrack(InputAction.CallbackContext context);
         void OnRotateTurret(InputAction.CallbackContext context);
         void OnXBoxRotateTurret(InputAction.CallbackContext context);
+        void OnFire(InputAction.CallbackContext context);
     }
 }

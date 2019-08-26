@@ -8,6 +8,9 @@ public class TankController : MonoBehaviour
 {
 	public float leftDrive;
 	public float rightDrive;
+	public Vector3 turretTarget;
+
+
 }
 
 public class PlayerScript : TankController
@@ -26,8 +29,15 @@ public class PlayerScript : TankController
 		controls.Player.RightTrack.canceled += ctr => { rightDrive = 0; };
 		controls.Player.RotateTurret.performed += ctr =>
 		{
-			Vector2 pos = ctr.ReadValue<Vector2>();
-
+			Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
+			// Save the info
+			RaycastHit hit;
+			// You successfully hi
+			if (Physics.Raycast(ray, out hit))
+			{
+				turretTarget = hit.point;
+				
+			}
 		};
 	}
 }

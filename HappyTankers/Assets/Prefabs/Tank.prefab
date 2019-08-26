@@ -74,7 +74,7 @@ Rigidbody:
   m_UseGravity: 1
   m_IsKinematic: 0
   m_Interpolate: 0
-  m_Constraints: 4
+  m_Constraints: 0
   m_CollisionDetection: 0
 --- !u!114 &7572879795259128528
 MonoBehaviour:
@@ -93,6 +93,8 @@ MonoBehaviour:
   m_controller: {fileID: 7572879795259128531}
   m_horsePower: 32
   m_rotatePower: 30
+  m_turretRotateSpeed: 1
+  m_turret: {fileID: 7572879797161428608}
 --- !u!114 &7572879795259128531
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -107,6 +109,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   leftDrive: 0
   rightDrive: 0
+  turretTarget: {x: 0, y: 0, z: 0}
 --- !u!1 &7572879795729595922
 GameObject:
   m_ObjectHideFlags: 0
@@ -498,8 +501,8 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 7572879797161428611}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -0.0019999463, y: 0.04, z: -0.234}
-  m_LocalScale: {x: 0.3503855, y: 0.23881523, z: 0.33346087}
+  m_LocalPosition: {x: -0.0019999463, y: 0.055, z: -0.039}
+  m_LocalScale: {x: 0.48224714, y: 0.3286893, z: 0.4589532}
   m_Children:
   - {fileID: 7572879795866612077}
   m_Father: {fileID: 7572879795259128541}
