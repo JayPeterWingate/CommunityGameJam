@@ -85,16 +85,16 @@ public class TankScript : MonoBehaviour
 	{
 		if (!m_isFiring && !m_isShielding)
 		{
-			StartCoroutine(StartShield(0.1f, 0.25f, 0.1f));
+			StartCoroutine(StartShield(0.1f, 0.25f, 0.1f, new Vector3(2.5f, 2.5f, 2.5f)));
 		}
 	}
-	private IEnumerator StartShield(float rise, float stay, float close)
+	private IEnumerator StartShield(float rise, float stay, float close, Vector3 size)
 	{
 		m_isShielding = true;
 		float current = 0;
 		while(current < rise)
 		{
-			m_shield.transform.localScale = Vector3.Lerp(new Vector3(), new Vector3(2, 2, 2), current / rise);
+			m_shield.transform.localScale = Vector3.Lerp(new Vector3(), size, current / rise);
 			current += Time.deltaTime;
 			yield return new WaitForEndOfFrame();
 		}
@@ -103,7 +103,7 @@ public class TankScript : MonoBehaviour
 		while (current < close)
 		{
 			current += Time.deltaTime;
-			m_shield.transform.localScale = Vector3.Lerp(new Vector3(2.1f, 2.1f, 2.1f), new Vector3(), current / close);
+			m_shield.transform.localScale = Vector3.Lerp(size, new Vector3(), current / close);
 			yield return new WaitForEndOfFrame();
 		}
 		
