@@ -25,6 +25,11 @@ public class TankScript : MonoBehaviour
 	[SerializeField] Transform m_turret;
 	[SerializeField] Transform m_bulletSpawn;
 	[SerializeField] GameObject m_bulletPrefab;
+	[SerializeField] Transform m_shield;
+
+	bool m_isFiring = false;
+	bool m_isShielding = false;
+
 	Vector3 m_currentTarget;
 	Rigidbody m_body;
 
@@ -35,6 +40,7 @@ public class TankScript : MonoBehaviour
 		m_currentTarget = new Vector3();
 		m_body = GetComponent<Rigidbody>();
 		m_controller.fireEvent.AddListener(FireMainBattleCannon);
+		m_controller.shieldEvent.AddListener(ActiveShield);
     }
 	
     // Update is called once per frame
@@ -55,18 +61,49 @@ public class TankScript : MonoBehaviour
 
 	private void FireMainBattleCannon()
 	{
-		StartCoroutine(FireBullets(10, 0.05f));
+		if(!m_isFiring && !m_isShielding)
+		{
+			StartCoroutine(FireBullets(10, 0.05f, 1.0f));
+		}
+		
 	}
-	private IEnumerator FireBullets(int bulletCount, float spawnGap)
+	private IEnumerator FireBullets(int bulletCount, float spawnGap, float cooldown)
 	{
+		m_isFiring = true;
 		for(int i = 0; i < bulletCount; i++)
 		{
 			GameObject bullet = Instantiate(m_bulletPrefab, m_bulletSpawn.position, m_turret.rotation);
 			yield return new WaitForSeconds(spawnGap);
 		}
+		yield return new WaitForSeconds(cooldown);
+		m_isFiring = false;
 	}
 	private void ActiveShield()
 	{
-
+		if (!m_isFiring && !m_isShielding)
+		{
+			StartCoroutine(StartShield(0.1f, 0.25f, 0.1f));
+		}
+	}
+	private IEnumerator StartShield(float rise, float stay, float close)
+	{
+		m_isShielding = true;
+		float current = 0;
+		while(current < rise)
+		{
+			m_shield.transform.localScale = Vector3.Lerp(new Vector3(), new Vector3(2, 2, 2), current / rise);
+			current += Time.deltaTime;
+			yield return new WaitForEndOfFrame();
+		}
+		yield return new WaitForSeconds(stay);
+		current = 0;
+		while (current < close)
+		{
+			current += Time.deltaTime;
+			m_shield.transform.localScale = Vector3.Lerp(new Vector3(2, 2, 2), new Vector3(), current / close);
+			yield return new WaitForEndOfFrame();
+		}
+		
+		m_isShielding = false;
 	}
 }
