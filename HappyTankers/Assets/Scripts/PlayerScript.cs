@@ -4,14 +4,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.InputSystem;
 
-public class TankController : MonoBehaviour
-{
-	public float leftDrive;
-	public float rightDrive;
-	public Vector3 turretTarget;
 
-
-}
 
 public class PlayerScript : TankController
 {
@@ -39,5 +32,7 @@ public class PlayerScript : TankController
 				
 			}
 		};
+		controls.Player.Fire.performed += crt => fireEvent.Invoke();
+		controls.Player.Shield.performed += crt => shieldEvent.Invoke();
 	}
 }

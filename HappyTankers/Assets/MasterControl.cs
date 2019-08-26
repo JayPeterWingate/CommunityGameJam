@@ -56,6 +56,14 @@ public class MasterControl : IInputActionCollection
                     ""expectedControlType"": """",
                     ""processors"": """",
                     ""interactions"": """"
+                },
+                {
+                    ""name"": ""Shield"",
+                    ""type"": ""Button"",
+                    ""id"": ""294743f8-5418-40cc-99cf-e60fb4d2323a"",
+                    ""expectedControlType"": """",
+                    ""processors"": """",
+                    ""interactions"": """"
                 }
             ],
             ""bindings"": [
@@ -278,6 +286,17 @@ public class MasterControl : IInputActionCollection
                     ""action"": ""Fire"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""ee167cd2-0fe0-4dfc-a672-38ee98e148ea"",
+                    ""path"": ""<Mouse>/rightButton"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""Shield"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
                 }
             ]
         }
@@ -321,6 +340,7 @@ public class MasterControl : IInputActionCollection
         m_Player_RotateTurret = m_Player.GetAction("RotateTurret");
         m_Player_XBoxRotateTurret = m_Player.GetAction("XBoxRotateTurret");
         m_Player_Fire = m_Player.GetAction("Fire");
+        m_Player_Shield = m_Player.GetAction("Shield");
     }
 
     ~MasterControl()
@@ -375,6 +395,7 @@ public class MasterControl : IInputActionCollection
     private readonly InputAction m_Player_RotateTurret;
     private readonly InputAction m_Player_XBoxRotateTurret;
     private readonly InputAction m_Player_Fire;
+    private readonly InputAction m_Player_Shield;
     public struct PlayerActions
     {
         private MasterControl m_Wrapper;
@@ -384,6 +405,7 @@ public class MasterControl : IInputActionCollection
         public InputAction @RotateTurret => m_Wrapper.m_Player_RotateTurret;
         public InputAction @XBoxRotateTurret => m_Wrapper.m_Player_XBoxRotateTurret;
         public InputAction @Fire => m_Wrapper.m_Player_Fire;
+        public InputAction @Shield => m_Wrapper.m_Player_Shield;
         public InputActionMap Get() { return m_Wrapper.m_Player; }
         public void Enable() { Get().Enable(); }
         public void Disable() { Get().Disable(); }
@@ -408,6 +430,9 @@ public class MasterControl : IInputActionCollection
                 Fire.started -= m_Wrapper.m_PlayerActionsCallbackInterface.OnFire;
                 Fire.performed -= m_Wrapper.m_PlayerActionsCallbackInterface.OnFire;
                 Fire.canceled -= m_Wrapper.m_PlayerActionsCallbackInterface.OnFire;
+                Shield.started -= m_Wrapper.m_PlayerActionsCallbackInterface.OnShield;
+                Shield.performed -= m_Wrapper.m_PlayerActionsCallbackInterface.OnShield;
+                Shield.canceled -= m_Wrapper.m_PlayerActionsCallbackInterface.OnShield;
             }
             m_Wrapper.m_PlayerActionsCallbackInterface = instance;
             if (instance != null)
@@ -427,6 +452,9 @@ public class MasterControl : IInputActionCollection
                 Fire.started += instance.OnFire;
                 Fire.performed += instance.OnFire;
                 Fire.canceled += instance.OnFire;
+                Shield.started += instance.OnShield;
+                Shield.performed += instance.OnShield;
+                Shield.canceled += instance.OnShield;
             }
         }
     }
@@ -456,5 +484,6 @@ public class MasterControl : IInputActionCollection
         void OnRotateTurret(InputAction.CallbackContext context);
         void OnXBoxRotateTurret(InputAction.CallbackContext context);
         void OnFire(InputAction.CallbackContext context);
+        void OnShield(InputAction.CallbackContext context);
     }
 }
