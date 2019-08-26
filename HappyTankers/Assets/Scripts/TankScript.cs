@@ -100,8 +100,9 @@ public class TankScript : MonoBehaviour
 		m_isFiring = true;
 		for(int i = 0; i < bulletCount; i++)
 		{
-			GameObject bullet = Instantiate(m_bulletPrefab, m_bulletSpawn.position, m_turret.rotation);
-			yield return new WaitForSeconds(spawnGap);
+            BouncyBullet bullet = Instantiate(m_bulletPrefab, m_bulletSpawn.position, m_turret.rotation).GetComponent<BouncyBullet>();
+            bullet.InitialSetup(bullet.transform.forward);
+            yield return new WaitForSeconds(spawnGap);
 		}
 		yield return new WaitForSeconds(cooldown);
 		m_isFiring = false;

@@ -15,4 +15,7 @@ public class BlockScript : MonoBehaviour
             m_dark.SetActive(dark);
         }
     }
+
+    virtual public void WasHit()
+    { }
 }

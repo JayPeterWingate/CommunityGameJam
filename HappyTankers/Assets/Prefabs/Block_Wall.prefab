@@ -10,7 +10,6 @@ GameObject:
   m_Component:
   - component: {fileID: 1926675571798279774}
   - component: {fileID: 2551937879283927949}
-  - component: {fileID: 1285558663}
   m_Layer: 0
   m_Name: Block_Wall
   m_TagString: Untagged
@@ -48,19 +47,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   m_happy: {fileID: 6274524947193001076}
   m_dark: {fileID: 6002959355290793145}
---- !u!65 &1285558663
-BoxCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 829868989969212873}
-  m_Material: {fileID: 0}
-  m_IsTrigger: 0
-  m_Enabled: 1
-  serializedVersion: 2
-  m_Size: {x: 1, y: 1, z: 1}
-  m_Center: {x: 0.5, y: 0.5, z: 0.5}
 --- !u!1 &3009134168486648328
 GameObject:
   m_ObjectHideFlags: 0
@@ -226,6 +212,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 7956459835640134389}
+  - component: {fileID: 8366766906662570273}
   m_Layer: 9
   m_Name: Happy
   m_TagString: Untagged
@@ -248,3 +235,16 @@ Transform:
   m_Father: {fileID: 1926675571798279774}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!65 &8366766906662570273
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6274524947193001076}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Size: {x: 1, y: 1, z: 1}
+  m_Center: {x: 0, y: 0, z: 0}

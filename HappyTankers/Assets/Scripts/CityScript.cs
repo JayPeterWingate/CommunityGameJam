@@ -52,6 +52,11 @@ public class CityScript : BlockScript
         //StartCoroutine(TestBreak());
     }
 
+    override public void WasHit()
+    {
+        SetBreakCity(true);
+    }
+
     private IEnumerator TestBreak()
     {
         yield return new WaitForSeconds(5);
@@ -69,6 +74,8 @@ public class CityScript : BlockScript
         m_brokenBuildings[1].SetActive(broken);
         m_brokenBuildings[2].SetActive(broken);
         m_brokenBuildings[3].SetActive(broken);
+
+        m_happy.SetActive(!broken);
 
         if (broken)
         {

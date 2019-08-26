@@ -645,7 +645,7 @@ MonoBehaviour:
   m_turretRotateSpeed: 1
   m_turret: {fileID: 7572879797161428608}
   m_bulletSpawn: {fileID: 9212621096883338999}
-  m_bulletPrefab: {fileID: 691190191737832958, guid: 48b310cf49c4dfe42bc877733ee8208b,
+  m_bulletPrefab: {fileID: 691190191737832958, guid: f1905a60e015cb64b8584dd4e434f2a3,
     type: 3}
   m_shield: {fileID: 4352405408986659683}
   m_renderers:

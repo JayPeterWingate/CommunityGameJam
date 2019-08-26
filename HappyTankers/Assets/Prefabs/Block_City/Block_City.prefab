@@ -4850,7 +4850,6 @@ GameObject:
   m_Component:
   - component: {fileID: 3293636280959512946}
   - component: {fileID: 9134341517488335840}
-  - component: {fileID: 258288624842751961}
   m_Layer: 0
   m_Name: Block_City
   m_TagString: Untagged
@@ -4901,19 +4900,6 @@ MonoBehaviour:
   m_fire: {fileID: 986334707121428170}
   m_smoke: {fileID: 2461570842031958501}
   m_explosion: {fileID: 2308821769777541127}
---- !u!65 &258288624842751961
-BoxCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 4363421743904297701}
-  m_Material: {fileID: 0}
-  m_IsTrigger: 0
-  m_Enabled: 1
-  serializedVersion: 2
-  m_Size: {x: 1, y: 1, z: 1}
-  m_Center: {x: 0.5, y: 0.5, z: 0.5}
 --- !u!1 &5624999299073497373
 GameObject:
   m_ObjectHideFlags: 0
@@ -14512,6 +14498,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 6440907876124167641}
+  - component: {fileID: 8859819628927972110}
   m_Layer: 9
   m_Name: Happy
   m_TagString: Untagged
@@ -14536,6 +14523,19 @@ Transform:
   m_Father: {fileID: 3293636280959512946}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!65 &8859819628927972110
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6924885534268998488}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Size: {x: 0.83, y: 1, z: 0.83}
+  m_Center: {x: 0.49, y: 0.5, z: 0.49}
 --- !u!1 &7225882926434255765
 GameObject:
   m_ObjectHideFlags: 0
