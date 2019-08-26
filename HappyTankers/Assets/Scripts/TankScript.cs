@@ -47,6 +47,9 @@ public class TankScript : MonoBehaviour
     void Update()
     {
 		m_body.AddTorque( transform.up * m_rotatePower * ( m_controller.leftDrive - m_controller.rightDrive));
+		Debug.DrawRay(m_leftTread.position, m_leftTread.position + m_leftTread.TransformDirection(new Vector3(0, 0, m_controller.leftDrive * m_horsePower)));
+		Debug.DrawRay(m_rightTread.position, m_rightTread.position + m_rightTread.TransformDirection(new Vector3(0, 0, m_controller.rightDrive * m_horsePower)));
+
 		m_body.AddForceAtPosition(m_leftTread.TransformDirection(new Vector3(0,0, m_controller.leftDrive * m_horsePower)), m_leftTread.position);
 		m_body.AddForceAtPosition(m_rightTread.TransformDirection(new Vector3(0, 0, m_controller.rightDrive * m_horsePower)), m_rightTread.position);
 
@@ -63,7 +66,7 @@ public class TankScript : MonoBehaviour
 	{
 		if(!m_isFiring && !m_isShielding)
 		{
-			StartCoroutine(FireBullets(10, 0.05f, 1.0f));
+			StartCoroutine(FireBullets(100, 0.05f, 1.0f));
 		}
 		
 	}
@@ -100,7 +103,7 @@ public class TankScript : MonoBehaviour
 		while (current < close)
 		{
 			current += Time.deltaTime;
-			m_shield.transform.localScale = Vector3.Lerp(new Vector3(2, 2, 2), new Vector3(), current / close);
+			m_shield.transform.localScale = Vector3.Lerp(new Vector3(2.1f, 2.1f, 2.1f), new Vector3(), current / close);
 			yield return new WaitForEndOfFrame();
 		}
 		
