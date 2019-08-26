@@ -10,12 +10,14 @@ public class TankController : MonoBehaviour
 	public float rightDrive;
 	public Vector3 turretTarget;
 
-	public UnityEvent fireEvent;
-	public UnityEvent shieldEvent;
+	public UnityEvent fireEvent = new UnityEvent();
+	public UnityEvent shieldEvent = new UnityEvent();
+	public Color color;
 }
 
 public class TankScript : MonoBehaviour
 {
+	public static List<TankScript> TankList = new List<TankScript>();
 	[SerializeField] Transform m_leftTread;
 	[SerializeField] Transform m_rightTread;
  	[SerializeField] TankController m_controller;
@@ -26,38 +28,61 @@ public class TankScript : MonoBehaviour
 	[SerializeField] Transform m_bulletSpawn;
 	[SerializeField] GameObject m_bulletPrefab;
 	[SerializeField] Transform m_shield;
-
+	[SerializeField] Renderer[] m_renderers;
+	[SerializeField] SpriteRenderer[] m_sprites;
 	bool m_isFiring = false;
 	bool m_isShielding = false;
 
 	Vector3 m_currentTarget;
 	Rigidbody m_body;
-
+	public Color color;
 
 	// Start is called before the first frame update
     void Start()
 	{
+		TankList.Add(this);
 		m_currentTarget = new Vector3();
 		m_body = GetComponent<Rigidbody>();
-		m_controller.fireEvent.AddListener(FireMainBattleCannon);
-		m_controller.shieldEvent.AddListener(ActiveShield);
-    }
+		if (m_controller.fireEvent != null)
+		{
+			m_controller.fireEvent.AddListener(FireMainBattleCannon);
+		}
+		if(m_controller.shieldEvent != null)
+		{
+			m_controller.shieldEvent.AddListener(ActiveShield);
+		}
+		
+		for(int i = 0; i < m_renderers.Length; i++)
+		{
+			m_renderers[i].material.color = m_controller.color;
+		}
+		for(int i = 0; i < m_sprites.Length; i++)
+		{
+			m_sprites[i].color = m_controller.color;
+		}
+		color = m_controller.color;
+
+	}
 	
     // Update is called once per frame
     void Update()
     {
-		m_body.AddTorque( transform.up * m_rotatePower * ( m_controller.leftDrive - m_controller.rightDrive));
-		Debug.DrawRay(m_leftTread.position, m_leftTread.position + transform.TransformDirection(new Vector3(0, 0, m_controller.leftDrive * m_horsePower)));
-		Debug.DrawRay(m_rightTread.position, m_rightTread.position + transform.rotation * (new Vector3(0, 0, m_controller.rightDrive * m_horsePower)));
+		if (m_controller)
+		{
+			m_body.AddTorque(transform.up * m_rotatePower * (m_controller.leftDrive - m_controller.rightDrive));
+			Debug.DrawRay(m_leftTread.position, m_leftTread.position + transform.TransformDirection(new Vector3(0, 0, m_controller.leftDrive * m_horsePower)));
+			Debug.DrawRay(m_rightTread.position, m_rightTread.position + transform.rotation * (new Vector3(0, 0, m_controller.rightDrive * m_horsePower)));
 
-		m_body.AddForceAtPosition(transform.TransformDirection(new Vector3(0,0, m_controller.leftDrive * m_horsePower)), m_leftTread.position);
-		m_body.AddForceAtPosition(transform.TransformDirection(new Vector3(0, 0, m_controller.rightDrive * m_horsePower)), m_rightTread.position);
+			m_body.AddForceAtPosition(transform.TransformDirection(new Vector3(0, 0, m_controller.leftDrive * m_horsePower)), m_leftTread.position);
+			m_body.AddForceAtPosition(transform.TransformDirection(new Vector3(0, 0, m_controller.rightDrive * m_horsePower)), m_rightTread.position);
 
-		// [TODO] get a smoother looking rotation
-		Vector3 targetPosition = new Vector3(m_controller.turretTarget.x, m_turret.position.y, m_controller.turretTarget.z);
-		var dir = targetPosition - m_turret.position;
-		dir.y = 0.0f;
-		m_turret.rotation = Quaternion.RotateTowards(m_turret.rotation, Quaternion.LookRotation(dir), Time.time * m_turretRotateSpeed);
+			// [TODO] get a smoother looking rotation
+			Vector3 targetPosition = new Vector3(m_controller.turretTarget.x, m_turret.position.y, m_controller.turretTarget.z);
+			var dir = targetPosition - m_turret.position;
+			dir.y = 0.0f;
+			m_turret.rotation = Quaternion.RotateTowards(m_turret.rotation, Quaternion.LookRotation(dir), Time.time * m_turretRotateSpeed);
+
+		}
 
 
 	}

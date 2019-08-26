@@ -14,6 +14,7 @@ public class PlayerScript : TankController
 	{
 
 		print("THIS OCCURED");
+		color = new Color(1, 1, 1);
 		controls = new MasterControl();
 		controls.Enable();
 		controls.Player.LeftTrack.performed += ctr => leftDrive = ctr.ReadValue<float>();

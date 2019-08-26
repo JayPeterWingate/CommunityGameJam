@@ -42,8 +42,9 @@ public class GenerateLevel : MonoBehaviour
         GameObject prefab = m_manager.GetPrefabFromColor(m_levelMap.GetPixel(x, y));
         if (prefab != null)
         {
-            m_levelBlocks.Add(Instantiate(prefab, transform.position + new Vector3(x - xSize / 2, 0, y - ySize / 2), transform.rotation).GetComponent<BlockScript>());
-        }
+            m_levelBlocks.Add(Instantiate(prefab, transform.position + new Vector3(x - xSize / 2, 0, y - ySize / 2), transform.rotation, transform).GetComponent<BlockScript>());
+			
+		}
     }
 
     public void SetActiveLevel(bool setting)
