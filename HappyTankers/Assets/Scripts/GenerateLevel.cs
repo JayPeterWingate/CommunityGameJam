@@ -6,8 +6,8 @@ public class GenerateLevel : MonoBehaviour
 {
     private LevelManager m_manager;
     [SerializeField] private Texture2D m_levelMap;
-    private int xSize = 24;
-    private int ySize = 18;
+    private int xSize = 26;
+    private int ySize = 16;
     private List<BlockScript> m_levelBlocks;
 
     // Start is called before the first frame update
