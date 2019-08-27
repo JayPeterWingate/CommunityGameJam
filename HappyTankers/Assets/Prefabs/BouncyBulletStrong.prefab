@@ -14,7 +14,7 @@ GameObject:
   - component: {fileID: -2112286372269544751}
   m_Layer: 9
   m_Name: BouncyBulletStrong
-  m_TagString: Untagged
+  m_TagString: bullet
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0

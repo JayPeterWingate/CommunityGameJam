@@ -165,4 +165,9 @@ public class TankScript : MonoBehaviour
 	{
 		m_bulletList.ForEach((GameObject obj) => Destroy(obj));
 	}
+
+	public void Hit()
+	{
+		print("IM HIT");
+	}
 }

@@ -9,7 +9,9 @@ public class PlayerBlock : BlockScript
     {
 		if (LevelManager.IsHappy)
 		{
-			PlayerScript.playerRef.transform.position = transform.position;
+			PlayerScript.playerRef.transform.Find("Tank").GetComponent<Rigidbody>().velocity = new Vector3();
+
+			PlayerScript.playerRef.transform.Find("Tank").GetComponent<Rigidbody>().MovePosition(transform.position);
 			for(int i = 0; i < transform.childCount; i++)
 			{
 				Destroy(transform.GetChild(i).gameObject);

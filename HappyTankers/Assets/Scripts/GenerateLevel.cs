@@ -20,7 +20,6 @@ public class GenerateLevel : MonoBehaviour
 
 	public void Generate()
 	{
-		
 		if (m_levelMap != null)
 		{
 			for (int x = 0; x < xSize; x++)

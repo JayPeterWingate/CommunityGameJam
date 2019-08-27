@@ -20,7 +20,7 @@ public class BouncyBullet : MonoBehaviour
     {
 
         RaycastHit hit;
-        Physics.Linecast(transform.position, transform.position + m_direction * m_speed * Time.deltaTime, out hit, ~0, QueryTriggerInteraction.UseGlobal);
+        Physics.Linecast(transform.position, transform.position + m_direction * m_speed * Time.deltaTime, out hit, ~0, QueryTriggerInteraction.Collide);
         if (hit.collider != null)
         {
             CollisionFound(hit);
@@ -31,11 +31,23 @@ public class BouncyBullet : MonoBehaviour
 
     void CollisionFound(RaycastHit hit)
     {
-        BlockScript blockScript = hit.collider.transform.parent.GetComponent<BlockScript>();
-        if (blockScript)
-        {
-            blockScript.WasHit(1);
-        }
+		if(hit.collider.transform.parent)
+		{
+			BlockScript blockScript = hit.collider.transform.parent.GetComponent<BlockScript>();
+			if (blockScript)
+			{
+				blockScript.WasHit(1);
+			}
+		}
+		if (hit.rigidbody)
+		{
+			TankScript tank = hit.rigidbody.GetComponent<TankScript>();
+			if (tank)
+			{
+				tank.Hit();
+				Destroy()
+			}
+		}
 
         Bounce(hit.normal);
     }
