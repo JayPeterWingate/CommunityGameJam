@@ -34,6 +34,7 @@ public class PlayerScript : TankController
 			}
 		};
 		controls.Player.Fire.performed += crt => fireEvent.Invoke();
-		controls.Player.Shield.performed += crt => shieldEvent.Invoke();
+        controls.Player.FireStrong.performed += crt => strongFireEvent.Invoke();
+        controls.Player.Shield.performed += crt => shieldEvent.Invoke();
 	}
 }

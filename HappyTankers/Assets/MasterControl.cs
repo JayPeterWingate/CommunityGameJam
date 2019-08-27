@@ -64,6 +64,14 @@ public class MasterControl : IInputActionCollection
                     ""expectedControlType"": """",
                     ""processors"": """",
                     ""interactions"": """"
+                },
+                {
+                    ""name"": ""FireStrong"",
+                    ""type"": ""Button"",
+                    ""id"": ""08bcd499-37d7-4659-bc53-c0fdf3769e16"",
+                    ""expectedControlType"": """",
+                    ""processors"": """",
+                    ""interactions"": """"
                 }
             ],
             ""bindings"": [
@@ -290,11 +298,22 @@ public class MasterControl : IInputActionCollection
                 {
                     ""name"": """",
                     ""id"": ""ee167cd2-0fe0-4dfc-a672-38ee98e148ea"",
+                    ""path"": ""<Keyboard>/space"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": "";Keyboard&Mouse"",
+                    ""action"": ""Shield"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""ed70f836-e997-4c5d-9a77-08bc41b2ee3a"",
                     ""path"": ""<Mouse>/rightButton"",
                     ""interactions"": """",
                     ""processors"": """",
-                    ""groups"": """",
-                    ""action"": ""Shield"",
+                    ""groups"": "";Keyboard&Mouse"",
+                    ""action"": ""FireStrong"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
                 }
@@ -341,6 +360,7 @@ public class MasterControl : IInputActionCollection
         m_Player_XBoxRotateTurret = m_Player.GetAction("XBoxRotateTurret");
         m_Player_Fire = m_Player.GetAction("Fire");
         m_Player_Shield = m_Player.GetAction("Shield");
+        m_Player_FireStrong = m_Player.GetAction("FireStrong");
     }
 
     ~MasterControl()
@@ -396,6 +416,7 @@ public class MasterControl : IInputActionCollection
     private readonly InputAction m_Player_XBoxRotateTurret;
     private readonly InputAction m_Player_Fire;
     private readonly InputAction m_Player_Shield;
+    private readonly InputAction m_Player_FireStrong;
     public struct PlayerActions
     {
         private MasterControl m_Wrapper;
@@ -406,6 +427,7 @@ public class MasterControl : IInputActionCollection
         public InputAction @XBoxRotateTurret => m_Wrapper.m_Player_XBoxRotateTurret;
         public InputAction @Fire => m_Wrapper.m_Player_Fire;
         public InputAction @Shield => m_Wrapper.m_Player_Shield;
+        public InputAction @FireStrong => m_Wrapper.m_Player_FireStrong;
         public InputActionMap Get() { return m_Wrapper.m_Player; }
         public void Enable() { Get().Enable(); }
         public void Disable() { Get().Disable(); }
@@ -433,6 +455,9 @@ public class MasterControl : IInputActionCollection
                 Shield.started -= m_Wrapper.m_PlayerActionsCallbackInterface.OnShield;
                 Shield.performed -= m_Wrapper.m_PlayerActionsCallbackInterface.OnShield;
                 Shield.canceled -= m_Wrapper.m_PlayerActionsCallbackInterface.OnShield;
+                FireStrong.started -= m_Wrapper.m_PlayerActionsCallbackInterface.OnFireStrong;
+                FireStrong.performed -= m_Wrapper.m_PlayerActionsCallbackInterface.OnFireStrong;
+                FireStrong.canceled -= m_Wrapper.m_PlayerActionsCallbackInterface.OnFireStrong;
             }
             m_Wrapper.m_PlayerActionsCallbackInterface = instance;
             if (instance != null)
@@ -455,6 +480,9 @@ public class MasterControl : IInputActionCollection
                 Shield.started += instance.OnShield;
                 Shield.performed += instance.OnShield;
                 Shield.canceled += instance.OnShield;
+                FireStrong.started += instance.OnFireStrong;
+                FireStrong.performed += instance.OnFireStrong;
+                FireStrong.canceled += instance.OnFireStrong;
             }
         }
     }
@@ -485,5 +513,6 @@ public class MasterControl : IInputActionCollection
         void OnXBoxRotateTurret(InputAction.CallbackContext context);
         void OnFire(InputAction.CallbackContext context);
         void OnShield(InputAction.CallbackContext context);
+        void OnFireStrong(InputAction.CallbackContext context);
     }
 }

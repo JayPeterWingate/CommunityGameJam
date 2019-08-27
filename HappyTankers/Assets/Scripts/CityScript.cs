@@ -52,7 +52,7 @@ public class CityScript : BlockScript
         //StartCoroutine(TestBreak());
     }
 
-    override public void WasHit()
+    override public void WasHit(int strength)
     {
         SetBreakCity(true);
     }

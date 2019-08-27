@@ -11,6 +11,7 @@ public class TankController : MonoBehaviour
 	public Vector3 turretTarget;
 
 	public UnityEvent fireEvent = new UnityEvent();
+    public UnityEvent strongFireEvent = new UnityEvent();
 	public UnityEvent shieldEvent = new UnityEvent();
 	public Color color;
 }
@@ -27,6 +28,7 @@ public class TankScript : MonoBehaviour
 	[SerializeField] Transform m_turret;
 	[SerializeField] Transform m_bulletSpawn;
 	[SerializeField] GameObject m_bulletPrefab;
+    [SerializeField] GameObject m_strongBulletPrefab;
 	[SerializeField] Transform m_shield;
 	[SerializeField] Renderer[] m_renderers;
 	[SerializeField] SpriteRenderer[] m_sprites;
@@ -47,7 +49,11 @@ public class TankScript : MonoBehaviour
 		{
 			m_controller.fireEvent.AddListener(FireMainBattleCannon);
 		}
-		if(m_controller.shieldEvent != null)
+        if (m_controller.strongFireEvent != null)
+        {
+            m_controller.strongFireEvent.AddListener(FireSecondaryStrongBattleCannon);
+        }
+        if (m_controller.shieldEvent != null)
 		{
 			m_controller.shieldEvent.AddListener(ActiveShield);
 		}
@@ -91,17 +97,33 @@ public class TankScript : MonoBehaviour
 	{
 		if(!m_isFiring && !m_isShielding)
 		{
-			StartCoroutine(FireBullets(10, 0.05f, 1.0f));
+			StartCoroutine(FireBullets(10, 0.05f, 1.0f, false));
 		}
 		
 	}
-	private IEnumerator FireBullets(int bulletCount, float spawnGap, float cooldown)
+    private void FireSecondaryStrongBattleCannon()
+    {
+        if (!m_isFiring && !m_isShielding)
+        {
+            StartCoroutine(FireBullets(1, 0.05f, 1.0f, true));
+        }
+
+    }
+    private IEnumerator FireBullets(int bulletCount, float spawnGap, float cooldown, bool strong)
 	{
 		m_isFiring = true;
 		for(int i = 0; i < bulletCount; i++)
 		{
-            BouncyBullet bullet = Instantiate(m_bulletPrefab, m_bulletSpawn.position, m_turret.rotation).GetComponent<BouncyBullet>();
-            bullet.InitialSetup(bullet.transform.forward);
+            if (strong)
+            {
+                BouncyBulletStrong bullet = Instantiate(m_strongBulletPrefab, m_bulletSpawn.position, m_turret.rotation).GetComponent<BouncyBulletStrong>();
+                bullet.InitialSetup(bullet.transform.forward);
+            }
+            else
+            {
+                BouncyBullet bullet = Instantiate(m_bulletPrefab, m_bulletSpawn.position, m_turret.rotation).GetComponent<BouncyBullet>();
+                bullet.InitialSetup(bullet.transform.forward);
+            }
             yield return new WaitForSeconds(spawnGap);
 		}
 		yield return new WaitForSeconds(cooldown);

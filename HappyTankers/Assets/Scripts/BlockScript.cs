@@ -16,6 +16,6 @@ public class BlockScript : MonoBehaviour
         }
     }
 
-    virtual public void WasHit()
+    virtual public void WasHit(int strength)
     { }
 }

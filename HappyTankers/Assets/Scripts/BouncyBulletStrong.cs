@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class BouncyBullet : MonoBehaviour
+public class BouncyBulletStrong : MonoBehaviour
 {
     private Vector3 m_direction;
     private float m_speed;
@@ -34,7 +34,7 @@ public class BouncyBullet : MonoBehaviour
         BlockScript blockScript = hit.collider.transform.parent.GetComponent<BlockScript>();
         if (blockScript)
         {
-            blockScript.WasHit(1);
+            blockScript.WasHit(2);
         }
 
         Bounce(hit.normal);

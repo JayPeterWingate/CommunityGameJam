@@ -52,6 +52,14 @@
                     "expectedControlType": "",
                     "processors": "",
                     "interactions": ""
+                },
+                {
+                    "name": "FireStrong",
+                    "type": "Button",
+                    "id": "08bcd499-37d7-4659-bc53-c0fdf3769e16",
+                    "expectedControlType": "",
+                    "processors": "",
+                    "interactions": ""
                 }
             ],
             "bindings": [
@@ -278,11 +286,22 @@
                 {
                     "name": "",
                     "id": "ee167cd2-0fe0-4dfc-a672-38ee98e148ea",
+                    "path": "<Keyboard>/space",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": ";Keyboard&Mouse",
+                    "action": "Shield",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "ed70f836-e997-4c5d-9a77-08bc41b2ee3a",
                     "path": "<Mouse>/rightButton",
                     "interactions": "",
                     "processors": "",
-                    "groups": "",
-                    "action": "Shield",
+                    "groups": ";Keyboard&Mouse",
+                    "action": "FireStrong",
                     "isComposite": false,
                     "isPartOfComposite": false
                 }
