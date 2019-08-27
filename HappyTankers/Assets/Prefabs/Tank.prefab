@@ -29,7 +29,7 @@ Transform:
   m_LocalScale: {x: -2.2558513, y: 2.4238677, z: 1.4655066}
   m_Children: []
   m_Father: {fileID: 7572879795259128541}
-  m_RootOrder: 5
+  m_RootOrder: 4
   m_LocalEulerAnglesHint: {x: 90, y: 0, z: 0}
 --- !u!212 &313399990
 SpriteRenderer:
@@ -108,7 +108,7 @@ Transform:
   m_LocalScale: {x: 2.2558513, y: 2.4238665, z: 1.4655057}
   m_Children: []
   m_Father: {fileID: 7572879795259128541}
-  m_RootOrder: 3
+  m_RootOrder: 2
   m_LocalEulerAnglesHint: {x: 90, y: 0, z: 0}
 --- !u!212 &1629416358
 SpriteRenderer:
@@ -217,7 +217,7 @@ Transform:
   m_LocalScale: {x: 2.2558515, y: 2.4238653, z: 2.219453}
   m_Children: []
   m_Father: {fileID: 7572879795259128541}
-  m_RootOrder: 8
+  m_RootOrder: 7
   m_LocalEulerAnglesHint: {x: 90, y: 0, z: 0}
 --- !u!212 &4501197080762706745
 SpriteRenderer:
@@ -360,7 +360,7 @@ GameObject:
   - component: {fileID: 2058229969}
   m_Layer: 10
   m_Name: Shield
-  m_TagString: tank
+  m_TagString: shield
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -375,7 +375,8 @@ Transform:
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: 0, y: -0.19499995, z: 0}
   m_LocalScale: {x: 0.3381056, y: 0.3381056, z: 0.3381056}
-  m_Children: []
+  m_Children:
+  - {fileID: 6813695180427266314}
   m_Father: {fileID: 7572879795259128541}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -449,7 +450,7 @@ GameObject:
   - component: {fileID: 4416872386191012066}
   m_Layer: 9
   m_Name: Happy
-  m_TagString: tank
+  m_TagString: shield
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -462,11 +463,11 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 7213526384567671768}
   m_LocalRotation: {x: 0.7071068, y: -0, z: -0, w: 0.7071068}
-  m_LocalPosition: {x: 0, y: -0.19899988, z: -0.0006765127}
-  m_LocalScale: {x: 0.051778205, y: 0.052584723, z: 0.103798464}
+  m_LocalPosition: {x: 0, y: -0.011830428, z: -0.0020008918}
+  m_LocalScale: {x: 0.15314212, y: 0.15552759, z: 0.30700028}
   m_Children: []
-  m_Father: {fileID: 7572879795259128541}
-  m_RootOrder: 1
+  m_Father: {fileID: 4352405408986659683}
+  m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 90, y: 0, z: 0}
 --- !u!212 &4416872386191012066
 SpriteRenderer:
@@ -549,7 +550,6 @@ Transform:
   m_LocalScale: {x: 0.64, y: 0.64, z: 0.64}
   m_Children:
   - {fileID: 4352405408986659683}
-  - {fileID: 6813695180427266314}
   - {fileID: 7572879796893449970}
   - {fileID: 1629416357}
   - {fileID: 7572879795876887383}
@@ -676,7 +676,7 @@ Transform:
   m_LocalScale: {x: 0.66773194, y: 0.23881523, z: 0.81125647}
   m_Children: []
   m_Father: {fileID: 7572879795259128541}
-  m_RootOrder: 6
+  m_RootOrder: 5
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!33 &7572879795729595926
 MeshFilter:
@@ -747,7 +747,6 @@ GameObject:
   - component: {fileID: 7572879795866612077}
   - component: {fileID: 7572879795866612064}
   - component: {fileID: 7572879795866612067}
-  - component: {fileID: 7572879795866612066}
   m_Layer: 10
   m_Name: Cube
   m_TagString: tank
@@ -814,19 +813,6 @@ MeshRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
---- !u!65 &7572879795866612066
-BoxCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 7572879795866612076}
-  m_Material: {fileID: 0}
-  m_IsTrigger: 0
-  m_Enabled: 1
-  serializedVersion: 2
-  m_Size: {x: 1, y: 1, z: 1}
-  m_Center: {x: 0, y: 0, z: 0}
 --- !u!1 &7572879795876887382
 GameObject:
   m_ObjectHideFlags: 0
@@ -858,7 +844,7 @@ Transform:
   m_LocalScale: {x: 0.24260515, y: 0.2302268, z: 0.20055}
   m_Children: []
   m_Father: {fileID: 7572879795259128541}
-  m_RootOrder: 4
+  m_RootOrder: 3
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!33 &7572879795876887466
 MeshFilter:
@@ -949,7 +935,7 @@ Transform:
   m_LocalScale: {x: 0.24736495, y: 0.2302268, z: 0.20055}
   m_Children: []
   m_Father: {fileID: 7572879795259128541}
-  m_RootOrder: 2
+  m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!33 &7572879796893449969
 MeshFilter:
@@ -1020,7 +1006,6 @@ GameObject:
   - component: {fileID: 7572879797161428608}
   - component: {fileID: 7572879797161428615}
   - component: {fileID: 7572879797161428614}
-  - component: {fileID: 7572879797161428609}
   m_Layer: 10
   m_Name: Turret
   m_TagString: tank
@@ -1043,7 +1028,7 @@ Transform:
   - {fileID: 9212621096883338999}
   - {fileID: 5753050279902536884}
   m_Father: {fileID: 7572879795259128541}
-  m_RootOrder: 7
+  m_RootOrder: 6
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!33 &7572879797161428615
 MeshFilter:
@@ -1090,16 +1075,3 @@ MeshRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
---- !u!65 &7572879797161428609
-BoxCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 7572879797161428611}
-  m_Material: {fileID: 0}
-  m_IsTrigger: 0
-  m_Enabled: 1
-  serializedVersion: 2
-  m_Size: {x: 1, y: 1, z: 1}
-  m_Center: {x: 0, y: 0, z: 0}

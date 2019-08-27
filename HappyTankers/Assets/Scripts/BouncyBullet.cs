@@ -39,17 +39,24 @@ public class BouncyBullet : MonoBehaviour
 				blockScript.WasHit(1);
 			}
 		}
-		if (hit.rigidbody)
-		{
-			TankScript tank = hit.rigidbody.GetComponent<TankScript>();
-			if (tank)
-			{
-				tank.Hit();
-				Destroy()
-			}
-		}
-
-        Bounce(hit.normal);
+		
+        if (hit.collider.tag == "shield")
+        {
+            
+        }
+        else
+        {
+            if (hit.rigidbody)
+            {
+                TankScript tank = hit.rigidbody.GetComponent<TankScript>();
+                if (tank)
+                {
+                    tank.Hit();
+                    Destroy(this.gameObject);
+                }
+            }
+            Bounce(hit.normal);
+        }
     }
 
     private void Bounce(Vector3 normal)

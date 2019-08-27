@@ -36,8 +36,23 @@ public class BouncyBulletStrong : MonoBehaviour
         {
             blockScript.WasHit(2);
         }
+        if (hit.collider.tag == "shield")
+        {
 
-        Bounce(hit.normal);
+        }
+        else
+        {
+            if (hit.rigidbody)
+            {
+                TankScript tank = hit.rigidbody.GetComponent<TankScript>();
+                if (tank)
+                {
+                    tank.Hit();
+                    Destroy(this.gameObject);
+                }
+            }
+            Bounce(hit.normal);
+        }
     }
 
     private void Bounce(Vector3 normal)
