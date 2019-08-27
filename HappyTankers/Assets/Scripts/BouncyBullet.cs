@@ -42,7 +42,7 @@ public class BouncyBullet : MonoBehaviour
 		
         if (hit.collider.tag == "shield")
         {
-            
+            m_direction = Vector3.Reflect(m_direction, hit.normal);
         }
         else
         {
