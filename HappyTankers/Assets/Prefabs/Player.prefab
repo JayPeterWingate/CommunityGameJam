@@ -9,10 +9,9 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 7630221963823168574}
-  - component: {fileID: 1506954003995478565}
   - component: {fileID: 212660142119781064}
   m_Layer: 0
-  m_Name: Block_Player_Tank
+  m_Name: Player
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -34,20 +33,6 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &1506954003995478565
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2662796557070453647}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 66a7175773a511248b62c23d47915db5, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  m_happy: {fileID: 7196062197869656309}
-  m_dark: {fileID: 4514564584238307888}
 --- !u!114 &212660142119781064
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -64,6 +49,11 @@ MonoBehaviour:
   rightDrive: 0
   turretTarget: {x: 0, y: 0, z: 0}
   fireEvent:
+    m_PersistentCalls:
+      m_Calls: []
+    m_TypeName: UnityEngine.Events.UnityEvent, UnityEngine.CoreModule, Version=0.0.0.0,
+      Culture=neutral, PublicKeyToken=null
+  strongFireEvent:
     m_PersistentCalls:
       m_Calls: []
     m_TypeName: UnityEngine.Events.UnityEvent, UnityEngine.CoreModule, Version=0.0.0.0,
@@ -178,12 +168,6 @@ PrefabInstance:
       objectReference: {fileID: 212660142119781064}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: d3d45c3e34f7c40479403475941f9267, type: 3}
---- !u!1 &7196062197869656309 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 7572879795259128542, guid: d3d45c3e34f7c40479403475941f9267,
-    type: 3}
-  m_PrefabInstance: {fileID: 776249145899090475}
-  m_PrefabAsset: {fileID: 0}
 --- !u!4 &7196062197869656310 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 7572879795259128541, guid: d3d45c3e34f7c40479403475941f9267,
