@@ -45,8 +45,10 @@ public class LevelManager : MonoBehaviour
 		return () =>
 		{
 			print(i);
-			m_levels[i].GetComponent<GenerateLevel>().Generate();
-			m_camera.transform.position = m_levels[i].transform.position;
+            m_levels[i - 1].GetComponent<GenerateLevel>().SetActiveLevel(false);
+            GenerateLevel nextLevel = m_levels[i].GetComponent<GenerateLevel>();
+            nextLevel.SetActiveLevel(false);
+			m_camera.transform.position = m_levels[i].transform.position + new Vector3(0,0,0.5f);
 			TankScript.TankList.ForEach((TankScript tank) => tank.DestroyBullets());
 		};
 	}
