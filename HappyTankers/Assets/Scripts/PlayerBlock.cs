@@ -5,7 +5,7 @@ using UnityEngine;
 public class PlayerBlock : BlockScript
 {
     // Start is called before the first frame update
-    void Start()
+    void OnEnable()
     {
 		if (LevelManager.IsHappy)
 		{

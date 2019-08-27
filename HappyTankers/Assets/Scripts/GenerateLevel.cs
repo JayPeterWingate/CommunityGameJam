@@ -15,7 +15,8 @@ public class GenerateLevel : MonoBehaviour
     {
 		m_manager = transform.root.GetComponent<LevelManager>();
 		m_levelBlocks = new List<BlockScript>();
-	}
+        Generate();
+    }
 
 	public void Generate()
 	{
