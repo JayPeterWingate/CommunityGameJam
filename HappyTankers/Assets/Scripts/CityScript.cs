@@ -48,13 +48,14 @@ public class CityScript : BlockScript
         m_brokenBuildings[3].transform.parent = m_dark.transform;
 
         SetBreakCity(false);
-
+		m_level.GetComponent<LevelProgression>().RegisterCity();
         //StartCoroutine(TestBreak());
     }
 
     override public void WasHit(int strength)
     {
-        SetBreakCity(true);
+		m_level.GetComponent<LevelProgression>().DestroyCity();
+		SetBreakCity(true);
     }
 
     private IEnumerator TestBreak()

@@ -32,7 +32,6 @@ public class AITankController : TankController
 		while (m_lookForEnemies)
 		{
 			yield return new WaitForSeconds(1);
-			print("ON THE HUNT");
 			bool canSee = false;
 			foreach (TankScript tank in TankList)
 			{
@@ -62,7 +61,6 @@ public class AITankController : TankController
 			if (m_agent.remainingDistance < m_agent.stoppingDistance && TargetReached != null)
 			{
 				m_hasPath = false;
-				print("Stop stop stop");
 				TargetReached.Invoke();
 			}
 		}

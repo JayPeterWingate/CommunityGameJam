@@ -29,6 +29,7 @@ public class TankScript : MonoBehaviour
 	[SerializeField] Transform m_bulletSpawn;
 	[SerializeField] GameObject m_bulletPrefab;
     [SerializeField] GameObject m_strongBulletPrefab;
+	[SerializeField] List<GameObject> m_bulletList;
 	[SerializeField] Transform m_shield;
 	[SerializeField] Renderer[] m_renderers;
 	[SerializeField] SpriteRenderer[] m_sprites;
@@ -67,6 +68,7 @@ public class TankScript : MonoBehaviour
 			m_sprites[i].color = m_controller.color;
 		}
 		color = m_controller.color;
+		m_bulletList = new List<GameObject>();
 
 	}
 	
@@ -118,12 +120,14 @@ public class TankScript : MonoBehaviour
             {
                 BouncyBulletStrong bullet = Instantiate(m_strongBulletPrefab, m_bulletSpawn.position, m_turret.rotation).GetComponent<BouncyBulletStrong>();
                 bullet.InitialSetup(bullet.transform.forward);
+				m_bulletList.Add(bullet.gameObject);
             }
             else
             {
                 BouncyBullet bullet = Instantiate(m_bulletPrefab, m_bulletSpawn.position, m_turret.rotation).GetComponent<BouncyBullet>();
                 bullet.InitialSetup(bullet.transform.forward);
-            }
+				m_bulletList.Add(bullet.gameObject);
+			}
             yield return new WaitForSeconds(spawnGap);
 		}
 		yield return new WaitForSeconds(cooldown);
@@ -156,5 +160,9 @@ public class TankScript : MonoBehaviour
 		}
 		
 		m_isShielding = false;
+	}
+	public void DestroyBullets()
+	{
+		m_bulletList.ForEach((GameObject obj) => Destroy(obj));
 	}
 }

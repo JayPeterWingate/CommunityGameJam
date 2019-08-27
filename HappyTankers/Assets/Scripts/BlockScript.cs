@@ -6,6 +6,7 @@ public class BlockScript : MonoBehaviour
 {
     [SerializeField] protected GameObject m_happy;
     [SerializeField] protected GameObject m_dark;
+	public GameObject m_level;
 
     public void SetFilterModes(bool happy, bool dark)
     {

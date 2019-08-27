@@ -8,11 +8,12 @@ using UnityEngine.InputSystem;
 
 public class PlayerScript : TankController
 {
+	public static GameObject playerRef;
 	public MasterControl controls;
 
 	private void Awake()
 	{
-
+		playerRef = gameObject;
 		print("THIS OCCURED");
 		color = new Color(1, 1, 1);
 		controls = new MasterControl();

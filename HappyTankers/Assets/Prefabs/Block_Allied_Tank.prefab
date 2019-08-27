@@ -247,9 +247,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 7630221963823168574}
-  - component: {fileID: 1506954003995478565}
-  - component: {fileID: 2806796324763431586}
-  - component: {fileID: 5129734541671013361}
+  - component: {fileID: 6761275806737921176}
   m_Layer: 0
   m_Name: Block_Allied_Tank
   m_TagString: Untagged
@@ -273,7 +271,7 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &1506954003995478565
+--- !u!114 &6761275806737921176
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -282,57 +280,12 @@ MonoBehaviour:
   m_GameObject: {fileID: 2662796557070453647}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 66a7175773a511248b62c23d47915db5, type: 3}
+  m_Script: {fileID: 11500000, guid: 1b59b0e9bb0f821448fdc2d2baab1361, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   m_happy: {fileID: 7196062197869656309}
-  m_dark: {fileID: 4514564584238307888}
---- !u!95 &2806796324763431586
-Animator:
-  serializedVersion: 3
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2662796557070453647}
-  m_Enabled: 1
-  m_Avatar: {fileID: 0}
-  m_Controller: {fileID: 9100000, guid: 70d0667148424fe41bdda382e0767462, type: 2}
-  m_CullingMode: 0
-  m_UpdateMode: 0
-  m_ApplyRootMotion: 0
-  m_LinearVelocityBlending: 0
-  m_WarningMessage: 
-  m_HasTransformHierarchy: 1
-  m_AllowConstantClipSamplingOptimization: 1
-  m_KeepAnimatorControllerStateOnDisable: 0
---- !u!114 &5129734541671013361
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2662796557070453647}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 9f4d86b25aebf2441b088bb762f60bf9, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  leftDrive: 0
-  rightDrive: 0
-  turretTarget: {x: 0, y: 0, z: 0}
-  fireEvent:
-    m_PersistentCalls:
-      m_Calls: []
-    m_TypeName: UnityEngine.Events.UnityEvent, UnityEngine.CoreModule, Version=0.0.0.0,
-      Culture=neutral, PublicKeyToken=null
-  shieldEvent:
-    m_PersistentCalls:
-      m_Calls: []
-    m_TypeName: UnityEngine.Events.UnityEvent, UnityEngine.CoreModule, Version=0.0.0.0,
-      Culture=neutral, PublicKeyToken=null
-  color: {r: 0, g: 0.80679727, b: 1, a: 1}
-  m_agent: {fileID: 4722100612042750163}
+  m_dark: {fileID: 0}
+  m_level: {fileID: 0}
 --- !u!1 &4481997490112208270
 GameObject:
   m_ObjectHideFlags: 0
@@ -871,7 +824,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   m_leftTread: {fileID: 7196062198336944508}
   m_rightTread: {fileID: 7196062197273132249}
-  m_controller: {fileID: 5129734541671013361}
+  m_controller: {fileID: 7928091582841232714}
   m_horsePower: 10
   m_rotatePower: 10
   m_turretRotateSpeed: 1
@@ -879,6 +832,7 @@ MonoBehaviour:
   m_bulletSpawn: {fileID: 8438624680809872604}
   m_bulletPrefab: {fileID: 691190191737832958, guid: 48b310cf49c4dfe42bc877733ee8208b,
     type: 3}
+  m_strongBulletPrefab: {fileID: 0}
   m_shield: {fileID: 3937012303050275144}
   m_renderers:
   - {fileID: 7196062198206430266}
@@ -1252,6 +1206,8 @@ GameObject:
   m_Component:
   - component: {fileID: 7668517253268470806}
   - component: {fileID: 4722100612042750163}
+  - component: {fileID: 7928091582841232714}
+  - component: {fileID: 6689129394138818448}
   m_Layer: 0
   m_Name: Navmesh
   m_TagString: Untagged
@@ -1296,3 +1252,54 @@ NavMeshAgent:
   m_BaseOffset: -0.22
   m_WalkableMask: 4294967295
   m_ObstacleAvoidanceType: 4
+--- !u!114 &7928091582841232714
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 9095138779532259388}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9f4d86b25aebf2441b088bb762f60bf9, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  leftDrive: 0
+  rightDrive: 0
+  turretTarget: {x: 0, y: 0, z: 0}
+  fireEvent:
+    m_PersistentCalls:
+      m_Calls: []
+    m_TypeName: UnityEngine.Events.UnityEvent, UnityEngine.CoreModule, Version=0.0.0.0,
+      Culture=neutral, PublicKeyToken=null
+  strongFireEvent:
+    m_PersistentCalls:
+      m_Calls: []
+    m_TypeName: UnityEngine.Events.UnityEvent, UnityEngine.CoreModule, Version=0.0.0.0,
+      Culture=neutral, PublicKeyToken=null
+  shieldEvent:
+    m_PersistentCalls:
+      m_Calls: []
+    m_TypeName: UnityEngine.Events.UnityEvent, UnityEngine.CoreModule, Version=0.0.0.0,
+      Culture=neutral, PublicKeyToken=null
+  color: {r: 0, g: 0.80679727, b: 1, a: 1}
+  m_agent: {fileID: 4722100612042750163}
+--- !u!95 &6689129394138818448
+Animator:
+  serializedVersion: 3
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 9095138779532259388}
+  m_Enabled: 1
+  m_Avatar: {fileID: 0}
+  m_Controller: {fileID: 9100000, guid: 70d0667148424fe41bdda382e0767462, type: 2}
+  m_CullingMode: 0
+  m_UpdateMode: 0
+  m_ApplyRootMotion: 0
+  m_LinearVelocityBlending: 0
+  m_WarningMessage: 
+  m_HasTransformHierarchy: 1
+  m_AllowConstantClipSamplingOptimization: 1
+  m_KeepAnimatorControllerStateOnDisable: 0

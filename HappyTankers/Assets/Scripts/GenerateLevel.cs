@@ -13,21 +13,26 @@ public class GenerateLevel : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        m_manager = transform.root.GetComponent<LevelManager>();
-        m_levelBlocks = new List<BlockScript>();
-        if (m_levelMap != null)
-        {
-            for (int x = 0; x < xSize; x++)
-            {
-                for (int y = 0; y < ySize; y++)
-                {
-                    SpawnObject(x, y);
-                }
-            }
-        }
-        //SetActiveLevel(false);
-        SetFilterMode(true, true);
-    }
+		m_manager = transform.root.GetComponent<LevelManager>();
+		m_levelBlocks = new List<BlockScript>();
+	}
+
+	public void Generate()
+	{
+		
+		if (m_levelMap != null)
+		{
+			for (int x = 0; x < xSize; x++)
+			{
+				for (int y = 0; y < ySize; y++)
+				{
+					SpawnObject(x, y);
+				}
+			}
+		}
+		//SetActiveLevel(false);
+		SetFilterMode(true, true);
+	}
 
     public void SetFilterMode(bool happy, bool dark)
     {
@@ -42,7 +47,8 @@ public class GenerateLevel : MonoBehaviour
         GameObject prefab = m_manager.GetPrefabFromColor(m_levelMap.GetPixel(x, y));
         if (prefab != null)
         {
-            m_levelBlocks.Add(Instantiate(prefab, transform.position + new Vector3(x - xSize / 2, 0, y - ySize / 2), transform.rotation, transform).GetComponent<BlockScript>());
+			prefab.GetComponent<BlockScript>().m_level = gameObject;
+			m_levelBlocks.Add(Instantiate(prefab, transform.position + new Vector3(x - xSize / 2, 0, y - ySize / 2), transform.rotation, transform).GetComponent<BlockScript>());
 			
 		}
     }

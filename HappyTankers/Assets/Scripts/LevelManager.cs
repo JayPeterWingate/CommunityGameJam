@@ -2,8 +2,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-
-
+using UnityEngine.Events;
 
 public class LevelManager : MonoBehaviour
 {
@@ -13,8 +12,10 @@ public class LevelManager : MonoBehaviour
         public Color colorCode;
         public GameObject prefab;
     }
-
+	public static bool IsHappy { get; private set; }
     [SerializeField] private levelObjectColorCoded[] m_levelObjectCodedPrefabs;
+	[SerializeField] private LevelProgression[] m_levels;
+	[SerializeField] private GameObject m_camera;
 
     public GameObject GetPrefabFromColor(Color col)
     {
@@ -28,4 +29,25 @@ public class LevelManager : MonoBehaviour
         }
         return null;
     }
+
+	private void Start()
+	{
+		IsHappy = true;
+		LegitTransition(0)();
+		for (int i = 0; i < m_levels.Length; i++)
+		{
+			m_levels[i].OnLevelComplete.AddListener(LegitTransition(i + 1));
+		}
+	}
+
+	private UnityAction LegitTransition(int i)
+	{
+		return () =>
+		{
+			print(i);
+			m_levels[i].GetComponent<GenerateLevel>().Generate();
+			m_camera.transform.position = m_levels[i].transform.position;
+			TankScript.TankList.ForEach((TankScript tank) => tank.DestroyBullets());
+		};
+	}
 }
