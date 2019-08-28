@@ -657,7 +657,7 @@ GameObject:
   - component: {fileID: 7572879795729595926}
   - component: {fileID: 7572879795729595921}
   - component: {fileID: 7572879795729595920}
-  m_Layer: 10
+  m_Layer: 12
   m_Name: TreadRight
   m_TagString: tank
   m_Icon: {fileID: 0}
@@ -747,7 +747,7 @@ GameObject:
   - component: {fileID: 7572879795866612077}
   - component: {fileID: 7572879795866612064}
   - component: {fileID: 7572879795866612067}
-  m_Layer: 10
+  m_Layer: 12
   m_Name: Cube
   m_TagString: tank
   m_Icon: {fileID: 0}
@@ -825,7 +825,7 @@ GameObject:
   - component: {fileID: 7572879795876887466}
   - component: {fileID: 7572879795876887381}
   - component: {fileID: 7572879795876887380}
-  m_Layer: 10
+  m_Layer: 12
   m_Name: TreadLeft
   m_TagString: tank
   m_Icon: {fileID: 0}
@@ -916,7 +916,7 @@ GameObject:
   - component: {fileID: 7572879796893449969}
   - component: {fileID: 7572879796893449968}
   - component: {fileID: 7572879796893449971}
-  m_Layer: 10
+  m_Layer: 12
   m_Name: TreadRight
   m_TagString: tank
   m_Icon: {fileID: 0}
@@ -1006,7 +1006,7 @@ GameObject:
   - component: {fileID: 7572879797161428608}
   - component: {fileID: 7572879797161428615}
   - component: {fileID: 7572879797161428614}
-  m_Layer: 10
+  m_Layer: 12
   m_Name: Turret
   m_TagString: tank
   m_Icon: {fileID: 0}

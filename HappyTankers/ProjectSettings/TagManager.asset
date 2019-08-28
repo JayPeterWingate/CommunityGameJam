@@ -7,6 +7,7 @@ TagManager:
   - bullet
   - tank
   - shield
+  - hidable
   layers:
   - Default
   - TransparentFX
@@ -20,7 +21,7 @@ TagManager:
   - Happy
   - Dark
   - NavMesh
-  - 
+  - DarkOutlined
   - 
   - 
   - 

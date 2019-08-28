@@ -63,8 +63,9 @@ MonoBehaviour:
       m_Calls: []
     m_TypeName: UnityEngine.Events.UnityEvent, UnityEngine.CoreModule, Version=0.0.0.0,
       Culture=neutral, PublicKeyToken=null
-  color: {r: 1, g: 1, b: 1, a: 0}
+  color: {r: 1, g: 1, b: 1, a: 1}
   lives: 3
+  startPos: {x: 0, y: 0, z: 0}
 --- !u!1 &4514564584238307888
 GameObject:
   m_ObjectHideFlags: 0
