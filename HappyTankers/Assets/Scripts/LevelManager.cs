@@ -197,7 +197,7 @@ public class LevelManager : MonoBehaviour
                                 temp.transform.position += 2 * shiftVal; m_gridElements.HW_V11 = temp;
                                 //V2x
                                 temp = m_gridElements.HW_V22; m_gridElements.HW_V22 = m_gridElements.HW_V21;
-                                temp.transform.position += 2 * shiftVal; m_gridElements.HW_H21 = temp;
+                                temp.transform.position += 2 * shiftVal; m_gridElements.HW_V21 = temp;
                                 //V3x
                                 temp = m_gridElements.HW_V32; m_gridElements.HW_V32 = m_gridElements.HW_V31;
                                 temp.transform.position += 2 * shiftVal; m_gridElements.HW_V31 = temp;
@@ -223,7 +223,7 @@ public class LevelManager : MonoBehaviour
                                 temp.transform.position += 2 * shiftVal; m_gridElements.HW_V12 = temp;
                                 //V2x
                                 temp = m_gridElements.HW_V21; m_gridElements.HW_V21 = m_gridElements.HW_V22;
-                                temp.transform.position += 2 * shiftVal; m_gridElements.HW_H22 = temp;
+                                temp.transform.position += 2 * shiftVal; m_gridElements.HW_V22 = temp;
                                 //V3x
                                 temp = m_gridElements.HW_V31; m_gridElements.HW_V31 = m_gridElements.HW_V32;
                                 temp.transform.position += 2 * shiftVal; m_gridElements.HW_V32 = temp;
@@ -250,6 +250,7 @@ public class LevelManager : MonoBehaviour
                     m_gridElements.LevelLast = m_gridElements.LevelCurrent;
                     m_gridElements.LevelCurrent = m_gridElements.LevelNext;
                     m_currentUFLIndex++;
+                    Debug.Log("NextLevelIndex = " + m_currentUFLIndex);
                     m_gridElements.LevelNext = m_unfilteredLevels[m_currentUFLIndex].gameObject; //TODO Unhardcode this level 3 spot
                     
                     //TODO activate and darken next level
@@ -295,6 +296,39 @@ public class LevelManager : MonoBehaviour
                 }
             default: break;
         }
+        DebugGridChecker();
+    }
+
+
+    private void DebugGridChecker()
+    {
+        Vector3 H11 = m_gridElements.HW_H11.transform.GetChild(0).position;
+        Vector3 H21 = m_gridElements.HW_H21.transform.GetChild(0).position;
+        Vector3 H31 = m_gridElements.HW_H31.transform.GetChild(0).position;
+        Vector3 H12 = m_gridElements.HW_H12.transform.GetChild(0).position;
+        Vector3 H22 = m_gridElements.HW_H22.transform.GetChild(0).position;
+        Vector3 H32 = m_gridElements.HW_H32.transform.GetChild(0).position;
+
+        Vector3 V11 = m_gridElements.HW_V11.transform.GetChild(0).position;
+        Vector3 V21 = m_gridElements.HW_V21.transform.GetChild(0).position;
+        Vector3 V31 = m_gridElements.HW_V31.transform.GetChild(0).position;
+        Vector3 V12 = m_gridElements.HW_V12.transform.GetChild(0).position;
+        Vector3 V22 = m_gridElements.HW_V22.transform.GetChild(0).position;
+        Vector3 V32 = m_gridElements.HW_V32.transform.GetChild(0).position;
+
+        Vector3 NTL = m_gridElements.NodeTL.transform.GetChild(0).position;
+        Vector3 NBL = m_gridElements.NodeBL.transform.GetChild(0).position;
+        Vector3 NTR = m_gridElements.NodeTR.transform.GetChild(0).position;
+        Vector3 NBR = m_gridElements.NodeBR.transform.GetChild(0).position;
+
+        Vector3 WP = m_gridElements.worldCentre;
+
+        if (H11.x >= H21.x) { Debug.Log("H-Fail1"); } if (H21.x >= H31.x) { Debug.Log("H-Fail2"); } if (H12.x >= H22.x) { Debug.Log("H-Fail3"); } if (H22.x >= H32.x) { Debug.Log("H-Fail4"); }
+        if (H11.z != H21.z || H11.z != H31.z || H21.z != H31.z) { Debug.Log("H-Fail5"); } if (H12.z != H22.z || H12.z != H32.z || H22.z != H32.z) { Debug.Log("H-Fail6"); }
+        if (V11.z <= V21.z) { Debug.Log("V-Fail1"); } if (V21.z <= V31.z) { Debug.Log("V-Fail2"); } if (V12.z <= V22.z) { Debug.Log("V-Fail3"); } if (V22.z <= V32.z) { Debug.Log("V-Fail4"); }
+        if (V11.x != V21.x || V11.x != V31.x || V21.x != V31.x) { Debug.Log("V-Fail5"); } if (V12.x != V22.x || V12.x != V32.x || V22.x != V32.x) { Debug.Log("V-Fail6"); }
+        if (WP.x >= NBR.x || WP.x >= NTR.x) { Debug.Log("N-Fail1"); } if (WP.x <= NBL.x || WP.x <= NTL.x) { Debug.Log("N-Fail2"); }
+        if (WP.z >= NTR.z || WP.z >= NTL.z) { Debug.Log("N-Fail3"); } if (WP.z <= NBR.z || WP.z <= NBL.z) { Debug.Log("N-Fail4"); }
     }
 
 
