@@ -102,7 +102,7 @@ GameObject:
   - component: {fileID: 1254804226675550514}
   - component: {fileID: 1067780629742655378}
   - component: {fileID: 1388221734314909996}
-  m_Layer: 10
+  m_Layer: 13
   m_Name: BulletDark
   m_TagString: Untagged
   m_Icon: {fileID: 0}

@@ -20,7 +20,7 @@ Material:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: Outline
+  m_Name: Outline 1
   m_Shader: {fileID: -6465566751694194690, guid: 1a7a1cb9572d6fb459d88913e7ccfb0f,
     type: 3}
   m_ShaderKeywords: 
@@ -63,7 +63,7 @@ Material:
         m_Offset: {x: 0, y: 0}
     m_Floats:
     - Vector1_59DC7BE5: 0.27
-    - Vector1_67AE8A: 0.757
+    - Vector1_67AE8A: 0.412
     - _AlphaClip: 0
     - _Blend: 0
     - _BumpScale: 1

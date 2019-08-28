@@ -26,7 +26,7 @@ public class CameraScript : MonoBehaviour
 
     // Update is called once per frame
     void Update()
-    {
+    { 
         m_timer += Time.deltaTime;
         if (m_timer>1)
         {
