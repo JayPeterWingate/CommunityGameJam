@@ -12,11 +12,13 @@ public class CameraScript : MonoBehaviour
     {
         m_animator = GetComponent<Animator>();
         m_targetPos = transform.position;
+
+		FilterManager.OnChange.AddListener(RemoveFilter);
     }
 
-    public void RemoveFilter()
+    public void RemoveFilter(bool isHappy)
     {
-        m_animator.SetBool("RemoveFilter",true);
+        m_animator.SetBool("RemoveFilter",!isHappy);
     }
 
     public void LerpMoveFocus(Vector3 newPos)
@@ -26,13 +28,7 @@ public class CameraScript : MonoBehaviour
 
     // Update is called once per frame
     void Update()
-    { 
-        m_timer += Time.deltaTime;
-        if (m_timer>1)
-        {
-            RemoveFilter();
-            m_timer = -1000f;
-        }
+    {
 
         if ((m_targetPos - transform.position).magnitude > 0.1f)
         {

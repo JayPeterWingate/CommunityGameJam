@@ -74,9 +74,21 @@ public class TankScript : MonoBehaviour
 
 		m_shield.gameObject.SetActive(false);
 
-
+		SetVisuals(true);
+		FilterManager.OnChange.AddListener(SetVisuals);
 	}
-	
+	void SetVisuals(bool isHappy)
+	{
+		for(int i = 0; i < m_renderers.Length; i++)
+		{
+			bool shouldBeActive = isHappy ?
+				m_renderers[i].gameObject.layer == 9
+				:
+				m_renderers[i].gameObject.layer == 10||
+				m_renderers[i].gameObject.layer == 12;
+			m_renderers[i].enabled = shouldBeActive;
+		}
+	}
     // Update is called once per frame
     void Update()
     {
@@ -219,6 +231,7 @@ public class TankScript : MonoBehaviour
 		}
 		m_isTakingDamage = false;
 	}
+
 	private void OnDestroy()
 	{
 		TankList.Remove(this);
