@@ -73,6 +73,8 @@ public class TankScript : MonoBehaviour
 		m_bulletList = new List<GameObject>();
 
 		m_shield.gameObject.SetActive(false);
+
+
 	}
 	
     // Update is called once per frame

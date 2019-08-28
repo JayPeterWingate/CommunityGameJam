@@ -7,7 +7,7 @@ public class PlayerBlock : BlockScript
     // Start is called before the first frame update
     void OnEnable()
     {
-		if (LevelManager.IsHappy)
+		if (FilterManager.IsAlmostDark)
 		{
 			PlayerScript.playerRef.transform.Find("Tank").GetComponent<Rigidbody>().velocity = new Vector3();
 
