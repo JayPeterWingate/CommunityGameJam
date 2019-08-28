@@ -31,8 +31,9 @@ public class BouncyBulletStrong : MonoBehaviour
 
     void CollisionFound(RaycastHit hit)
     {
-		if (transform.parent)
+		if (hit.collider.transform.parent)
 		{
+			print("has a paretn");
 			BlockScript blockScript = hit.collider.transform.parent.GetComponent<BlockScript>();
 			if (blockScript)
 			{
