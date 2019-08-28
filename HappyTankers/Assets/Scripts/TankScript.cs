@@ -183,8 +183,19 @@ public class TankScript : MonoBehaviour
 			else
 			{
 				TankList.Remove(this);
-				Destroy(gameObject);
 
+				try
+				{
+					PlayerScript player = (PlayerScript)m_controller;
+					DestroyBullets();
+					transform.position = player.startPos;
+					player.lives = 3;
+				}
+				catch
+				{
+					// Controller is not a player
+					Destroy(gameObject);
+				}
 			}
 			print("IM HIT");
 			m_isTakingDamage = true;
@@ -205,5 +216,9 @@ public class TankScript : MonoBehaviour
 			}
 		}
 		m_isTakingDamage = false;
+	}
+	private void OnDestroy()
+	{
+		TankList.Remove(this);
 	}
 }

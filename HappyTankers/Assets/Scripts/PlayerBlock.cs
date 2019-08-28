@@ -12,7 +12,8 @@ public class PlayerBlock : BlockScript
 			PlayerScript.playerRef.transform.Find("Tank").GetComponent<Rigidbody>().velocity = new Vector3();
 
 			PlayerScript.playerRef.transform.Find("Tank").GetComponent<Rigidbody>().MovePosition(transform.position);
-			for(int i = 0; i < transform.childCount; i++)
+			PlayerScript.playerRef.GetComponent<PlayerScript>().startPos = transform.position;
+			for (int i = 0; i < transform.childCount; i++)
 			{
 				Destroy(transform.GetChild(i).gameObject);
 			}

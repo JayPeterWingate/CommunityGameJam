@@ -21,7 +21,7 @@ public class CameraScript : MonoBehaviour
     void Update()
     {
         m_timer += Time.deltaTime;
-        if (m_timer>10)
+        if (m_timer>1)
         {
             RemoveFilter();
             m_timer = -1000f;

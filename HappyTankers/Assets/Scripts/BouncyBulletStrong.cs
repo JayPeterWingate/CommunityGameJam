@@ -31,11 +31,15 @@ public class BouncyBulletStrong : MonoBehaviour
 
     void CollisionFound(RaycastHit hit)
     {
-        BlockScript blockScript = hit.collider.transform.parent.GetComponent<BlockScript>();
-        if (blockScript)
-        {
-            blockScript.WasHit(2);
-        }
+		if (transform.parent)
+		{
+			BlockScript blockScript = hit.collider.transform.parent.GetComponent<BlockScript>();
+			if (blockScript)
+			{
+				blockScript.WasHit(2);
+			}
+		}
+        
         if (hit.collider.tag == "shield")
         {
             m_direction = Vector3.Reflect(m_direction, hit.normal);

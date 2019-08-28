@@ -10,6 +10,7 @@ public class PlayerScript : TankController
 {
 	public static GameObject playerRef;
 	public MasterControl controls;
+	public Vector3 startPos;
 
 	private void Awake()
 	{

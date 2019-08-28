@@ -10,7 +10,7 @@ public class BouncyBullet : MonoBehaviour
 
     public void InitialSetup(Vector3 d, float s = 5)
     {
-        m_direction = d;
+        m_direction = d + new Vector3(Random.Range(-0.25f,0.25f),0, Random.Range(-0.25f, 0.25f));
         m_speed = s;
     }
 
@@ -40,10 +40,14 @@ public class BouncyBullet : MonoBehaviour
 			}
 		} 
 		
-        if (hit.collider.tag == "shield")
+        if (hit.collider.gameObject.tag == "shield")
         {
             m_direction = Vector3.Reflect(m_direction, hit.normal);
         }
+		else if(hit.collider.gameObject.tag == "bullet")
+		{
+			Destroy(gameObject);
+		}
         else
         {
             if (hit.rigidbody)
