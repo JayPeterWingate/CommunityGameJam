@@ -148,6 +148,28 @@ MonoBehaviour:
   - {fileID: 307300577686852757}
   - {fileID: 307300577615010922}
   m_camera: {fileID: 0}
+  m_gridElements:
+    worldCentre: {x: 0, y: 0, z: 0}
+    camPos: 0
+    HW_V11: {fileID: 0}
+    HW_V21: {fileID: 0}
+    HW_V31: {fileID: 0}
+    HW_V12: {fileID: 0}
+    HW_V22: {fileID: 0}
+    HW_V32: {fileID: 0}
+    HW_H11: {fileID: 0}
+    HW_H21: {fileID: 0}
+    HW_H31: {fileID: 0}
+    HW_H12: {fileID: 0}
+    HW_H22: {fileID: 0}
+    HW_H32: {fileID: 0}
+    NodeTL: {fileID: 0}
+    NodeTR: {fileID: 0}
+    NodeBL: {fileID: 0}
+    NodeBR: {fileID: 0}
+    LevelCurrent: {fileID: 0}
+    LevelNext: {fileID: 0}
+    LevelVoid: {fileID: 0}
 --- !u!1 &7379069545692404331
 GameObject:
   m_ObjectHideFlags: 0
