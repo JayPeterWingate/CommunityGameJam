@@ -1,30 +1,47 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Events;
 
 public class GenerateLevel : MonoBehaviour
 {
     private LevelManager m_manager;
     [SerializeField] private Texture2D m_levelMap;
-    private int xSize = 26;
-    private int ySize = 16;
     private List<BlockScript> m_levelBlocks;
 
+    [SerializeField] LevelTriggerScript m_triggerLeft;
+    [SerializeField] LevelTriggerScript m_triggerRight;
+    [SerializeField] LevelTriggerScript m_triggerTop;
+    [SerializeField] LevelTriggerScript m_triggerBot;
     // Start is called before the first frame update
     void Start()
     {
 		m_manager = transform.root.GetComponent<LevelManager>();
 		m_levelBlocks = new List<BlockScript>();
         Generate();
+
+
+        m_triggerLeft.m_action = LeaveLevelBounds(CamTransitionType.Room_Left);
+        m_triggerRight.m_action = LeaveLevelBounds(CamTransitionType.Room_Right);
+        m_triggerTop.m_action = LeaveLevelBounds(CamTransitionType.Room_Up);
+        m_triggerBot.m_action = LeaveLevelBounds(CamTransitionType.Room_Down);
     }
 
-	public void Generate()
+    public UnityAction LeaveLevelBounds(CamTransitionType ctt)
+    {
+        return () =>
+        {
+            m_manager.UnfilteredTransition(ctt);
+        };
+    }
+
+    public void Generate()
 	{
 		if (m_levelMap != null)
 		{
-			for (int x = 0; x < xSize; x++)
+			for (int x = 0; x < m_manager.m_levelW; x++)
 			{
-				for (int y = 0; y < ySize; y++)
+				for (int y = 0; y < m_manager.m_levelH; y++)
 				{
 					SpawnObject(x, y);
 				}
@@ -48,7 +65,7 @@ public class GenerateLevel : MonoBehaviour
         if (prefab != null)
         {
 			prefab.GetComponent<BlockScript>().m_level = gameObject;
-			m_levelBlocks.Add(Instantiate(prefab, transform.position + new Vector3(x - xSize / 2, 0, y - ySize / 2), transform.rotation, transform).GetComponent<BlockScript>());
+			m_levelBlocks.Add(Instantiate(prefab, transform.position + new Vector3(x - m_manager.m_levelW / 2, 0, y - m_manager.m_levelH / 2), transform.rotation, transform).GetComponent<BlockScript>());
 			
 		}
     }
@@ -60,11 +77,5 @@ public class GenerateLevel : MonoBehaviour
             m_levelBlocks[i].gameObject.SetActive(setting);
         }
         transform.position = new Vector3(transform.position.x, setting ? 0 : -20, transform.position.z);
-    }
-
-    // Update is called once per frame
-    void Update()
-    {
-        
     }
 }

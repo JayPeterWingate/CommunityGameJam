@@ -26,8 +26,12 @@ public enum CamTransitionType
 [Serializable]
 public struct LevelGridElements
 {
+    //Orientation
     [HideInInspector] public Vector3 worldCentre;
     [HideInInspector] public CamPos camPos;
+    //Levels
+    [HideInInspector] public GameObject LevelCurrent;
+    [HideInInspector] public GameObject LevelNext;
     //Vertical Highways
     public GameObject HW_V11;
     public GameObject HW_V21;
@@ -47,10 +51,6 @@ public struct LevelGridElements
     public GameObject NodeTR;
     public GameObject NodeBL;
     public GameObject NodeBR;
-    //Levels
-    public GameObject LevelCurrent;
-    public GameObject LevelNext;
-    public GameObject LevelVoid;
 }
 
 public class LevelManager : MonoBehaviour
@@ -67,6 +67,9 @@ public class LevelManager : MonoBehaviour
 	[SerializeField] private CameraScript m_camera;
     
     [SerializeField] private LevelGridElements m_gridElements;
+
+    public int m_levelW = 26;
+    public int m_levelH = 16;
 
     public GameObject GetPrefabFromColor(Color col)
     {
@@ -99,39 +102,50 @@ public class LevelManager : MonoBehaviour
         
     }
 
-    private void UnfilteredTransition(CamTransitionType type)
+    public void UnfilteredTransition(CamTransitionType type)
     {
         switch (type)
         {
             case CamTransitionType.HW_New:
                 {
                     m_gridElements.camPos = CamPos.InRoom;
+                    
+                    //TODO
 
                     break;
                 }
             case CamTransitionType.HW_Old:
                 {
                     m_gridElements.camPos = CamPos.InRoom;
+                    m_camera.LerpMoveFocus(m_gridElements.worldCentre);
                     break;
                 }
             case CamTransitionType.Room_Left:
                 {
                     m_gridElements.camPos = CamPos.LeftHW;
+                    m_camera.LerpMoveFocus(m_gridElements.worldCentre - new Vector3(m_levelW / 2 + 3,0,0));
+                    m_gridElements.LevelNext.transform.position = m_gridElements.worldCentre - new Vector3(m_levelW + 6, 0, 0);
                     break;
                 }
             case CamTransitionType.Room_Right:
                 {
                     m_gridElements.camPos = CamPos.RightHW;
+                    m_camera.LerpMoveFocus(m_gridElements.worldCentre + new Vector3(m_levelW / 2 + 3, 0, 0));
+                    m_gridElements.LevelNext.transform.position = m_gridElements.worldCentre + new Vector3(m_levelW + 6, 0, 0);
                     break;
                 }
             case CamTransitionType.Room_Up:
                 {
                     m_gridElements.camPos = CamPos.TopHW;
+                    m_camera.LerpMoveFocus(m_gridElements.worldCentre + new Vector3(m_levelH / 2 + 3, 0, 0));
+                    m_gridElements.LevelNext.transform.position = m_gridElements.worldCentre + new Vector3(m_levelH + 6, 0, 0);
                     break;
                 }
             case CamTransitionType.Room_Down:
                 {
                     m_gridElements.camPos = CamPos.BotHW;
+                    m_camera.LerpMoveFocus(m_gridElements.worldCentre - new Vector3(m_levelH / 2 + 3, 0, 0));
+                    m_gridElements.LevelNext.transform.position = m_gridElements.worldCentre - new Vector3(m_levelH + 6, 0, 0);
                     break;
                 }
             default: break;
