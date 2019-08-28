@@ -47,8 +47,7 @@ public class BouncyBulletStrong : MonoBehaviour
                 TankScript tank = hit.rigidbody.GetComponent<TankScript>();
                 if (tank)
                 {
-                    tank.Hit();
-                    Destroy(this.gameObject);
+                    tank.Hit(gameObject);
                 }
             }
             Bounce(hit.normal);

@@ -38,7 +38,7 @@ public class BouncyBullet : MonoBehaviour
 			{
 				blockScript.WasHit(1);
 			}
-		}
+		} 
 		
         if (hit.collider.tag == "shield")
         {
@@ -48,13 +48,12 @@ public class BouncyBullet : MonoBehaviour
         {
             if (hit.rigidbody)
             {
-                TankScript tank = hit.rigidbody.GetComponent<TankScript>();
-                if (tank)
-                {
-                    tank.Hit();
-                    Destroy(this.gameObject);
-                }
-            }
+				TankScript tank = hit.rigidbody.GetComponent<TankScript>();
+				if (tank)
+				{
+					tank.Hit(gameObject);
+				}
+			}
             Bounce(hit.normal);
         }
     }

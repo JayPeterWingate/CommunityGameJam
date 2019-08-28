@@ -14,6 +14,8 @@ public class TankController : MonoBehaviour
     public UnityEvent strongFireEvent = new UnityEvent();
 	public UnityEvent shieldEvent = new UnityEvent();
 	public Color color;
+
+	public int lives;
 }
 
 public class TankScript : MonoBehaviour
@@ -35,7 +37,7 @@ public class TankScript : MonoBehaviour
 	[SerializeField] SpriteRenderer[] m_sprites;
 	bool m_isFiring = false;
 	bool m_isShielding = false;
-
+	bool m_isTakingDamage = false;
 	Vector3 m_currentTarget;
 	Rigidbody m_body;
 	public Color color;
@@ -70,6 +72,7 @@ public class TankScript : MonoBehaviour
 		color = m_controller.color;
 		m_bulletList = new List<GameObject>();
 
+		m_shield.gameObject.SetActive(false);
 	}
 	
     // Update is called once per frame
@@ -97,7 +100,7 @@ public class TankScript : MonoBehaviour
 
 	private void FireMainBattleCannon()
 	{
-		if(!m_isFiring && !m_isShielding)
+		if(!m_isFiring && !m_isShielding && !m_isTakingDamage)
 		{
 			StartCoroutine(FireBullets(10, 0.05f, 1.0f, false));
 		}
@@ -105,7 +108,7 @@ public class TankScript : MonoBehaviour
 	}
     private void FireSecondaryStrongBattleCannon()
     {
-        if (!m_isFiring && !m_isShielding)
+        if (!m_isFiring && !m_isShielding && !m_isTakingDamage)
         {
             StartCoroutine(FireBullets(1, 0.05f, 1.0f, true));
         }
@@ -135,7 +138,7 @@ public class TankScript : MonoBehaviour
 	}
 	private void ActiveShield()
 	{
-		if (!m_isFiring && !m_isShielding)
+		if (!m_isFiring && !m_isShielding && !m_isTakingDamage)
 		{
 			StartCoroutine(StartShield(0.1f, 0.25f, 0.1f, new Vector3(2.5f, 2.5f, 2.5f)));
 		}
@@ -144,6 +147,7 @@ public class TankScript : MonoBehaviour
 	{
 		m_isShielding = true;
 		float current = 0;
+		m_shield.gameObject.SetActive(true);
 		while(current < rise)
 		{
 			m_shield.transform.localScale = Vector3.Lerp(new Vector3(), size, current / rise);
@@ -158,7 +162,8 @@ public class TankScript : MonoBehaviour
 			m_shield.transform.localScale = Vector3.Lerp(size, new Vector3(), current / close);
 			yield return new WaitForEndOfFrame();
 		}
-		
+
+		m_shield.gameObject.SetActive(false);
 		m_isShielding = false;
 	}
 	public void DestroyBullets()
@@ -166,8 +171,39 @@ public class TankScript : MonoBehaviour
 		m_bulletList.ForEach((GameObject obj) => Destroy(obj));
 	}
 
-	public void Hit()
+	public void Hit(GameObject bullet)
 	{
-		print("IM HIT");
+		if (!m_isTakingDamage)
+		{
+			if (m_controller.lives > 0)
+			{
+				Destroy(bullet);
+				m_controller.lives -= 1;
+			}
+			else
+			{
+				TankList.Remove(this);
+				Destroy(gameObject);
+
+			}
+			print("IM HIT");
+			m_isTakingDamage = true;
+			Destroy(bullet);
+			StartCoroutine(ResetDamage(1));
+		}
+	}
+	IEnumerator ResetDamage(float resetTime)
+	{
+		bool onSwitch = true;
+		for(int counter = 0; counter < 6; counter++)
+		{
+			yield return new WaitForSeconds(resetTime / 6);
+			onSwitch = !onSwitch;
+			for(int i = 0; i < m_sprites.Length; i++)
+			{
+				m_sprites[i].enabled = onSwitch;
+			}
+		}
+		m_isTakingDamage = false;
 	}
 }
