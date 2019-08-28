@@ -196,8 +196,6 @@ public class TankScript : MonoBehaviour
 			}
 			else
 			{
-				TankList.Remove(this);
-
 				try
 				{
 					PlayerScript player = (PlayerScript)m_controller;
@@ -208,6 +206,7 @@ public class TankScript : MonoBehaviour
 				catch
 				{
 					// Controller is not a player
+					TankList.Remove(this);
 					Destroy(gameObject);
 				}
 			}

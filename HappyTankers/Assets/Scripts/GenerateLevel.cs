@@ -73,12 +73,19 @@ public class GenerateLevel : MonoBehaviour
 		}
     }
 
-    public void SetActiveLevel(bool setting)
-    {
-        for (int i = 0; i < m_levelBlocks.Count; i++)
-        {
-            m_levelBlocks[i].gameObject.SetActive(setting);
-        }
-        transform.position = new Vector3(transform.position.x, setting ? 0 : -20, transform.position.z);
-    }
+	public void SetActiveLevel(bool setting)
+	{
+		try
+		{
+			for (int i = 0; i < m_levelBlocks.Count; i++)
+			{
+				m_levelBlocks[i].gameObject.SetActive(setting);
+			}
+			transform.position = new Vector3(transform.position.x, setting ? 0 : -20, transform.position.z);
+		}
+		catch
+		{
+
+		}
+	}
 }

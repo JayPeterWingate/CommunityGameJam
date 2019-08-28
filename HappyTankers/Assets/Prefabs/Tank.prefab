@@ -613,6 +613,9 @@ MonoBehaviour:
   m_renderers:
   - {fileID: 7572879795729595921}
   - {fileID: 7572879797161428614}
+  - {fileID: 7572879795866612067}
+  - {fileID: 7572879796893449968}
+  - {fileID: 7572879795876887381}
   m_sprites:
   - {fileID: 1629416358}
   - {fileID: 313399990}
