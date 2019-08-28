@@ -102,8 +102,22 @@ public class LevelManager : MonoBehaviour
         
     }
 
+    public void RoomEntryDetected(GameObject room)
+    {
+        if (m_gridElements.camPos == CamPos.InRoom) { return; } //Return if invalid transition request
+        UnfilteredTransition(room == m_gridElements.LevelCurrent ? CamTransitionType.HW_Old : CamTransitionType.HW_New);
+    }
+
     public void UnfilteredTransition(CamTransitionType type)
     {
+        Debug.Log("UnfilteredTransition - " + type);
+
+        if ((type == CamTransitionType.Room_Down || type == CamTransitionType.Room_Left || type == CamTransitionType.Room_Right || type == CamTransitionType.Room_Up)
+            && (m_gridElements.camPos != CamPos.InRoom))
+        {
+            return; //Return if invalid transition request
+        }
+
         switch (type)
         {
             case CamTransitionType.HW_New:

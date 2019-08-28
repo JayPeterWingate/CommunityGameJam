@@ -11,7 +11,7 @@ GameObject:
   - component: {fileID: 8868679558146591710}
   - component: {fileID: 5822054084924958440}
   - component: {fileID: 2517759572308490521}
-  m_Layer: 0
+  m_Layer: 14
   m_Name: TrigTop
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -29,8 +29,8 @@ Transform:
   m_LocalPosition: {x: 0, y: 1, z: 9}
   m_LocalScale: {x: 28, y: 3, z: 1}
   m_Children: []
-  m_Father: {fileID: 2055820960022555945}
-  m_RootOrder: 2
+  m_Father: {fileID: 2449267779580406235}
+  m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!65 &5822054084924958440
 BoxCollider:
@@ -145,7 +145,7 @@ GameObject:
   - component: {fileID: 201370229861620565}
   - component: {fileID: 254912077010710767}
   - component: {fileID: 7303571833728752696}
-  m_Layer: 0
+  m_Layer: 14
   m_Name: TrigLeft
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -159,12 +159,12 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1352585314358805218}
-  m_LocalRotation: {x: 0, y: 0.7071068, z: 0, w: 0.7071068}
+  m_LocalRotation: {x: -0, y: 0.7071068, z: -0, w: 0.7071068}
   m_LocalPosition: {x: -14, y: 1, z: 0}
   m_LocalScale: {x: 18, y: 3, z: 1}
   m_Children: []
-  m_Father: {fileID: 2055820960022555945}
-  m_RootOrder: 4
+  m_Father: {fileID: 2449267779580406235}
+  m_RootOrder: 2
   m_LocalEulerAnglesHint: {x: 0, y: 90, z: 0}
 --- !u!65 &254912077010710767
 BoxCollider:
@@ -191,6 +191,41 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: fbafd3705e4b9684282a939c32013943, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!1 &1916421879561610602
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 2449267779580406235}
+  m_Layer: 0
+  m_Name: Triggers
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &2449267779580406235
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1916421879561610602}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children:
+  - {fileID: 8868679558146591710}
+  - {fileID: 7126958112382189020}
+  - {fileID: 201370229861620565}
+  - {fileID: 3250512439489239600}
+  - {fileID: 3414543459619309985}
+  m_Father: {fileID: 2055820960022555945}
+  m_RootOrder: 2
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &2055820960022555944
 GameObject:
   m_ObjectHideFlags: 0
@@ -222,10 +257,7 @@ Transform:
   m_Children:
   - {fileID: 4126056858575821144}
   - {fileID: 7369692152037165440}
-  - {fileID: 8868679558146591710}
-  - {fileID: 7126958112382189020}
-  - {fileID: 201370229861620565}
-  - {fileID: 3250512439489239600}
+  - {fileID: 2449267779580406235}
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -242,6 +274,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_levelMap: {fileID: 2800000, guid: cfedf026ac1197047bee4f5c43816745, type: 3}
+  m_triggerMiddle: {fileID: 6090541189482289857}
   m_triggerLeft: {fileID: 7303571833728752696}
   m_triggerRight: {fileID: 5088877749525953347}
   m_triggerTop: {fileID: 2517759572308490521}
@@ -346,7 +379,7 @@ GameObject:
   - component: {fileID: 7126958112382189020}
   - component: {fileID: 8491293115722284357}
   - component: {fileID: 6927751592781879015}
-  m_Layer: 0
+  m_Layer: 14
   m_Name: TrigBot
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -364,8 +397,8 @@ Transform:
   m_LocalPosition: {x: 0, y: 1, z: -9}
   m_LocalScale: {x: 28, y: 3, z: 1}
   m_Children: []
-  m_Father: {fileID: 2055820960022555945}
-  m_RootOrder: 3
+  m_Father: {fileID: 2449267779580406235}
+  m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!65 &8491293115722284357
 BoxCollider:
@@ -392,6 +425,63 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: fbafd3705e4b9684282a939c32013943, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!1 &6903685213771779235
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 3414543459619309985}
+  - component: {fileID: 6183839213897001421}
+  - component: {fileID: 6090541189482289857}
+  m_Layer: 14
+  m_Name: TrigMid
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &3414543459619309985
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6903685213771779235}
+  m_LocalRotation: {x: -0, y: 0.7071068, z: -0, w: 0.7071068}
+  m_LocalPosition: {x: 0, y: 1, z: 0}
+  m_LocalScale: {x: 14, y: 3, z: 24}
+  m_Children: []
+  m_Father: {fileID: 2449267779580406235}
+  m_RootOrder: 4
+  m_LocalEulerAnglesHint: {x: 0, y: 90, z: 0}
+--- !u!65 &6183839213897001421
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6903685213771779235}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 1
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Size: {x: 1, y: 1, z: 1}
+  m_Center: {x: 0, y: 0, z: 0}
+--- !u!114 &6090541189482289857
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6903685213771779235}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fbafd3705e4b9684282a939c32013943, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &7825643624356146674
 GameObject:
   m_ObjectHideFlags: 0
@@ -403,7 +493,7 @@ GameObject:
   - component: {fileID: 3250512439489239600}
   - component: {fileID: 4877734815595575169}
   - component: {fileID: 5088877749525953347}
-  m_Layer: 0
+  m_Layer: 14
   m_Name: TrigRight
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -421,8 +511,8 @@ Transform:
   m_LocalPosition: {x: 14, y: 1, z: 0}
   m_LocalScale: {x: 18, y: 3, z: 1}
   m_Children: []
-  m_Father: {fileID: 2055820960022555945}
-  m_RootOrder: 5
+  m_Father: {fileID: 2449267779580406235}
+  m_RootOrder: 3
   m_LocalEulerAnglesHint: {x: 0, y: 90, z: 0}
 --- !u!65 &4877734815595575169
 BoxCollider:

@@ -20,7 +20,7 @@ public class BouncyBullet : MonoBehaviour
     {
 
         RaycastHit hit;
-        Physics.Linecast(transform.position, transform.position + m_direction * m_speed * Time.deltaTime, out hit, ~0, QueryTriggerInteraction.Collide);
+        Physics.Linecast(transform.position, transform.position + m_direction * m_speed * Time.deltaTime, out hit, ~(1 << 14), QueryTriggerInteraction.Collide);
         if (hit.collider != null)
         {
             CollisionFound(hit);

@@ -34,7 +34,7 @@ public class CameraScript : MonoBehaviour
             m_timer = -1000f;
         }
 
-        if ((m_targetPos - transform.position).magnitude < 0.1f)
+        if ((m_targetPos - transform.position).magnitude > 0.1f)
         {
             transform.position += (m_targetPos - transform.position) * 1 * Time.deltaTime;
         }

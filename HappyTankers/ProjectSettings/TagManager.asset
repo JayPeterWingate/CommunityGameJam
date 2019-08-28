@@ -23,7 +23,7 @@ TagManager:
   - NavMesh
   - DarkOutlined
   - DarkBullet
-  - 
+  - NoBulletCollision
   - 
   - 
   - 

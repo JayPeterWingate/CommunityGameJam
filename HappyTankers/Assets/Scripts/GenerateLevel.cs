@@ -9,6 +9,8 @@ public class GenerateLevel : MonoBehaviour
     [SerializeField] private Texture2D m_levelMap;
     private List<BlockScript> m_levelBlocks;
 
+    [SerializeField] LevelTriggerScript m_triggerMiddle;
+
     [SerializeField] LevelTriggerScript m_triggerLeft;
     [SerializeField] LevelTriggerScript m_triggerRight;
     [SerializeField] LevelTriggerScript m_triggerTop;
@@ -20,6 +22,7 @@ public class GenerateLevel : MonoBehaviour
 		m_levelBlocks = new List<BlockScript>();
         Generate();
 
+        m_triggerMiddle.m_action = () => m_manager.RoomEntryDetected(this.gameObject);
 
         m_triggerLeft.m_action = LeaveLevelBounds(CamTransitionType.Room_Left);
         m_triggerRight.m_action = LeaveLevelBounds(CamTransitionType.Room_Right);

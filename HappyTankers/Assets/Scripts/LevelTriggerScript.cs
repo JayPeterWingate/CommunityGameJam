@@ -7,8 +7,12 @@ public class LevelTriggerScript : MonoBehaviour
 {
     public UnityAction m_action;
 
-    void OnTriggerEnter()
+    void OnTriggerEnter(Collider collider)
     {
-        m_action();
+        if (PlayerScript.playerRef == collider.attachedRigidbody.transform.parent.gameObject)
+        {
+            //Debug.Log("HitOutterWall");
+            m_action();
+        }
     }
 }
