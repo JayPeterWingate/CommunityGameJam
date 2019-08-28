@@ -30,8 +30,8 @@ public class GenerateLevel : MonoBehaviour
 				}
 			}
 		}
-		//SetActiveLevel(false);
-		SetFilterMode(true, true);
+		SetActiveLevel(false);
+		//SetFilterMode(true, true);
 	}
 
     public void SetFilterMode(bool happy, bool dark)
@@ -59,6 +59,7 @@ public class GenerateLevel : MonoBehaviour
         {
             m_levelBlocks[i].gameObject.SetActive(setting);
         }
+        transform.position = new Vector3(transform.position.x, setting ? 0 : -20, transform.position.z);
     }
 
     // Update is called once per frame
