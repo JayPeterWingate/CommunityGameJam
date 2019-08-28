@@ -30,6 +30,7 @@ public struct LevelGridElements
     [HideInInspector] public Vector3 worldCentre;
     [HideInInspector] public CamPos camPos;
     //Levels
+    [HideInInspector] public GameObject LevelLast;
     [HideInInspector] public GameObject LevelCurrent;
     [HideInInspector] public GameObject LevelNext;
     //Vertical Highways
@@ -64,6 +65,8 @@ public class LevelManager : MonoBehaviour
 	public static bool IsHappy { get; private set; }
     [SerializeField] private levelObjectColorCoded[] m_levelObjectCodedPrefabs;
 	[SerializeField] private LevelProgression[] m_levels;
+    [SerializeField] private LevelProgression[] m_unfilteredLevels;
+    private int m_currentUFLIndex = 0;
 	[SerializeField] private CameraScript m_camera;
     
     [SerializeField] private LevelGridElements m_gridElements;
@@ -89,7 +92,7 @@ public class LevelManager : MonoBehaviour
 		IsHappy = true;
 
         m_gridElements.LevelCurrent = m_levels[0].gameObject;
-        m_gridElements.LevelNext = m_levels[1].gameObject;
+        m_gridElements.LevelNext = m_unfilteredLevels[0].gameObject;
         m_gridElements.LevelCurrent.transform.position = new Vector3(0, 0, 0);
         m_gridElements.camPos = CamPos.InRoom;
         m_gridElements.worldCentre = new Vector3(0,0,0);
@@ -110,22 +113,146 @@ public class LevelManager : MonoBehaviour
 
     public void UnfilteredTransition(CamTransitionType type)
     {
-        Debug.Log("UnfilteredTransition - " + type);
-
         if ((type == CamTransitionType.Room_Down || type == CamTransitionType.Room_Left || type == CamTransitionType.Room_Right || type == CamTransitionType.Room_Up)
             && (m_gridElements.camPos != CamPos.InRoom))
         {
             return; //Return if invalid transition request
         }
 
+        Debug.Log("UnfilteredTransition - " + type + " from " + m_gridElements.camPos);
+
         switch (type)
         {
             case CamTransitionType.HW_New:
                 {
-                    m_gridElements.camPos = CamPos.InRoom;
-                    
-                    //TODO
+                    FilterManager.IsHappy = false;
 
+                    GameObject temp;
+                    Vector3 shiftVal = new Vector3(0,0,0);
+                    switch (m_gridElements.camPos)
+                    {
+                        case CamPos.BotHW:
+                            {
+                                shiftVal = -(new Vector3(0,0,m_levelH + 6));
+                                //Vx1
+                                temp = m_gridElements.HW_V11; m_gridElements.HW_V11 = m_gridElements.HW_V21; m_gridElements.HW_V21 = m_gridElements.HW_V31;
+                                temp.transform.position += 3*shiftVal; m_gridElements.HW_V31 = temp;
+                                //Vx2
+                                temp = m_gridElements.HW_V12; m_gridElements.HW_V12 = m_gridElements.HW_V22; m_gridElements.HW_V22 = m_gridElements.HW_V32;
+                                temp.transform.position += 3*shiftVal; m_gridElements.HW_V32 = temp;
+                                //H1x
+                                temp = m_gridElements.HW_H11; m_gridElements.HW_H11 = m_gridElements.HW_H12;
+                                temp.transform.position += 2*shiftVal; m_gridElements.HW_H12 = temp;
+                                //H2x
+                                temp = m_gridElements.HW_H21; m_gridElements.HW_H21 = m_gridElements.HW_H22;
+                                temp.transform.position += 2*shiftVal; m_gridElements.HW_H22 = temp;
+                                //H3x
+                                temp = m_gridElements.HW_H31; m_gridElements.HW_H31 = m_gridElements.HW_H32;
+                                temp.transform.position += 2*shiftVal; m_gridElements.HW_H32 = temp;
+                                //NxL
+                                temp = m_gridElements.NodeTL; m_gridElements.NodeTL = m_gridElements.NodeBL;
+                                temp.transform.position += 2*shiftVal; m_gridElements.NodeBL = temp;
+                                //NxR
+                                temp = m_gridElements.NodeTR; m_gridElements.NodeTR = m_gridElements.NodeBR;
+                                temp.transform.position += 2*shiftVal; m_gridElements.NodeBR = temp;
+                                break;
+                            }
+                        case CamPos.TopHW:
+                            {
+                                shiftVal = (new Vector3(0, 0, m_levelH + 6));
+                                //Vx1
+                                temp = m_gridElements.HW_V31; m_gridElements.HW_V31 = m_gridElements.HW_V21; m_gridElements.HW_V21 = m_gridElements.HW_V11;
+                                temp.transform.position += 3 * shiftVal; m_gridElements.HW_V11 = temp;
+                                //Vx2
+                                temp = m_gridElements.HW_V32; m_gridElements.HW_V32 = m_gridElements.HW_V22; m_gridElements.HW_V22 = m_gridElements.HW_V12;
+                                temp.transform.position += 3 * shiftVal; m_gridElements.HW_V12 = temp;
+                                //H1x
+                                temp = m_gridElements.HW_H12; m_gridElements.HW_H12 = m_gridElements.HW_H11;
+                                temp.transform.position += 2 * shiftVal; m_gridElements.HW_H11 = temp;
+                                //H2x
+                                temp = m_gridElements.HW_H22; m_gridElements.HW_H22 = m_gridElements.HW_H21;
+                                temp.transform.position += 2 * shiftVal; m_gridElements.HW_H21 = temp;
+                                //H3x
+                                temp = m_gridElements.HW_H32; m_gridElements.HW_H32 = m_gridElements.HW_H31;
+                                temp.transform.position += 2 * shiftVal; m_gridElements.HW_H31 = temp;
+                                //NxL
+                                temp = m_gridElements.NodeBL; m_gridElements.NodeBL = m_gridElements.NodeTL;
+                                temp.transform.position += 2 * shiftVal; m_gridElements.NodeTL = temp;
+                                //NxR
+                                temp = m_gridElements.NodeBR; m_gridElements.NodeBR = m_gridElements.NodeTR;
+                                temp.transform.position += 2 * shiftVal; m_gridElements.NodeTR = temp;
+                                break;
+                            }
+                        case CamPos.LeftHW:
+                            {
+                                shiftVal = -(new Vector3(m_levelW + 6, 0, 0));
+                                //Hx1
+                                temp = m_gridElements.HW_H31; m_gridElements.HW_H31 = m_gridElements.HW_H21; m_gridElements.HW_H21 = m_gridElements.HW_H11;
+                                temp.transform.position += 3 * shiftVal; m_gridElements.HW_H11 = temp;
+                                //Hx2
+                                temp = m_gridElements.HW_H32; m_gridElements.HW_H32 = m_gridElements.HW_H22; m_gridElements.HW_H22 = m_gridElements.HW_H12;
+                                temp.transform.position += 3 * shiftVal; m_gridElements.HW_H12 = temp;
+                                //V1x
+                                temp = m_gridElements.HW_V12; m_gridElements.HW_V12 = m_gridElements.HW_V11;
+                                temp.transform.position += 2 * shiftVal; m_gridElements.HW_V11 = temp;
+                                //V2x
+                                temp = m_gridElements.HW_V22; m_gridElements.HW_V22 = m_gridElements.HW_V21;
+                                temp.transform.position += 2 * shiftVal; m_gridElements.HW_H21 = temp;
+                                //V3x
+                                temp = m_gridElements.HW_V32; m_gridElements.HW_V32 = m_gridElements.HW_V31;
+                                temp.transform.position += 2 * shiftVal; m_gridElements.HW_V31 = temp;
+                                //NTx
+                                temp = m_gridElements.NodeTR; m_gridElements.NodeTR = m_gridElements.NodeTL;
+                                temp.transform.position += 2 * shiftVal; m_gridElements.NodeTL = temp;
+                                //NBx
+                                temp = m_gridElements.NodeBR; m_gridElements.NodeBR = m_gridElements.NodeBL;
+                                temp.transform.position += 2 * shiftVal; m_gridElements.NodeBL = temp;
+                                break;
+                            }
+                        case CamPos.RightHW:
+                            {
+                                shiftVal = (new Vector3(m_levelW + 6, 0, 0));
+                                //Hx1
+                                temp = m_gridElements.HW_H11; m_gridElements.HW_H11 = m_gridElements.HW_H21; m_gridElements.HW_H21 = m_gridElements.HW_H31;
+                                temp.transform.position += 3 * shiftVal; m_gridElements.HW_H31 = temp;
+                                //Hx2
+                                temp = m_gridElements.HW_H12; m_gridElements.HW_H12 = m_gridElements.HW_H22; m_gridElements.HW_H22 = m_gridElements.HW_H32;
+                                temp.transform.position += 3 * shiftVal; m_gridElements.HW_H32 = temp;
+                                //V1x
+                                temp = m_gridElements.HW_V11; m_gridElements.HW_V11 = m_gridElements.HW_V12;
+                                temp.transform.position += 2 * shiftVal; m_gridElements.HW_V12 = temp;
+                                //V2x
+                                temp = m_gridElements.HW_V21; m_gridElements.HW_V21 = m_gridElements.HW_V22;
+                                temp.transform.position += 2 * shiftVal; m_gridElements.HW_H22 = temp;
+                                //V3x
+                                temp = m_gridElements.HW_V31; m_gridElements.HW_V31 = m_gridElements.HW_V32;
+                                temp.transform.position += 2 * shiftVal; m_gridElements.HW_V32 = temp;
+                                //NTx
+                                temp = m_gridElements.NodeTL; m_gridElements.NodeTL = m_gridElements.NodeTR;
+                                temp.transform.position += 2 * shiftVal; m_gridElements.NodeTR = temp;
+                                //NBx
+                                temp = m_gridElements.NodeBL; m_gridElements.NodeBL = m_gridElements.NodeBR;
+                                temp.transform.position += 2 * shiftVal; m_gridElements.NodeBR = temp;
+                                break;
+                            }
+                        case CamPos.InRoom:
+                            {
+                                Debug.Log("Attempted room switch whilst midroom");
+                                break;
+                            }
+                        default: break;
+                    }
+                    m_gridElements.worldCentre += shiftVal;
+                    m_gridElements.camPos = CamPos.InRoom;
+                    m_camera.LerpMoveFocus(m_gridElements.worldCentre);
+
+                    if (m_gridElements.LevelLast != null) { m_gridElements.LevelLast.GetComponent<GenerateLevel>().SetActiveLevel(false); }
+                    m_gridElements.LevelLast = m_gridElements.LevelCurrent;
+                    m_gridElements.LevelCurrent = m_gridElements.LevelNext;
+                    m_currentUFLIndex++;
+                    m_gridElements.LevelNext = m_unfilteredLevels[m_currentUFLIndex].gameObject; //TODO Unhardcode this level 3 spot
+                    
+                    //TODO activate and darken next level
                     break;
                 }
             case CamTransitionType.HW_Old:
@@ -136,6 +263,7 @@ public class LevelManager : MonoBehaviour
                 }
             case CamTransitionType.Room_Left:
                 {
+                    if (FilterManager.IsHappy) { FilterManager.IsAlmostDark = true; }
                     m_gridElements.camPos = CamPos.LeftHW;
                     m_camera.LerpMoveFocus(m_gridElements.worldCentre - new Vector3(m_levelW / 2 + 3,0,0));
                     m_gridElements.LevelNext.transform.position = m_gridElements.worldCentre - new Vector3(m_levelW + 6, 0, 0);
@@ -143,6 +271,7 @@ public class LevelManager : MonoBehaviour
                 }
             case CamTransitionType.Room_Right:
                 {
+                    if (FilterManager.IsHappy) { FilterManager.IsAlmostDark = true; }
                     m_gridElements.camPos = CamPos.RightHW;
                     m_camera.LerpMoveFocus(m_gridElements.worldCentre + new Vector3(m_levelW / 2 + 3, 0, 0));
                     m_gridElements.LevelNext.transform.position = m_gridElements.worldCentre + new Vector3(m_levelW + 6, 0, 0);
@@ -150,16 +279,18 @@ public class LevelManager : MonoBehaviour
                 }
             case CamTransitionType.Room_Up:
                 {
+                    if (FilterManager.IsHappy) { FilterManager.IsAlmostDark = true; }
                     m_gridElements.camPos = CamPos.TopHW;
-                    m_camera.LerpMoveFocus(m_gridElements.worldCentre + new Vector3(m_levelH / 2 + 3, 0, 0));
-                    m_gridElements.LevelNext.transform.position = m_gridElements.worldCentre + new Vector3(m_levelH + 6, 0, 0);
+                    m_camera.LerpMoveFocus(m_gridElements.worldCentre + new Vector3(0, 0, m_levelH / 2 + 3));
+                    m_gridElements.LevelNext.transform.position = m_gridElements.worldCentre + new Vector3(0, 0, m_levelH + 6);
                     break;
                 }
             case CamTransitionType.Room_Down:
                 {
+                    if (FilterManager.IsHappy) { FilterManager.IsAlmostDark = true; }
                     m_gridElements.camPos = CamPos.BotHW;
-                    m_camera.LerpMoveFocus(m_gridElements.worldCentre - new Vector3(m_levelH / 2 + 3, 0, 0));
-                    m_gridElements.LevelNext.transform.position = m_gridElements.worldCentre - new Vector3(m_levelH + 6, 0, 0);
+                    m_camera.LerpMoveFocus(m_gridElements.worldCentre - new Vector3(0, 0, m_levelH / 2 + 3));
+                    m_gridElements.LevelNext.transform.position = m_gridElements.worldCentre - new Vector3(0, 0, m_levelH + 6);
                     break;
                 }
             default: break;
@@ -177,7 +308,7 @@ public class LevelManager : MonoBehaviour
                 m_levels[i - 1].GetComponent<GenerateLevel>().SetActiveLevel(false);
             }
             m_gridElements.LevelCurrent = m_levels[i].gameObject;
-            m_gridElements.LevelNext = m_levels[i+1].gameObject;
+            
 
             GenerateLevel nextLevel = m_levels[i].GetComponent<GenerateLevel>();
             nextLevel.SetActiveLevel(true);

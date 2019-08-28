@@ -827,6 +827,11 @@ PrefabInstance:
       propertyPath: m_Name
       value: TL_BR_HWNode
       objectReference: {fileID: 0}
+    - target: {fileID: 6476551357772264070, guid: f79456c09e10c9c49ad50e4f97741dda,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 2443378429882943728, guid: f79456c09e10c9c49ad50e4f97741dda,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -895,6 +900,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Name
       value: BL_TR_HWNode
+      objectReference: {fileID: 0}
+    - target: {fileID: 2335083820990166638, guid: 8d42152338cbd604da4d92ea7d7f0208,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 499470086045685883, guid: 8d42152338cbd604da4d92ea7d7f0208,
         type: 3}
@@ -1039,6 +1049,11 @@ PrefabInstance:
       propertyPath: m_Name
       value: Vert_HW
       objectReference: {fileID: 0}
+    - target: {fileID: 4286565305066127197, guid: 3658a4cff2862814fbd54f62abe0e0fe,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 1107881542161611886, guid: 3658a4cff2862814fbd54f62abe0e0fe,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -1107,6 +1122,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Name
       value: Horiz_HW
+      objectReference: {fileID: 0}
+    - target: {fileID: 1997056234844037598, guid: 9c6afe2ba3447d941b47b12ddf8bf097,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 699469834327146136, guid: 9c6afe2ba3447d941b47b12ddf8bf097,
         type: 3}
