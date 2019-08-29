@@ -90,7 +90,7 @@ public class AITankController : TankController
 	}
 	public void SetTarget(Vector3 target)
 	{
-		print("Got a path");
+		//print("Got a path");
 		m_hasPath = true;
 		m_agent.SetDestination(target);
 	}

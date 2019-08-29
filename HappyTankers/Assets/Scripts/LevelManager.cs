@@ -93,12 +93,13 @@ public class LevelManager : MonoBehaviour
 
     private void InLevelSlot(GenerateLevel inputObj)
     {
-        m_gridElements.usedSlots[(m_worldSize/2) + ((int)inputObj.transform.position.x / (m_levelW + 6)), (m_worldSize / 2) + ((int)inputObj.transform.position.z / (m_levelH + 6))] = inputObj;
+        m_gridElements.usedSlots[(m_worldSize / 2) + (int)Mathf.Round(inputObj.transform.position.x / (m_levelW + 6))
+                               , (m_worldSize / 2) + (int)Mathf.Round(inputObj.transform.position.z / (m_levelH + 6))] = inputObj;
     }
 
     private GenerateLevel OutLevelSlot(float x, float y)
     {
-        return m_gridElements.usedSlots[(m_worldSize / 2) + ((int)x + 100 / (m_levelW + 6)), (m_worldSize / 2) + ((int)y + 100 / (m_levelH + 6))];
+        return m_gridElements.usedSlots[(m_worldSize / 2) + (int)Mathf.Round(x / (m_levelW + 6)), (m_worldSize / 2) + (int)Mathf.Round(y / (m_levelH + 6))];
     }
 
 	private void Start()
@@ -261,14 +262,16 @@ public class LevelManager : MonoBehaviour
                     m_gridElements.camPos = CamPos.InRoom;
                     m_camera.LerpMoveFocus(m_gridElements.worldCentre);
 
-                    if (m_gridElements.LevelLast != null) { m_gridElements.LevelLast.SetActiveLevel(false); }
+                    GenerateLevel newLevel = OutLevelSlot(m_gridElements.worldCentre.x, m_gridElements.worldCentre.z);
+                    if (m_gridElements.LevelLast != null && newLevel != m_gridElements.LevelLast) { m_gridElements.LevelLast.SetActiveLevel(false); }
                     m_gridElements.LevelLast = m_gridElements.LevelCurrent;
-                    m_gridElements.LevelCurrent = OutLevelSlot(m_gridElements.worldCentre.x, m_gridElements.worldCentre.z);
+                    m_gridElements.LevelCurrent = newLevel;
                     m_gridElements.LevelCurrent.SetShadowMode(false);
                     m_gridElements.LevelCurrent.SetPauseMode(false);
                     //TODO Unhardcode this level 3 spot
-                    
+
                     //TODO activate and darken next level
+                    DebugGridArrayPrint();
                     break;
                 }
             case CamTransitionType.HW_Old:
@@ -317,13 +320,13 @@ public class LevelManager : MonoBehaviour
             default: break;
         }
         //DebugGridChecker();
-        DebugGridArrayPrint();
     }
 
     private void HighwayEntryAddedCode(Vector3 offsetNL)
     {
         Vector3 nextLevelPos = m_gridElements.worldCentre + offsetNL;
-        if (OutLevelSlot(nextLevelPos.x, nextLevelPos.z) != null)
+        GenerateLevel nextLevelSlot = OutLevelSlot(nextLevelPos.x, nextLevelPos.z);
+        if (nextLevelSlot == null)
         {
             m_gridElements.LevelNext.transform.position = nextLevelPos;
             InLevelSlot(m_gridElements.LevelNext);
@@ -332,17 +335,21 @@ public class LevelManager : MonoBehaviour
             Debug.Log("NextLevelIndex = " + m_currentUFLIndex);
             m_gridElements.LevelNext = m_unfilteredLevelGenerations[m_currentUFLIndex];
         }
+        else
+        {
+            nextLevelSlot.SetActiveLevel(true);
+        }
         m_gridElements.LevelCurrent.SetShadowMode(true);
     }
 
     private void DebugGridArrayPrint()
     {
-        int minIdx = (m_worldSize / 2) - 15;
-        int maxIdx = (m_worldSize / 2) + 15;
+        int minIdx = (m_worldSize / 2) - 5;
+        int maxIdx = (m_worldSize / 2) + 5;
         string debugString = "";
-        for (int x = minIdx; x < maxIdx; x++)
+        for (int y = maxIdx - 1; y > minIdx - 1; y--)
         {
-            for (int y = minIdx; y < maxIdx; y++)
+            for (int x = minIdx; x < maxIdx; x++)
             {
                 debugString += DGAP_Aux(m_gridElements.usedSlots[x,y]);
             }
@@ -354,21 +361,21 @@ public class LevelManager : MonoBehaviour
     {
         if (gl == null)
         {
-            return "-";
+            return "_ ";
         }
         if (gl == m_gridElements.LevelCurrent)
         {
-            return "C";
+            return "C ";
         }
         if (gl == m_gridElements.LevelLast)
         {
-            return "L";
+            return "L ";
         }
         if (gl == m_gridElements.LevelNext)
         {
-            return "N";
+            return "N ";
         }
-        return "X";
+        return "X ";
     }
 
 
