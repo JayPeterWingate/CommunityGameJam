@@ -12,6 +12,13 @@ public class PlayerScript : TankController
 	public MasterControl controls;
 	public Vector3 startPos;
 
+	public Texture2D m_darkCursor;
+	public Texture2D m_happyCursor;
+
+	public Texture2D m_darkReadyCursor;
+	public Texture2D m_happyReadyCursor;
+
+
 	private void Awake()
 	{
 		playerRef = gameObject;
@@ -41,4 +48,6 @@ public class PlayerScript : TankController
         controls.Player.FireStrong.performed += crt => strongFireEvent.Invoke();
         controls.Player.Shield.performed += crt => shieldEvent.Invoke();
 	}
+
+	public override void SetCursor(bool ready) =>	Cursor.SetCursor(FilterManager.IsHappy ? ready ? m_happyReadyCursor : m_happyCursor : ready ? m_darkReadyCursor : m_darkCursor, new Vector2(32, 32), CursorMode.Auto);
 }

@@ -12,8 +12,6 @@ public class CameraScript : MonoBehaviour
 	[SerializeField] GameObject m_transitionaryCamera;
 	[SerializeField] GameObject m_plane;
 	[SerializeField] GameObject m_border;
-	[SerializeField] Texture2D m_darkCursor;
-	[SerializeField] Texture2D m_happyCursor;
 	public GameObject m_blueScreen;
 
     void Start()
@@ -29,7 +27,6 @@ public class CameraScript : MonoBehaviour
 		m_blueScreen.SetActive(false);
 		FilterManager.OnChange.AddListener(RemoveFilter);
 		FilterManager.OnDeath.AddListener(ShowBlueScreen);
-		Cursor.SetCursor(m_happyCursor, new Vector2(32,32),CursorMode.Auto);
     }
 
 	private void ShowBlueScreen()
@@ -49,8 +46,7 @@ public class CameraScript : MonoBehaviour
 		StartCoroutine(UpdateCullMask());
 		m_camera.cullingMask = 1 << 10 | 1 << 13 | 1 << 15 | 1 << 8;
 		m_animator.SetBool("RemoveFilter",!isHappy);
-
-		Cursor.SetCursor(m_darkCursor, new Vector2(32, 32), CursorMode.Auto);
+		
 	}
 	private IEnumerator UpdateCullMask()
 	{

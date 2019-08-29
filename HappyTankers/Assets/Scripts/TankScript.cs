@@ -15,6 +15,8 @@ public class TankController : MonoBehaviour
 	public UnityEvent shieldEvent = new UnityEvent();
 	public Color color;
 
+	public virtual void SetCursor(bool ready) { }
+
 	public int lives;
 }
 
@@ -131,7 +133,8 @@ public class TankScript : MonoBehaviour
     private IEnumerator FireBullets(int bulletCount, float spawnGap, float cooldown, bool strong)
 	{
 		m_isFiring = true;
-		for(int i = 0; i < bulletCount; i++)
+		m_controller.SetCursor(false);
+		for (int i = 0; i < bulletCount; i++)
 		{
             if (strong)
             {
@@ -148,6 +151,7 @@ public class TankScript : MonoBehaviour
             yield return new WaitForSeconds(spawnGap);
 		}
 		yield return new WaitForSeconds(cooldown);
+		m_controller.SetCursor(true);
 		m_isFiring = false;
 	}
 	private void ActiveShield()

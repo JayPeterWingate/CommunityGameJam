@@ -66,6 +66,10 @@ MonoBehaviour:
   color: {r: 1, g: 1, b: 1, a: 1}
   lives: 3
   startPos: {x: 0, y: 0, z: 0}
+  m_darkCursor: {fileID: 2800000, guid: c3b7d2444a6927343af6ec36a4344612, type: 3}
+  m_happyCursor: {fileID: 2800000, guid: 66865323dae595044a004bf0037eb51b, type: 3}
+  m_darkReadyCursor: {fileID: 2800000, guid: 4afbc662b4196ba42a599e37895316bb, type: 3}
+  m_happyReadyCursor: {fileID: 2800000, guid: 2ad8c1677c8ecb2428f6055c5dc74a63, type: 3}
 --- !u!1 &4514564584238307888
 GameObject:
   m_ObjectHideFlags: 0
