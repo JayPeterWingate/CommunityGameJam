@@ -18,10 +18,13 @@ public class PlayerScript : TankController
 		color = new Color(1, 1, 1);
 		controls = new MasterControl();
 		controls.Enable();
-		controls.Player.LeftTrack.performed += ctr => leftDrive = ctr.ReadValue<float>();
-		controls.Player.RightTrack.performed += ctr => rightDrive = ctr.ReadValue<float>();
-		controls.Player.LeftTrack.canceled += ctr => { leftDrive = 0; };
-		controls.Player.RightTrack.canceled += ctr => { rightDrive = 0; };
+		controls.Player.MovementAxis.performed += ctr =>
+		{
+			Vector2 input = ctr.ReadValue<Vector2>();
+			rightDrive = Vector2.Dot(input, new Vector2(-1, 1));
+			leftDrive = Vector2.Dot(input, new Vector2(1 , 1));
+		};
+		controls.Player.MovementAxis.canceled += ctr => { leftDrive = 0; rightDrive = 0; };
 		controls.Player.RotateTurret.performed += ctr =>
 		{
 			Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);

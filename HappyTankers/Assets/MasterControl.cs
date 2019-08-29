@@ -18,22 +18,6 @@ public class MasterControl : IInputActionCollection
             ""id"": ""3f14c98b-03a9-4542-85d0-a5ab3f470dd4"",
             ""actions"": [
                 {
-                    ""name"": ""LeftTrack"",
-                    ""type"": ""Button"",
-                    ""id"": ""157d32a1-b197-41b7-852d-5aaf4ce77330"",
-                    ""expectedControlType"": """",
-                    ""processors"": """",
-                    ""interactions"": """"
-                },
-                {
-                    ""name"": ""RightTrack"",
-                    ""type"": ""Button"",
-                    ""id"": ""d8e754b2-19b5-4cce-b182-3db830fc003d"",
-                    ""expectedControlType"": """",
-                    ""processors"": """",
-                    ""interactions"": """"
-                },
-                {
                     ""name"": ""RotateTurret"",
                     ""type"": ""Value"",
                     ""id"": ""92fe82ba-4ed3-41fc-b15c-1c3a1916990b"",
@@ -72,141 +56,17 @@ public class MasterControl : IInputActionCollection
                     ""expectedControlType"": """",
                     ""processors"": """",
                     ""interactions"": """"
+                },
+                {
+                    ""name"": ""MovementAxis"",
+                    ""type"": ""Button"",
+                    ""id"": ""b1593a26-19cf-4165-bd98-17460a994571"",
+                    ""expectedControlType"": """",
+                    ""processors"": """",
+                    ""interactions"": """"
                 }
             ],
             ""bindings"": [
-                {
-                    ""name"": ""Keyboard"",
-                    ""id"": ""a3656a2c-5959-4885-a476-49a388659fd2"",
-                    ""path"": ""1DAxis"",
-                    ""interactions"": """",
-                    ""processors"": """",
-                    ""groups"": """",
-                    ""action"": ""LeftTrack"",
-                    ""isComposite"": true,
-                    ""isPartOfComposite"": false
-                },
-                {
-                    ""name"": ""negative"",
-                    ""id"": ""29953dc1-2343-4278-ba25-6b070807a889"",
-                    ""path"": ""<Keyboard>/a"",
-                    ""interactions"": """",
-                    ""processors"": """",
-                    ""groups"": "";Keyboard&Mouse"",
-                    ""action"": ""LeftTrack"",
-                    ""isComposite"": false,
-                    ""isPartOfComposite"": true
-                },
-                {
-                    ""name"": ""positive"",
-                    ""id"": ""a2bd1100-2bb7-4499-a573-c787ce059a2d"",
-                    ""path"": ""<Keyboard>/q"",
-                    ""interactions"": """",
-                    ""processors"": """",
-                    ""groups"": "";Keyboard&Mouse"",
-                    ""action"": ""LeftTrack"",
-                    ""isComposite"": false,
-                    ""isPartOfComposite"": true
-                },
-                {
-                    ""name"": ""XBox"",
-                    ""id"": ""9f9e8ded-f58b-4e1b-aadb-ea45a023f4b8"",
-                    ""path"": ""1DAxis"",
-                    ""interactions"": """",
-                    ""processors"": """",
-                    ""groups"": """",
-                    ""action"": ""LeftTrack"",
-                    ""isComposite"": true,
-                    ""isPartOfComposite"": false
-                },
-                {
-                    ""name"": ""negative"",
-                    ""id"": ""64492e87-fe43-4ceb-9f34-aa20879163e2"",
-                    ""path"": ""<XInputController>/leftShoulder"",
-                    ""interactions"": """",
-                    ""processors"": """",
-                    ""groups"": "";XBox"",
-                    ""action"": ""LeftTrack"",
-                    ""isComposite"": false,
-                    ""isPartOfComposite"": true
-                },
-                {
-                    ""name"": ""positive"",
-                    ""id"": ""cf90a3f6-1264-4ffb-85ff-092867efa5c3"",
-                    ""path"": ""<XInputController>/leftTrigger"",
-                    ""interactions"": """",
-                    ""processors"": """",
-                    ""groups"": "";XBox"",
-                    ""action"": ""LeftTrack"",
-                    ""isComposite"": false,
-                    ""isPartOfComposite"": true
-                },
-                {
-                    ""name"": ""Keyboard"",
-                    ""id"": ""3279c3f5-31c3-4c57-b146-69e470fb05e3"",
-                    ""path"": ""1DAxis"",
-                    ""interactions"": """",
-                    ""processors"": """",
-                    ""groups"": """",
-                    ""action"": ""RightTrack"",
-                    ""isComposite"": true,
-                    ""isPartOfComposite"": false
-                },
-                {
-                    ""name"": ""negative"",
-                    ""id"": ""775eab21-a155-47de-889a-ad97d16ba0fe"",
-                    ""path"": ""<Keyboard>/d"",
-                    ""interactions"": """",
-                    ""processors"": """",
-                    ""groups"": "";Keyboard&Mouse"",
-                    ""action"": ""RightTrack"",
-                    ""isComposite"": false,
-                    ""isPartOfComposite"": true
-                },
-                {
-                    ""name"": ""positive"",
-                    ""id"": ""b9c1d8d3-a6f7-413b-b0e0-f670744de3ff"",
-                    ""path"": ""<Keyboard>/e"",
-                    ""interactions"": """",
-                    ""processors"": """",
-                    ""groups"": "";Keyboard&Mouse"",
-                    ""action"": ""RightTrack"",
-                    ""isComposite"": false,
-                    ""isPartOfComposite"": true
-                },
-                {
-                    ""name"": ""XBox"",
-                    ""id"": ""6229478e-7f9b-49c8-a87a-ab92becd87a4"",
-                    ""path"": ""1DAxis"",
-                    ""interactions"": """",
-                    ""processors"": """",
-                    ""groups"": """",
-                    ""action"": ""RightTrack"",
-                    ""isComposite"": true,
-                    ""isPartOfComposite"": false
-                },
-                {
-                    ""name"": ""negative"",
-                    ""id"": ""9fe55a79-4116-4f83-8b19-395c61531af9"",
-                    ""path"": ""<XInputController>/rightShoulder"",
-                    ""interactions"": """",
-                    ""processors"": """",
-                    ""groups"": "";XBox"",
-                    ""action"": ""RightTrack"",
-                    ""isComposite"": false,
-                    ""isPartOfComposite"": true
-                },
-                {
-                    ""name"": ""positive"",
-                    ""id"": ""5339d15f-30f0-4eaf-a51b-adaec6d5adbb"",
-                    ""path"": ""<XInputController>/rightTrigger"",
-                    ""interactions"": """",
-                    ""processors"": """",
-                    ""groups"": "";XBox"",
-                    ""action"": ""RightTrack"",
-                    ""isComposite"": false,
-                    ""isPartOfComposite"": true
-                },
                 {
                     ""name"": """",
                     ""id"": ""116ce69d-149b-4e94-b43d-42a3f09ba672"",
@@ -316,6 +176,61 @@ public class MasterControl : IInputActionCollection
                     ""action"": ""FireStrong"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": ""2D Vector"",
+                    ""id"": ""f11954a0-e57e-4a29-a6fb-8d98f482e586"",
+                    ""path"": ""2DVector"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""MovementAxis"",
+                    ""isComposite"": true,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": ""up"",
+                    ""id"": ""f029994d-6e1a-43ee-8e2e-f889fdedf0b8"",
+                    ""path"": ""<Keyboard>/w"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""MovementAxis"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": true
+                },
+                {
+                    ""name"": ""down"",
+                    ""id"": ""224084f2-3225-420a-bbd4-8ab17dfaca50"",
+                    ""path"": ""<Keyboard>/s"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""MovementAxis"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": true
+                },
+                {
+                    ""name"": ""left"",
+                    ""id"": ""1932f81b-efe3-4e9c-874e-6e8564fbff3c"",
+                    ""path"": ""<Keyboard>/a"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""MovementAxis"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": true
+                },
+                {
+                    ""name"": ""right"",
+                    ""id"": ""6e2be21f-8f6b-48a3-a7ba-80466ff24f09"",
+                    ""path"": ""<Keyboard>/d"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""MovementAxis"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": true
                 }
             ]
         }
@@ -354,13 +269,12 @@ public class MasterControl : IInputActionCollection
 }");
         // Player
         m_Player = asset.GetActionMap("Player");
-        m_Player_LeftTrack = m_Player.GetAction("LeftTrack");
-        m_Player_RightTrack = m_Player.GetAction("RightTrack");
         m_Player_RotateTurret = m_Player.GetAction("RotateTurret");
         m_Player_XBoxRotateTurret = m_Player.GetAction("XBoxRotateTurret");
         m_Player_Fire = m_Player.GetAction("Fire");
         m_Player_Shield = m_Player.GetAction("Shield");
         m_Player_FireStrong = m_Player.GetAction("FireStrong");
+        m_Player_MovementAxis = m_Player.GetAction("MovementAxis");
     }
 
     ~MasterControl()
@@ -410,24 +324,22 @@ public class MasterControl : IInputActionCollection
     // Player
     private readonly InputActionMap m_Player;
     private IPlayerActions m_PlayerActionsCallbackInterface;
-    private readonly InputAction m_Player_LeftTrack;
-    private readonly InputAction m_Player_RightTrack;
     private readonly InputAction m_Player_RotateTurret;
     private readonly InputAction m_Player_XBoxRotateTurret;
     private readonly InputAction m_Player_Fire;
     private readonly InputAction m_Player_Shield;
     private readonly InputAction m_Player_FireStrong;
+    private readonly InputAction m_Player_MovementAxis;
     public struct PlayerActions
     {
         private MasterControl m_Wrapper;
         public PlayerActions(MasterControl wrapper) { m_Wrapper = wrapper; }
-        public InputAction @LeftTrack => m_Wrapper.m_Player_LeftTrack;
-        public InputAction @RightTrack => m_Wrapper.m_Player_RightTrack;
         public InputAction @RotateTurret => m_Wrapper.m_Player_RotateTurret;
         public InputAction @XBoxRotateTurret => m_Wrapper.m_Player_XBoxRotateTurret;
         public InputAction @Fire => m_Wrapper.m_Player_Fire;
         public InputAction @Shield => m_Wrapper.m_Player_Shield;
         public InputAction @FireStrong => m_Wrapper.m_Player_FireStrong;
+        public InputAction @MovementAxis => m_Wrapper.m_Player_MovementAxis;
         public InputActionMap Get() { return m_Wrapper.m_Player; }
         public void Enable() { Get().Enable(); }
         public void Disable() { Get().Disable(); }
@@ -437,12 +349,6 @@ public class MasterControl : IInputActionCollection
         {
             if (m_Wrapper.m_PlayerActionsCallbackInterface != null)
             {
-                LeftTrack.started -= m_Wrapper.m_PlayerActionsCallbackInterface.OnLeftTrack;
-                LeftTrack.performed -= m_Wrapper.m_PlayerActionsCallbackInterface.OnLeftTrack;
-                LeftTrack.canceled -= m_Wrapper.m_PlayerActionsCallbackInterface.OnLeftTrack;
-                RightTrack.started -= m_Wrapper.m_PlayerActionsCallbackInterface.OnRightTrack;
-                RightTrack.performed -= m_Wrapper.m_PlayerActionsCallbackInterface.OnRightTrack;
-                RightTrack.canceled -= m_Wrapper.m_PlayerActionsCallbackInterface.OnRightTrack;
                 RotateTurret.started -= m_Wrapper.m_PlayerActionsCallbackInterface.OnRotateTurret;
                 RotateTurret.performed -= m_Wrapper.m_PlayerActionsCallbackInterface.OnRotateTurret;
                 RotateTurret.canceled -= m_Wrapper.m_PlayerActionsCallbackInterface.OnRotateTurret;
@@ -458,16 +364,13 @@ public class MasterControl : IInputActionCollection
                 FireStrong.started -= m_Wrapper.m_PlayerActionsCallbackInterface.OnFireStrong;
                 FireStrong.performed -= m_Wrapper.m_PlayerActionsCallbackInterface.OnFireStrong;
                 FireStrong.canceled -= m_Wrapper.m_PlayerActionsCallbackInterface.OnFireStrong;
+                MovementAxis.started -= m_Wrapper.m_PlayerActionsCallbackInterface.OnMovementAxis;
+                MovementAxis.performed -= m_Wrapper.m_PlayerActionsCallbackInterface.OnMovementAxis;
+                MovementAxis.canceled -= m_Wrapper.m_PlayerActionsCallbackInterface.OnMovementAxis;
             }
             m_Wrapper.m_PlayerActionsCallbackInterface = instance;
             if (instance != null)
             {
-                LeftTrack.started += instance.OnLeftTrack;
-                LeftTrack.performed += instance.OnLeftTrack;
-                LeftTrack.canceled += instance.OnLeftTrack;
-                RightTrack.started += instance.OnRightTrack;
-                RightTrack.performed += instance.OnRightTrack;
-                RightTrack.canceled += instance.OnRightTrack;
                 RotateTurret.started += instance.OnRotateTurret;
                 RotateTurret.performed += instance.OnRotateTurret;
                 RotateTurret.canceled += instance.OnRotateTurret;
@@ -483,6 +386,9 @@ public class MasterControl : IInputActionCollection
                 FireStrong.started += instance.OnFireStrong;
                 FireStrong.performed += instance.OnFireStrong;
                 FireStrong.canceled += instance.OnFireStrong;
+                MovementAxis.started += instance.OnMovementAxis;
+                MovementAxis.performed += instance.OnMovementAxis;
+                MovementAxis.canceled += instance.OnMovementAxis;
             }
         }
     }
@@ -507,12 +413,11 @@ public class MasterControl : IInputActionCollection
     }
     public interface IPlayerActions
     {
-        void OnLeftTrack(InputAction.CallbackContext context);
-        void OnRightTrack(InputAction.CallbackContext context);
         void OnRotateTurret(InputAction.CallbackContext context);
         void OnXBoxRotateTurret(InputAction.CallbackContext context);
         void OnFire(InputAction.CallbackContext context);
         void OnShield(InputAction.CallbackContext context);
         void OnFireStrong(InputAction.CallbackContext context);
+        void OnMovementAxis(InputAction.CallbackContext context);
     }
 }

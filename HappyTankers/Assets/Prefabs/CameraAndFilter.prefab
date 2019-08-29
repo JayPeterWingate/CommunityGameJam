@@ -460,6 +460,8 @@ MonoBehaviour:
   m_transitionaryCamera: {fileID: 8567531501448084189}
   m_plane: {fileID: 2461031907347631013}
   m_border: {fileID: 6162716053106242300}
+  m_darkCursor: {fileID: 2800000, guid: c3b7d2444a6927343af6ec36a4344612, type: 3}
+  m_happyCursor: {fileID: 2800000, guid: 66865323dae595044a004bf0037eb51b, type: 3}
   m_blueScreen: {fileID: 5127930014908370599}
 --- !u!1 &3891065789525822315
 GameObject:
@@ -1060,7 +1062,7 @@ GameObject:
   - component: {fileID: 7492534379401712802}
   m_Layer: 10
   m_Name: TransitionCamera
-  m_TagString: MainCamera
+  m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
