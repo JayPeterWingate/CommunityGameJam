@@ -30,9 +30,9 @@ public struct LevelGridElements
     [HideInInspector] public Vector3 worldCentre;
     [HideInInspector] public CamPos camPos;
     //Levels
-    [HideInInspector] public GameObject LevelLast;
-    [HideInInspector] public GameObject LevelCurrent;
-    [HideInInspector] public GameObject LevelNext;
+    [HideInInspector] public GenerateLevel LevelLast;
+    [HideInInspector] public GenerateLevel LevelCurrent;
+    [HideInInspector] public GenerateLevel LevelNext;
     //Vertical Highways
     public GameObject HW_V11;
     public GameObject HW_V21;
@@ -65,7 +65,7 @@ public class LevelManager : MonoBehaviour
 	public static bool IsHappy { get; private set; }
     [SerializeField] private levelObjectColorCoded[] m_levelObjectCodedPrefabs;
 	[SerializeField] private LevelProgression[] m_levels;
-    [SerializeField] private LevelProgression[] m_unfilteredLevels;
+    [SerializeField] private GenerateLevel[] m_unfilteredLevelGenerations;
     private int m_currentUFLIndex = 0;
 	[SerializeField] private CameraScript m_camera;
     
@@ -91,8 +91,8 @@ public class LevelManager : MonoBehaviour
 	{
 		IsHappy = true;
 
-        m_gridElements.LevelCurrent = m_levels[0].gameObject;
-        m_gridElements.LevelNext = m_unfilteredLevels[0].gameObject;
+        m_gridElements.LevelCurrent = m_levels[0].GetComponent<GenerateLevel>();
+        m_gridElements.LevelNext = m_unfilteredLevelGenerations[0];
         m_gridElements.LevelCurrent.transform.position = new Vector3(0, 0, 0);
         m_gridElements.camPos = CamPos.InRoom;
         m_gridElements.worldCentre = new Vector3(0,0,0);
@@ -246,12 +246,14 @@ public class LevelManager : MonoBehaviour
                     m_gridElements.camPos = CamPos.InRoom;
                     m_camera.LerpMoveFocus(m_gridElements.worldCentre);
 
-                    if (m_gridElements.LevelLast != null) { m_gridElements.LevelLast.GetComponent<GenerateLevel>().SetActiveLevel(false); }
+                    if (m_gridElements.LevelLast != null) { m_gridElements.LevelLast.SetActiveLevel(false); }
                     m_gridElements.LevelLast = m_gridElements.LevelCurrent;
                     m_gridElements.LevelCurrent = m_gridElements.LevelNext;
+                    m_gridElements.LevelCurrent.SetShadowMode(false);
+                    m_gridElements.LevelCurrent.SetPauseMode(false);
                     m_currentUFLIndex++;
                     Debug.Log("NextLevelIndex = " + m_currentUFLIndex);
-                    m_gridElements.LevelNext = m_unfilteredLevels[m_currentUFLIndex].gameObject; //TODO Unhardcode this level 3 spot
+                    m_gridElements.LevelNext = m_unfilteredLevelGenerations[m_currentUFLIndex]; //TODO Unhardcode this level 3 spot
                     
                     //TODO activate and darken next level
                     break;
@@ -260,6 +262,7 @@ public class LevelManager : MonoBehaviour
                 {
                     m_gridElements.camPos = CamPos.InRoom;
                     m_camera.LerpMoveFocus(m_gridElements.worldCentre);
+                    m_gridElements.LevelCurrent.SetShadowMode(false);
                     break;
                 }
             case CamTransitionType.Room_Left:
@@ -268,6 +271,7 @@ public class LevelManager : MonoBehaviour
                     m_gridElements.camPos = CamPos.LeftHW;
                     m_camera.LerpMoveFocus(m_gridElements.worldCentre - new Vector3(m_levelW / 2 + 3,0,0));
                     m_gridElements.LevelNext.transform.position = m_gridElements.worldCentre - new Vector3(m_levelW + 6, 0, 0);
+                    m_gridElements.LevelNext.SetActiveLevel(true);
                     break;
                 }
             case CamTransitionType.Room_Right:
@@ -276,6 +280,7 @@ public class LevelManager : MonoBehaviour
                     m_gridElements.camPos = CamPos.RightHW;
                     m_camera.LerpMoveFocus(m_gridElements.worldCentre + new Vector3(m_levelW / 2 + 3, 0, 0));
                     m_gridElements.LevelNext.transform.position = m_gridElements.worldCentre + new Vector3(m_levelW + 6, 0, 0);
+                    m_gridElements.LevelNext.SetActiveLevel(true);
                     break;
                 }
             case CamTransitionType.Room_Up:
@@ -284,6 +289,7 @@ public class LevelManager : MonoBehaviour
                     m_gridElements.camPos = CamPos.TopHW;
                     m_camera.LerpMoveFocus(m_gridElements.worldCentre + new Vector3(0, 0, m_levelH / 2 + 3));
                     m_gridElements.LevelNext.transform.position = m_gridElements.worldCentre + new Vector3(0, 0, m_levelH + 6);
+                    m_gridElements.LevelNext.SetActiveLevel(true);
                     break;
                 }
             case CamTransitionType.Room_Down:
@@ -292,11 +298,12 @@ public class LevelManager : MonoBehaviour
                     m_gridElements.camPos = CamPos.BotHW;
                     m_camera.LerpMoveFocus(m_gridElements.worldCentre - new Vector3(0, 0, m_levelH / 2 + 3));
                     m_gridElements.LevelNext.transform.position = m_gridElements.worldCentre - new Vector3(0, 0, m_levelH + 6);
+                    m_gridElements.LevelNext.SetActiveLevel(true);
                     break;
                 }
             default: break;
         }
-        DebugGridChecker();
+        //DebugGridChecker();
     }
 
 
@@ -341,10 +348,9 @@ public class LevelManager : MonoBehaviour
             {
                 m_levels[i - 1].GetComponent<GenerateLevel>().SetActiveLevel(false);
             }
-            m_gridElements.LevelCurrent = m_levels[i].gameObject;
-            
 
             GenerateLevel nextLevel = m_levels[i].GetComponent<GenerateLevel>();
+            m_gridElements.LevelCurrent = nextLevel;
             nextLevel.SetActiveLevel(true);
 			//m_camera.transform.position = m_levels[i].transform.position + new Vector3(0,0,0.5f);
 			TankScript.TankList.ForEach((TankScript tank) => tank.DestroyBullets());
