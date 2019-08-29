@@ -90,6 +90,7 @@ public class TankScript : MonoBehaviour
 				m_renderers[i].gameObject.layer == 12;
 			m_renderers[i].enabled = shouldBeActive;
 		}
+		m_controller.SetCursor(m_isFiring);
 	}
     // Update is called once per frame
     void FixedUpdate()
