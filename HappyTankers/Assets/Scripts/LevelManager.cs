@@ -29,10 +29,12 @@ public struct LevelGridElements
     //Orientation
     [HideInInspector] public Vector3 worldCentre;
     [HideInInspector] public CamPos camPos;
+    [HideInInspector] public GenerateLevel[,] usedSlots;
     //Levels
     [HideInInspector] public GenerateLevel LevelLast;
     [HideInInspector] public GenerateLevel LevelCurrent;
     [HideInInspector] public GenerateLevel LevelNext;
+
     //Vertical Highways
     public GameObject HW_V11;
     public GameObject HW_V21;
@@ -73,6 +75,7 @@ public class LevelManager : MonoBehaviour
 
     public int m_levelW = 26;
     public int m_levelH = 16;
+    public int m_worldSize = 200;
 
     public GameObject GetPrefabFromColor(Color col)
     {
@@ -87,6 +90,17 @@ public class LevelManager : MonoBehaviour
         return null;
     }
 
+
+    private void InLevelSlot(GenerateLevel inputObj)
+    {
+        m_gridElements.usedSlots[(m_worldSize/2) + ((int)inputObj.transform.position.x / (m_levelW + 6)), (m_worldSize / 2) + ((int)inputObj.transform.position.z / (m_levelH + 6))] = inputObj;
+    }
+
+    private GenerateLevel OutLevelSlot(float x, float y)
+    {
+        return m_gridElements.usedSlots[(m_worldSize / 2) + ((int)x + 100 / (m_levelW + 6)), (m_worldSize / 2) + ((int)y + 100 / (m_levelH + 6))];
+    }
+
 	private void Start()
 	{
 		IsHappy = true;
@@ -95,6 +109,8 @@ public class LevelManager : MonoBehaviour
         m_gridElements.LevelNext = m_unfilteredLevelGenerations[0];
         m_gridElements.LevelCurrent.transform.position = new Vector3(0, 0, 0);
         m_gridElements.camPos = CamPos.InRoom;
+        m_gridElements.usedSlots = new GenerateLevel[m_worldSize, m_worldSize];
+        InLevelSlot(m_gridElements.LevelCurrent);
         m_gridElements.worldCentre = new Vector3(0,0,0);
         FilteredTransition(0)();
 
@@ -120,7 +136,6 @@ public class LevelManager : MonoBehaviour
         }
 
         Debug.Log("UnfilteredTransition - " + type + " from " + m_gridElements.camPos);
-
         switch (type)
         {
             case CamTransitionType.HW_New:
@@ -248,12 +263,10 @@ public class LevelManager : MonoBehaviour
 
                     if (m_gridElements.LevelLast != null) { m_gridElements.LevelLast.SetActiveLevel(false); }
                     m_gridElements.LevelLast = m_gridElements.LevelCurrent;
-                    m_gridElements.LevelCurrent = m_gridElements.LevelNext;
+                    m_gridElements.LevelCurrent = OutLevelSlot(m_gridElements.worldCentre.x, m_gridElements.worldCentre.z);
                     m_gridElements.LevelCurrent.SetShadowMode(false);
                     m_gridElements.LevelCurrent.SetPauseMode(false);
-                    m_currentUFLIndex++;
-                    Debug.Log("NextLevelIndex = " + m_currentUFLIndex);
-                    m_gridElements.LevelNext = m_unfilteredLevelGenerations[m_currentUFLIndex]; //TODO Unhardcode this level 3 spot
+                    //TODO Unhardcode this level 3 spot
                     
                     //TODO activate and darken next level
                     break;
@@ -270,8 +283,8 @@ public class LevelManager : MonoBehaviour
                     if (FilterManager.IsHappy) { FilterManager.IsAlmostDark = true; }
                     m_gridElements.camPos = CamPos.LeftHW;
                     m_camera.LerpMoveFocus(m_gridElements.worldCentre - new Vector3(m_levelW / 2 + 3,0,0));
-                    m_gridElements.LevelNext.transform.position = m_gridElements.worldCentre - new Vector3(m_levelW + 6, 0, 0);
-                    m_gridElements.LevelNext.SetActiveLevel(true);
+
+                    HighwayEntryAddedCode(-new Vector3(m_levelW + 6, 0, 0));
                     break;
                 }
             case CamTransitionType.Room_Right:
@@ -279,8 +292,8 @@ public class LevelManager : MonoBehaviour
                     if (FilterManager.IsHappy) { FilterManager.IsAlmostDark = true; }
                     m_gridElements.camPos = CamPos.RightHW;
                     m_camera.LerpMoveFocus(m_gridElements.worldCentre + new Vector3(m_levelW / 2 + 3, 0, 0));
-                    m_gridElements.LevelNext.transform.position = m_gridElements.worldCentre + new Vector3(m_levelW + 6, 0, 0);
-                    m_gridElements.LevelNext.SetActiveLevel(true);
+
+                    HighwayEntryAddedCode(new Vector3(m_levelW + 6, 0, 0));
                     break;
                 }
             case CamTransitionType.Room_Up:
@@ -288,8 +301,8 @@ public class LevelManager : MonoBehaviour
                     if (FilterManager.IsHappy) { FilterManager.IsAlmostDark = true; }
                     m_gridElements.camPos = CamPos.TopHW;
                     m_camera.LerpMoveFocus(m_gridElements.worldCentre + new Vector3(0, 0, m_levelH / 2 + 3));
-                    m_gridElements.LevelNext.transform.position = m_gridElements.worldCentre + new Vector3(0, 0, m_levelH + 6);
-                    m_gridElements.LevelNext.SetActiveLevel(true);
+
+                    HighwayEntryAddedCode(new Vector3(0, 0, m_levelH + 6));
                     break;
                 }
             case CamTransitionType.Room_Down:
@@ -297,13 +310,65 @@ public class LevelManager : MonoBehaviour
                     if (FilterManager.IsHappy) { FilterManager.IsAlmostDark = true; }
                     m_gridElements.camPos = CamPos.BotHW;
                     m_camera.LerpMoveFocus(m_gridElements.worldCentre - new Vector3(0, 0, m_levelH / 2 + 3));
-                    m_gridElements.LevelNext.transform.position = m_gridElements.worldCentre - new Vector3(0, 0, m_levelH + 6);
-                    m_gridElements.LevelNext.SetActiveLevel(true);
+
+                    HighwayEntryAddedCode(-new Vector3(0, 0, m_levelH + 6));
                     break;
                 }
             default: break;
         }
         //DebugGridChecker();
+        DebugGridArrayPrint();
+    }
+
+    private void HighwayEntryAddedCode(Vector3 offsetNL)
+    {
+        Vector3 nextLevelPos = m_gridElements.worldCentre + offsetNL;
+        if (OutLevelSlot(nextLevelPos.x, nextLevelPos.z) != null)
+        {
+            m_gridElements.LevelNext.transform.position = nextLevelPos;
+            InLevelSlot(m_gridElements.LevelNext);
+            m_gridElements.LevelNext.SetActiveLevel(true);
+            m_currentUFLIndex++;
+            Debug.Log("NextLevelIndex = " + m_currentUFLIndex);
+            m_gridElements.LevelNext = m_unfilteredLevelGenerations[m_currentUFLIndex];
+        }
+        m_gridElements.LevelCurrent.SetShadowMode(true);
+    }
+
+    private void DebugGridArrayPrint()
+    {
+        int minIdx = (m_worldSize / 2) - 15;
+        int maxIdx = (m_worldSize / 2) + 15;
+        string debugString = "";
+        for (int x = minIdx; x < maxIdx; x++)
+        {
+            for (int y = minIdx; y < maxIdx; y++)
+            {
+                debugString += DGAP_Aux(m_gridElements.usedSlots[x,y]);
+            }
+            debugString += "\n";
+        }
+        Debug.Log(debugString);
+    }
+    private string DGAP_Aux(GenerateLevel gl)
+    {
+        if (gl == null)
+        {
+            return "-";
+        }
+        if (gl == m_gridElements.LevelCurrent)
+        {
+            return "C";
+        }
+        if (gl == m_gridElements.LevelLast)
+        {
+            return "L";
+        }
+        if (gl == m_gridElements.LevelNext)
+        {
+            return "N";
+        }
+        return "X";
     }
 
 
@@ -351,6 +416,7 @@ public class LevelManager : MonoBehaviour
 
             GenerateLevel nextLevel = m_levels[i].GetComponent<GenerateLevel>();
             m_gridElements.LevelCurrent = nextLevel;
+            InLevelSlot(m_gridElements.LevelCurrent);
             nextLevel.SetActiveLevel(true);
 			//m_camera.transform.position = m_levels[i].transform.position + new Vector3(0,0,0.5f);
 			TankScript.TankList.ForEach((TankScript tank) => tank.DestroyBullets());
