@@ -120,10 +120,45 @@ public class LevelManager : MonoBehaviour
         
     }
 
+
+    void Update()
+    {
+        if (FilterManager.IsHappy)
+        {
+            SoundController.Instance.FadeStatic(Mathf.Min(1,Mathf.Max(0,GetRoadCrossPerc())));
+        }
+    }
+
+    private float GetRoadCrossPerc()
+    {
+        float result = 0;
+
+        if (m_gridElements.camPos == CamPos.InRoom) { return result; }
+        if (m_gridElements.camPos == CamPos.BotHW)
+        {
+            return -((PlayerScript.playerRef.transform.Find("Tank").position.z - (1-m_levelH / 2)) / 2);
+        }
+        if (m_gridElements.camPos == CamPos.TopHW)
+        {
+            return ((PlayerScript.playerRef.transform.Find("Tank").position.z - (-1+m_levelH / 2)) / 2);
+        }
+        if (m_gridElements.camPos == CamPos.LeftHW)
+        {
+            return -((PlayerScript.playerRef.transform.Find("Tank").position.x - (1-m_levelW / 2)) / 2);
+        }
+        if (m_gridElements.camPos == CamPos.RightHW)
+        {
+            return ((PlayerScript.playerRef.transform.Find("Tank").position.x - (-1+m_levelW / 2)) / 2);
+        }
+
+        return result;
+    }
+
     public void RoomEntryDetected(GameObject room)
     {
         if (m_gridElements.camPos == CamPos.InRoom) { return; } //Return if invalid transition request
-        UnfilteredTransition(room == m_gridElements.LevelCurrent ? CamTransitionType.HW_Old : CamTransitionType.HW_New);
+        Debug.Log(room.name);
+        UnfilteredTransition(room == m_gridElements.LevelCurrent.gameObject ? CamTransitionType.HW_Old : CamTransitionType.HW_New);
     }
 
     public void UnfilteredTransition(CamTransitionType type)
@@ -263,6 +298,12 @@ public class LevelManager : MonoBehaviour
                     m_camera.LerpMoveFocus(m_gridElements.worldCentre);
 
                     GenerateLevel newLevel = OutLevelSlot(m_gridElements.worldCentre.x, m_gridElements.worldCentre.z);
+                    if (FilterManager.IsHappy)
+                    {
+                        //Hacky fix to first transition backtrack bugs
+                        newLevel = m_gridElements.LevelNext;
+                        InLevelSlot(newLevel);
+                    }
                     if (m_gridElements.LevelLast != null && newLevel != m_gridElements.LevelLast) { m_gridElements.LevelLast.SetActiveLevel(false); }
                     m_gridElements.LevelLast = m_gridElements.LevelCurrent;
                     m_gridElements.LevelCurrent = newLevel;
@@ -280,6 +321,41 @@ public class LevelManager : MonoBehaviour
                     m_gridElements.camPos = CamPos.InRoom;
                     m_camera.LerpMoveFocus(m_gridElements.worldCentre);
                     m_gridElements.LevelCurrent.SetShadowMode(false);
+
+                    Vector2 OLSInput = new Vector2(100000,100000);
+                    if (!FilterManager.IsHappy)
+                    {
+                        switch (m_gridElements.camPos)
+                        {
+                            case CamPos.BotHW:
+                                {
+                                    OLSInput = new Vector2(m_gridElements.worldCentre.x, m_gridElements.worldCentre.z - m_levelH - 6);
+                                    break;
+                                }
+                            case CamPos.TopHW:
+                                {
+                                    OLSInput = new Vector2(m_gridElements.worldCentre.x, m_gridElements.worldCentre.z + m_levelH + 6);
+                                    break;
+                                }
+                            case CamPos.LeftHW:
+                                {
+                                    OLSInput = new Vector2(m_gridElements.worldCentre.x - m_levelW - 6, m_gridElements.worldCentre.z);
+                                    break;
+                                }
+                            case CamPos.RightHW:
+                                {
+                                    OLSInput = new Vector2(m_gridElements.worldCentre.x + m_levelW + 6, m_gridElements.worldCentre.z);
+                                    break;
+                                }
+                            case CamPos.InRoom:
+                                {
+                                    Debug.Log("Attempted room backtrack whilst midroom");
+                                    break;
+                                }
+                            default: break;
+                        }
+                        OutLevelSlot(OLSInput.x, OLSInput.y).SetActiveLevel(false);
+                    }
                     break;
                 }
             case CamTransitionType.Room_Left:
@@ -334,7 +410,7 @@ public class LevelManager : MonoBehaviour
             m_gridElements.LevelNext.SetActiveLevel(true);
             m_currentUFLIndex++;
             Debug.Log("NextLevelIndex = " + m_currentUFLIndex);
-            m_gridElements.LevelNext = m_unfilteredLevelGenerations[m_currentUFLIndex];
+            if (!FilterManager.IsHappy) { m_gridElements.LevelNext = m_unfilteredLevelGenerations[m_currentUFLIndex]; }
         }
         else
         {

@@ -15,6 +15,7 @@ public class GenerateLevel : MonoBehaviour
     [SerializeField] LevelTriggerScript m_triggerRight;
     [SerializeField] LevelTriggerScript m_triggerTop;
     [SerializeField] LevelTriggerScript m_triggerBot;
+
     // Start is called before the first frame update
     void Start()
     {
