@@ -154,7 +154,7 @@ public class TankScript : MonoBehaviour
 	{
 		if (!m_isFiring && !m_isShielding && !m_isTakingDamage)
 		{
-			StartCoroutine(StartShield(0.1f, 0.25f, 0.1f, new Vector3(2.5f, 2.5f, 2.5f)));
+			StartCoroutine(StartShield(0.1f, 1f, 0.1f, new Vector3(5f, 5f, 5f)));
 		}
 	}
 	private IEnumerator StartShield(float rise, float stay, float close, Vector3 size)
