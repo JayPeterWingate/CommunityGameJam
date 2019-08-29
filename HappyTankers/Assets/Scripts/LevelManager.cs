@@ -174,10 +174,6 @@ public class LevelManager : MonoBehaviour
         {
             case CamTransitionType.HW_New:
                 {
-                    FilterManager.IsHappy = false;
-
-
-
                     GameObject temp;
                     Vector3 shiftVal = new Vector3(0,0,0);
                     switch (m_gridElements.camPos)
@@ -309,11 +305,19 @@ public class LevelManager : MonoBehaviour
                     m_gridElements.LevelCurrent = newLevel;
                     m_gridElements.LevelCurrent.SetShadowMode(false);
                     m_gridElements.LevelCurrent.SetPauseMode(false);
+                    if (FilterManager.IsHappy)
+                    {
+                        //Hacky fix to first transition backtrack bugs
+                        m_currentUFLIndex++;
+                        m_gridElements.LevelNext = m_unfilteredLevelGenerations[m_currentUFLIndex];
+                    }
                     //TODO Unhardcode this level 3 spot
 
                     //TODO activate and darken next level
-                    DebugGridArrayPrint();
-					PlayerBlock.PlayerStarter.ActivateEnemy();
+
+                    PlayerBlock.PlayerStarter.ActivateEnemy();
+
+                    if (FilterManager.IsHappy) { FilterManager.IsHappy = false; }
                     break;
                 }
             case CamTransitionType.HW_Old:
@@ -396,7 +400,7 @@ public class LevelManager : MonoBehaviour
                 }
             default: break;
         }
-        //DebugGridChecker();
+        DebugGridArrayPrint();
     }
 
     private void HighwayEntryAddedCode(Vector3 offsetNL)
@@ -408,9 +412,11 @@ public class LevelManager : MonoBehaviour
             m_gridElements.LevelNext.transform.position = nextLevelPos;
             InLevelSlot(m_gridElements.LevelNext);
             m_gridElements.LevelNext.SetActiveLevel(true);
-            m_currentUFLIndex++;
+            if (!FilterManager.IsHappy) {
+                m_currentUFLIndex++;
+                m_gridElements.LevelNext = m_unfilteredLevelGenerations[m_currentUFLIndex];
+            }
             Debug.Log("NextLevelIndex = " + m_currentUFLIndex);
-            if (!FilterManager.IsHappy) { m_gridElements.LevelNext = m_unfilteredLevelGenerations[m_currentUFLIndex]; }
         }
         else
         {
