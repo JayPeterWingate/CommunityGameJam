@@ -199,9 +199,16 @@ public class TankScript : MonoBehaviour
 				try
 				{
 					PlayerScript player = (PlayerScript)m_controller;
-					DestroyBullets();
-					transform.position = player.startPos;
-					player.lives = 3;
+					if (FilterManager.IsHappy)
+					{
+						DestroyBullets();
+						transform.position = player.startPos;
+						player.lives = 3;
+					} else
+					{
+						FilterManager.TriggerDeath();
+					}
+					
 				}
 				catch
 				{

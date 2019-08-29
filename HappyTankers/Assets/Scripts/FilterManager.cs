@@ -1,4 +1,5 @@
-﻿using System.Collections;
+﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Events;
@@ -16,6 +17,9 @@ public class FilterManager : MonoBehaviour
 			m_isHappy = value;
 		}
 	}
-	
-
+	static public UnityEvent OnDeath = new UnityEvent();
+	internal static void TriggerDeath()
+	{
+		OnDeath.Invoke();
+	}
 }

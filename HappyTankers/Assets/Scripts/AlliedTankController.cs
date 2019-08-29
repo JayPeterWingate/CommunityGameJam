@@ -10,9 +10,12 @@ public class AlliedTankController : AITankController
     {
 		Init();
     }
-
-    // Update is called once per frame
-    void Update()
+	private void OnEnable()
+	{
+		SetRandomDirection();
+	}
+	// Update is called once per frame
+	void Update()
     {
 		Tick();
     }

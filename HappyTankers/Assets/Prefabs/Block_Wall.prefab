@@ -10,6 +10,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1926675571798279774}
   - component: {fileID: 6508929542657293394}
+  - component: {fileID: 7302392979313035799}
   m_Layer: 0
   m_Name: Block_Wall
   m_TagString: Untagged
@@ -47,7 +48,24 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   m_happy: {fileID: 6274524947193001076}
   m_dark: {fileID: 6002959355290793145}
+  m_level: {fileID: 0}
   m_happySprite: {fileID: 1693037280603626450}
+--- !u!208 &7302392979313035799
+NavMeshObstacle:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 829868989969212873}
+  m_Enabled: 1
+  serializedVersion: 3
+  m_Shape: 1
+  m_Extents: {x: 0.5, y: 0.5, z: 0.5}
+  m_MoveThreshold: 0.1
+  m_Carve: 1
+  m_CarveOnlyStationary: 1
+  m_Center: {x: 0.5, y: 0.5, z: 0.5}
+  m_TimeToStationary: 0.5
 --- !u!1 &3009134168486648328
 GameObject:
   m_ObjectHideFlags: 0

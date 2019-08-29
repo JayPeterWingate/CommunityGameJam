@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.AI;
 
 public class OuterWallScript : BlockScript
 {
@@ -40,5 +41,6 @@ public class OuterWallScript : BlockScript
     {
         m_happy.SetActive(!broken);
         m_dark.SetActive(!broken);
-    }
+		GetComponent<NavMeshObstacle>().carving = !broken;
+	}
 }

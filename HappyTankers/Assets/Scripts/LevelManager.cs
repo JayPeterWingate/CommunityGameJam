@@ -143,6 +143,8 @@ public class LevelManager : MonoBehaviour
                 {
                     FilterManager.IsHappy = false;
 
+
+
                     GameObject temp;
                     Vector3 shiftVal = new Vector3(0,0,0);
                     switch (m_gridElements.camPos)
@@ -272,6 +274,7 @@ public class LevelManager : MonoBehaviour
 
                     //TODO activate and darken next level
                     DebugGridArrayPrint();
+					PlayerBlock.PlayerStarter.ActivateEnemy();
                     break;
                 }
             case CamTransitionType.HW_Old:
@@ -338,8 +341,10 @@ public class LevelManager : MonoBehaviour
         else
         {
             nextLevelSlot.SetActiveLevel(true);
+			
         }
-        m_gridElements.LevelCurrent.SetShadowMode(true);
+		NavMeshManager.BuildTheMesh();
+		m_gridElements.LevelCurrent.SetShadowMode(true);
     }
 
     private void DebugGridArrayPrint()
@@ -425,6 +430,7 @@ public class LevelManager : MonoBehaviour
             m_gridElements.LevelCurrent = nextLevel;
             InLevelSlot(m_gridElements.LevelCurrent);
             nextLevel.SetActiveLevel(true);
+			PlayerBlock.PlayerStarter.TeleportPlayer();
 			//m_camera.transform.position = m_levels[i].transform.position + new Vector3(0,0,0.5f);
 			TankScript.TankList.ForEach((TankScript tank) => tank.DestroyBullets());
 		};

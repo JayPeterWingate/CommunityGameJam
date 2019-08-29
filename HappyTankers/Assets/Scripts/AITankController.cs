@@ -27,11 +27,11 @@ public class AITankController : TankController
 		TargetReached.AddListener(SetRandomDirection);
 
 	}
-	private void SetRandomDirection()
+	protected void SetRandomDirection()
 	{
 		float x = Random.Range(-6, 6);
 		float z = Random.Range(-6, 6);
-		SetTarget(PlayerScript.playerRef.transform.position + new Vector3(x, 0, z));
+		SetTarget(PlayerScript.playerRef.transform.Find("Tank").position + new Vector3(x, 0, z));
 	}
 	protected void Destruct()
 	{
@@ -92,6 +92,7 @@ public class AITankController : TankController
 	{
 		//print("Got a path");
 		m_hasPath = true;
-		m_agent.SetDestination(target);
+		if(m_agent.isOnNavMesh)
+			m_agent.SetDestination(target);
 	}
 }

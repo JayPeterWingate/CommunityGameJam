@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.AI;
 
 public class CityScript : BlockScript
 {
@@ -84,5 +85,6 @@ public class CityScript : BlockScript
             m_smoke.Play();
             m_explosion.Play();
         }
+		GetComponent<NavMeshObstacle>().carving = !broken;
     }
 }

@@ -6,9 +6,10 @@ using UnityEngine.AI;
 [RequireComponent(typeof(NavMeshSurface))]
 public class NavMeshManager : MonoBehaviour
 {
-	static void BuildTheMesh()
+	public static void BuildTheMesh()
 	{
-		m_navMesh.BuildNavMesh();
+		print("I am SAD");
+		m_navMesh.UpdateNavMesh(m_navMesh.navMeshData);
 	}
 	static NavMeshSurface m_navMesh;
     // Start is called before the first frame update

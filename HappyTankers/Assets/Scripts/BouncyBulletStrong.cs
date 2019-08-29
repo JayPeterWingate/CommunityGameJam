@@ -33,7 +33,6 @@ public class BouncyBulletStrong : MonoBehaviour
     {
 		if (hit.collider.transform.parent)
 		{
-			print("has a paretn");
 			BlockScript blockScript = hit.collider.transform.parent.GetComponent<BlockScript>();
 			if (blockScript)
 			{
