@@ -46,12 +46,14 @@ public class CameraScript : MonoBehaviour
 		StartCoroutine(UpdateCullMask());
 		m_camera.cullingMask = 1 << 10 | 1 << 13 | 1 << 15 | 1 << 8;
 		m_animator.SetBool("RemoveFilter",!isHappy);
-		
+        SoundController.Instance.Silence();
 	}
-	private IEnumerator UpdateCullMask()
+
+    private IEnumerator UpdateCullMask()
 	{
 		yield return new WaitForSeconds(1f);
-		m_camera.cullingMask = 1 << 0 | 1 << 10 | 1 << 12 | 1 << 13 | 1 << 15 | 1 << 8;
+        SoundController.Instance.StartSombreState();
+        m_camera.cullingMask = 1 << 0 | 1 << 10 | 1 << 12 | 1 << 13 | 1 << 15 | 1 << 8;
 	}
 	public void OnFilterRemoved()
 	{
