@@ -1144,16 +1144,6 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 6666892297449015662, guid: 127c7e3f6f77a0646aead6f887820db4,
         type: 3}
-      propertyPath: m_levels.Array.size
-      value: 3
-      objectReference: {fileID: 0}
-    - target: {fileID: 6666892297449015662, guid: 127c7e3f6f77a0646aead6f887820db4,
-        type: 3}
-      propertyPath: m_unfilteredLevelGenerations.Array.size
-      value: 3
-      objectReference: {fileID: 0}
-    - target: {fileID: 6666892297449015662, guid: 127c7e3f6f77a0646aead6f887820db4,
-        type: 3}
       propertyPath: m_camera
       value: 
       objectReference: {fileID: 167269413}
