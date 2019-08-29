@@ -42,6 +42,7 @@ public class BouncyBullet : MonoBehaviour
 		
         if (hit.collider.gameObject.tag == "shield")
         {
+            Destroy(gameObject);
             m_direction = Vector3.Reflect(m_direction, hit.normal);
         }
 		else if(hit.collider.gameObject.tag == "bullet")

@@ -136,19 +136,19 @@ public class LevelManager : MonoBehaviour
         if (m_gridElements.camPos == CamPos.InRoom) { return result; }
         if (m_gridElements.camPos == CamPos.BotHW)
         {
-            return -((PlayerScript.playerRef.transform.Find("Tank").position.z - (1-m_levelH / 2)) / 2);
+            return -((PlayerScript.playerRef.transform.Find("Tank").position.z - (1-m_levelH / 2)) / 3);
         }
         if (m_gridElements.camPos == CamPos.TopHW)
         {
-            return ((PlayerScript.playerRef.transform.Find("Tank").position.z - (-1+m_levelH / 2)) / 2);
+            return ((PlayerScript.playerRef.transform.Find("Tank").position.z - (-1+m_levelH / 2)) / 3);
         }
         if (m_gridElements.camPos == CamPos.LeftHW)
         {
-            return -((PlayerScript.playerRef.transform.Find("Tank").position.x - (1-m_levelW / 2)) / 2);
+            return -((PlayerScript.playerRef.transform.Find("Tank").position.x - (1-m_levelW / 2)) / 3);
         }
         if (m_gridElements.camPos == CamPos.RightHW)
         {
-            return ((PlayerScript.playerRef.transform.Find("Tank").position.x - (-1+m_levelW / 2)) / 2);
+            return ((PlayerScript.playerRef.transform.Find("Tank").position.x - (-1+m_levelW / 2)) / 3);
         }
 
         return result;

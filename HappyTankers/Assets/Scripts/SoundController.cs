@@ -49,7 +49,7 @@ public class SoundController : MonoBehaviour
     public void FadeStatic(float percStatic)
     {
         m_music.volume = 0.7f * (1 - percStatic);
-        m_ambient.volume = 0.7f * percStatic;
+        m_ambient.volume = 0.1f * percStatic;
     }
 
     public void Silence()
