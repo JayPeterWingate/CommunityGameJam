@@ -16,4 +16,9 @@ public class AlliedTankController : AITankController
     {
 		Tick();
     }
+
+	private void OnDestroy()
+	{
+		Destruct();
+	}
 }

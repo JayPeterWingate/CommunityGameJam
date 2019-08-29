@@ -7,7 +7,6 @@ using System.Linq;
 public class AITankController : TankController
 {
 	IEnumerable<TankScript> TankList;
-	Animator m_fsm;
 	[SerializeField]NavMeshAgent m_agent;
 
 	bool m_hasPath;
@@ -17,7 +16,6 @@ public class AITankController : TankController
 	protected void Init()
     {
 		print("HIT");
-		m_fsm = GetComponent<Animator>();
 		TargetReached = new UnityEvent();
 		TankList =
 		(from tank in TankScript.TankList
@@ -25,8 +23,24 @@ public class AITankController : TankController
 		 select tank);
 		StartCoroutine(CheckForEnemies());
 
-	}
+		SetRandomDirection();
+		TargetReached.AddListener(SetRandomDirection);
 
+	}
+	private void SetRandomDirection()
+	{
+		float x = Random.Range(-6, 6);
+		float z = Random.Range(-6, 6);
+		SetTarget(PlayerScript.playerRef.transform.position + new Vector3(x, 0, z));
+	}
+	protected void Destruct()
+	{
+		if (TargetReached != null)
+		{
+			TargetReached.RemoveAllListeners();
+		}
+		
+	}
 	IEnumerator CheckForEnemies()
 	{
 		while (m_lookForEnemies)
@@ -46,7 +60,10 @@ public class AITankController : TankController
 					}
 				}
 			}
-			m_fsm.SetBool("CanSeeEnemy", canSee);
+			if (canSee) {
+				// TODO Shoot enemy
+
+			}
 
 		}
 			
