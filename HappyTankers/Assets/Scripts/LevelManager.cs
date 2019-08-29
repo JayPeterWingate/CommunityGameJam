@@ -341,7 +341,6 @@ public class LevelManager : MonoBehaviour
             nextLevelSlot.SetActiveLevel(true);
 			
         }
-		NavMeshManager.BuildTheMesh();
 		m_gridElements.LevelCurrent.SetShadowMode(true);
     }
 
