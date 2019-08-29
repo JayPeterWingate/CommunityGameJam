@@ -15,8 +15,14 @@ public class CityScript : BlockScript
     private GameObject[] m_healthyBuildings;
     private GameObject[] m_brokenBuildings;
 
-    // Start is called before the first frame update
-    void Start()
+	[SerializeField] private SpriteRenderer m_happySprite;
+	[SerializeField] private SpriteRenderer m_onFireSprite;
+
+
+	float m_redPerc = 0;
+
+	// Start is called before the first frame update
+	void Start()
     {
         m_healthyBuildings = new GameObject[4];
         m_brokenBuildings = new GameObject[4];
@@ -53,13 +59,27 @@ public class CityScript : BlockScript
         //StartCoroutine(TestBreak());
     }
 
-    override public void WasHit(int strength)
-    {
+	override public void WasHit(int strength)
+	{
 		m_level.GetComponent<LevelProgression>().DestroyCity();
 		SetBreakCity(true);
+		if (gameObject.activeInHierarchy)
+		{
+			StartCoroutine(TakeHit());
+		}
+		
     }
-
-    private IEnumerator TestBreak()
+	IEnumerator TakeHit()
+	{
+		float redPercent = 1;
+		while (redPercent > 0)
+		{
+			yield return new WaitForEndOfFrame();
+			redPercent = Mathf.Max(0, redPercent - 2 * Time.deltaTime);
+			m_onFireSprite.color = new Vector4(0.5f, 0.5f - redPercent, 0.5f - redPercent, 0.5f - 0.5f * redPercent);
+		}
+	}
+	private IEnumerator TestBreak()
     {
         yield return new WaitForSeconds(5);
         SetBreakCity(true);
@@ -77,7 +97,8 @@ public class CityScript : BlockScript
         m_brokenBuildings[2].SetActive(broken);
         m_brokenBuildings[3].SetActive(broken);
 
-        m_happy.SetActive(!broken);
+		m_happySprite.enabled = !broken;
+		m_onFireSprite.enabled = broken;
 
         if (broken)
         {

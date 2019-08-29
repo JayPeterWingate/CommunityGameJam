@@ -499,6 +499,7 @@ public class LevelManager : MonoBehaviour
 	{
 		return () =>
 		{
+			if (!FilterManager.IsHappy || FilterManager.IsAlmostDark) { return; }
             m_levels[i].transform.position = m_gridElements.LevelCurrent.transform.position;
             if (i > 0)
             {
@@ -509,13 +510,11 @@ public class LevelManager : MonoBehaviour
             m_gridElements.LevelCurrent = nextLevel;
             InLevelSlot(m_gridElements.LevelCurrent);
             nextLevel.SetActiveLevel(true);
+			TankScript.TankList.ForEach((TankScript tank) => tank.DestroyBullets());
 			if (PlayerBlock.PlayerStarter != null)
 			{
 				PlayerBlock.PlayerStarter.TeleportPlayer();
-			}
-			
-			//m_camera.transform.position = m_levels[i].transform.position + new Vector3(0,0,0.5f);
-			TankScript.TankList.ForEach((TankScript tank) => tank.DestroyBullets());
+			}			
 		};
 	}
 }

@@ -49,5 +49,5 @@ public class PlayerScript : TankController
         controls.Player.Shield.performed += crt => shieldEvent.Invoke();
 	}
 
-	public override void SetCursor(bool ready) =>	Cursor.SetCursor(FilterManager.IsHappy ? ready ? m_happyReadyCursor : m_happyCursor : ready ? m_darkReadyCursor : m_darkCursor, new Vector2(32, 32), CursorMode.Auto);
+	public override void SetCursor(bool happy, bool ready) =>	Cursor.SetCursor(happy? ready ? m_happyReadyCursor : m_happyCursor : ready ? m_darkReadyCursor : m_darkCursor, new Vector2(32, 32), CursorMode.Auto);
 }
