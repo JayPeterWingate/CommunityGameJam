@@ -18,7 +18,7 @@ public class CityScript : BlockScript
 	[SerializeField] private SpriteRenderer m_happySprite;
 	[SerializeField] private SpriteRenderer m_onFireSprite;
 
-
+	bool isDead = false;
 	float m_redPerc = 0;
 
 	// Start is called before the first frame update
@@ -61,8 +61,13 @@ public class CityScript : BlockScript
 
 	override public void WasHit(int strength)
 	{
-		m_level.GetComponent<LevelProgression>().DestroyCity();
-		SetBreakCity(true);
+		if (isDead == false)
+		{
+			m_level.GetComponent<LevelProgression>().DestroyCity();
+			SetBreakCity(true);
+			isDead = true;
+		}
+		
 		if (gameObject.activeInHierarchy)
 		{
 			StartCoroutine(TakeHit());
