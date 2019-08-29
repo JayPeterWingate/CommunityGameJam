@@ -64,7 +64,6 @@ public class LevelManager : MonoBehaviour
         public Color colorCode;
         public GameObject prefab;
     }
-	public static bool IsHappy { get; private set; }
     [SerializeField] private levelObjectColorCoded[] m_levelObjectCodedPrefabs;
 	[SerializeField] private LevelProgression[] m_levels;
     [SerializeField] private GenerateLevel[] m_unfilteredLevelGenerations;
@@ -104,7 +103,6 @@ public class LevelManager : MonoBehaviour
 
 	private void Start()
 	{
-		IsHappy = true;
 
         m_gridElements.LevelCurrent = m_levels[0].GetComponent<GenerateLevel>();
         m_gridElements.LevelNext = m_unfilteredLevelGenerations[0];
@@ -430,7 +428,11 @@ public class LevelManager : MonoBehaviour
             m_gridElements.LevelCurrent = nextLevel;
             InLevelSlot(m_gridElements.LevelCurrent);
             nextLevel.SetActiveLevel(true);
-			PlayerBlock.PlayerStarter.TeleportPlayer();
+			if (PlayerBlock.PlayerStarter != null)
+			{
+				PlayerBlock.PlayerStarter.TeleportPlayer();
+			}
+			
 			//m_camera.transform.position = m_levels[i].transform.position + new Vector3(0,0,0.5f);
 			TankScript.TankList.ForEach((TankScript tank) => tank.DestroyBullets());
 		};

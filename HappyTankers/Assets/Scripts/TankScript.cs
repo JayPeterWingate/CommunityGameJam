@@ -90,7 +90,7 @@ public class TankScript : MonoBehaviour
 		}
 	}
     // Update is called once per frame
-    void Update()
+    void FixedUpdate()
     {
 		if (m_controller)
 		{
@@ -99,7 +99,7 @@ public class TankScript : MonoBehaviour
 			Debug.DrawRay(m_rightTread.position, m_rightTread.position + transform.rotation * (new Vector3(0, 0, m_controller.rightDrive * m_horsePower)));
 
 			m_body.AddForceAtPosition(transform.TransformDirection(new Vector3(0, 0, m_controller.leftDrive * m_horsePower)), m_leftTread.position);
-			m_body.AddForceAtPosition(transform.TransformDirection(new Vector3(0, 0, m_controller.rightDrive * m_horsePower)), m_rightTread.position);
+			m_body.AddForceAtPosition(transform.TransformDirection(new Vector3(0, 0, m_controller.rightDrive * m_horsePower )), m_rightTread.position);
 
 			// [TODO] get a smoother looking rotation
 			Vector3 targetPosition = new Vector3(m_controller.turretTarget.x, m_turret.position.y, m_controller.turretTarget.z);

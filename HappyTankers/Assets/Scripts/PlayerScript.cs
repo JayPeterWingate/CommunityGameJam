@@ -15,7 +15,6 @@ public class PlayerScript : TankController
 	private void Awake()
 	{
 		playerRef = gameObject;
-		print("THIS OCCURED");
 		color = new Color(1, 1, 1);
 		controls = new MasterControl();
 		controls.Enable();
