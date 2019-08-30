@@ -188,12 +188,15 @@ MonoBehaviour:
   m_distantFireClips:
   - {fileID: 8300000, guid: d8f44545801c96449b2897165698e007, type: 3}
   - {fileID: 8300000, guid: 7776d318b82b9a44eb94d892ca2401e5, type: 3}
+  - {fileID: 8300000, guid: 59d958e79fb89924da6651362f9109c7, type: 3}
   chirpSmallFire: {fileID: 8300000, guid: 4ed7fdf92637ced4a8c5bf0cd4a8aff0, type: 3}
   chirpBigFire: {fileID: 8300000, guid: d21accdea2a228145a16922ac2c5117c, type: 3}
   chirpTeleport: {fileID: 8300000, guid: 5d670bf6e4b00cd42ad94ee79e21bee2, type: 3}
   chirpDie: {fileID: 8300000, guid: d3ee1ff955b96954ab97c1da6b83db19, type: 3}
   chirpHitCity: {fileID: 8300000, guid: e02fe6fe3fbf5f942aa79083af6ec352, type: 3}
   darkSmallFire: {fileID: 8300000, guid: 6a8ccdbb041636d43848e1f5bc712c87, type: 3}
+  darkBigFire: {fileID: 8300000, guid: 405cebb00b7a0eb4d9b3f2a71b4ba815, type: 3}
+  darkCityDestroy: {fileID: 8300000, guid: 8af31629aea5de249ae681f2cc956b00, type: 3}
 --- !u!1 &4863852147591975535
 GameObject:
   m_ObjectHideFlags: 0

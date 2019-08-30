@@ -132,7 +132,9 @@ public class CityScript : BlockScript
         {
             if (m_darkAudio != null && !FilterManager.IsHappy)
             {
-                //TODO Dark building explosion
+                m_darkAudio.clip = SoundController.Instance.darkCityDestroy;
+                m_darkAudio.volume = 0.8f;
+                m_darkAudio.Play();
             }
             else if (m_happyAudio != null)
             {

@@ -19,11 +19,14 @@ public class BouncyBulletStrong : MonoBehaviour
         if (FilterManager.IsHappy)
         {
             m_happySound.clip = SoundController.Instance.chirpSmallFire;
+            m_darkSound.volume = 1f;
             m_happySound.Play();
         }
         else
         {
-            //TODO Get dark heavy hit
+            m_darkSound.clip = SoundController.Instance.darkBigFire;
+            m_darkSound.volume = 0.7f;
+            m_darkSound.Play();
         }
     }
 

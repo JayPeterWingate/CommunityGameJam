@@ -27,6 +27,8 @@ public class SoundController : MonoBehaviour
     public AudioClip chirpHitCity;
 
     public AudioClip darkSmallFire;
+    public AudioClip darkBigFire;
+    public AudioClip darkCityDestroy;
 
     private int m_distantFireQueue = 0;
     private AudioClip m_distantFireClip;
@@ -104,9 +106,10 @@ public class SoundController : MonoBehaviour
             {
                 if (Random.Range(0, 2000 * Time.deltaTime) < 1)
                 {
+                    int clipIdx = (int)Random.Range(0, m_distantFireClips.Length - 0.001f);
                     m_distantFireQueue = (int)Random.Range(2, 6.5f);
-                    m_distantFireSpeed = Random.Range(0.1f, 0.8f - (0.6f * (m_distantFireQueue / 6)));
-                    m_distantFireClip = m_distantFireClips[(int)Random.Range(0, m_distantFireClips.Length - 0.001f)];
+                    m_distantFireSpeed = Random.Range(0.1f, 0.8f - (0.6f * (m_distantFireQueue / 6))) + (clipIdx == 2 ? 0.4f : 0);
+                    m_distantFireClip = m_distantFireClips[clipIdx];
                     m_distantFireVol = Random.Range(0.1f, 1f);
                 }
             }
