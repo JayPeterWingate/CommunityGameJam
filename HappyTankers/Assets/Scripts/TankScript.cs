@@ -118,7 +118,7 @@ public class TankScript : MonoBehaviour
 
 	private void FireMainBattleCannon()
 	{
-		if(!m_isFiring && !m_isShielding && !m_isTakingDamage)
+		if(!m_isFiring && !m_isShielding && !m_isTakingDamage && !paused)
 		{
 			StartCoroutine(FireBullets(10, 0.05f, 1.0f, false));
 		}
@@ -126,7 +126,7 @@ public class TankScript : MonoBehaviour
 	}
     private void FireSecondaryStrongBattleCannon()
     {
-        if (!m_isFiring && !m_isShielding && !m_isTakingDamage)
+        if (!m_isFiring && !m_isShielding && !m_isTakingDamage && !paused)
         {
             StartCoroutine(FireBullets(1, 0.05f, 1.0f, true));
         }
