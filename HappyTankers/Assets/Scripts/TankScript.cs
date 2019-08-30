@@ -43,6 +43,7 @@ public class TankScript : MonoBehaviour
 	Vector3 m_currentTarget;
 	Rigidbody m_body;
 	public Color color;
+    public bool paused = false;
 
 	// Start is called before the first frame update
     void Start()
@@ -95,7 +96,7 @@ public class TankScript : MonoBehaviour
     // Update is called once per frame
     void FixedUpdate()
     {
-		if (m_controller)
+		if (m_controller && !paused)
 		{
 			m_body.AddTorque(transform.up * m_rotatePower * (m_controller.leftDrive - m_controller.rightDrive));
 			Debug.DrawRay(m_leftTread.position, m_leftTread.position + transform.TransformDirection(new Vector3(0, 0, m_controller.leftDrive * m_horsePower)));
