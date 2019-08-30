@@ -120,7 +120,14 @@ public class TankScript : MonoBehaviour
 	{
 		if(!m_isFiring && !m_isShielding && !m_isTakingDamage && !paused)
 		{
-			StartCoroutine(FireBullets(10, 0.05f, 1.0f, false));
+			try
+			{
+				PlayerScript playerController = (PlayerScript)m_controller;
+				StartCoroutine(FireBullets(10, 0.05f, 1.0f, false));
+			} catch {
+				StartCoroutine(FireBullets(1, 0.05f, 0.5f, false));
+			};
+			
 		}
 		
 	}

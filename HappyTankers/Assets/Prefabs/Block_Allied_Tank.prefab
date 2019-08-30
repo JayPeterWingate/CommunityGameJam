@@ -121,19 +121,19 @@ NavMeshAgent:
   m_GameObject: {fileID: 9095138779532259388}
   m_Enabled: 1
   m_AgentTypeID: 0
-  m_Radius: 0.6
+  m_Radius: 0.7
   m_Speed: 3.5
   m_Acceleration: 8
   avoidancePriority: 50
-  m_AngularSpeed: 120
+  m_AngularSpeed: 100
   m_StoppingDistance: 1
   m_AutoTraverseOffMeshLink: 0
   m_AutoBraking: 0
-  m_AutoRepath: 0
+  m_AutoRepath: 1
   m_Height: 0.89
-  m_BaseOffset: -0.22
+  m_BaseOffset: 0
   m_WalkableMask: 4294967295
-  m_ObstacleAvoidanceType: 4
+  m_ObstacleAvoidanceType: 2
 --- !u!114 &7928091582841232714
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -164,10 +164,11 @@ MonoBehaviour:
       m_Calls: []
     m_TypeName: UnityEngine.Events.UnityEvent, UnityEngine.CoreModule, Version=0.0.0.0,
       Culture=neutral, PublicKeyToken=null
-  color: {r: 0, g: 0.80679727, b: 1, a: 1}
-  lives: 0
+  color: {r: 1, g: 1, b: 1, a: 1}
+  lives: 3
   m_agent: {fileID: 4722100612042750163}
   m_levelSpawned: {fileID: 0}
+  m_target: {fileID: 0}
 --- !u!1001 &3761946673296215297
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -240,6 +241,26 @@ PrefabInstance:
       propertyPath: m_controller
       value: 
       objectReference: {fileID: 7928091582841232714}
+    - target: {fileID: 8864040992825522329, guid: d3d45c3e34f7c40479403475941f9267,
+        type: 3}
+      propertyPath: m_Size.x
+      value: 1.0273092
+      objectReference: {fileID: 0}
+    - target: {fileID: 8864040992825522329, guid: d3d45c3e34f7c40479403475941f9267,
+        type: 3}
+      propertyPath: m_Size.z
+      value: 1.1868218
+      objectReference: {fileID: 0}
+    - target: {fileID: 8864040992825522329, guid: d3d45c3e34f7c40479403475941f9267,
+        type: 3}
+      propertyPath: m_Center.x
+      value: 0.0010419637
+      objectReference: {fileID: 0}
+    - target: {fileID: 8864040992825522329, guid: d3d45c3e34f7c40479403475941f9267,
+        type: 3}
+      propertyPath: m_Center.z
+      value: 0.030802771
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: d3d45c3e34f7c40479403475941f9267, type: 3}
 --- !u!4 &6714120048110188508 stripped

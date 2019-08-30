@@ -45,6 +45,6 @@ public class OuterWallScript : BlockScript
     {
         m_happy.SetActive(!broken);
         m_dark.SetActive(!broken);
-		GetComponent<NavMeshObstacle>().carving = !broken;
+		// GetComponent<NavMeshObstacle>().carving = !broken;
 	}
 }
