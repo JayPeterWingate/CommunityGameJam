@@ -133,7 +133,7 @@ NavMeshAgent:
   m_Height: 0.89
   m_BaseOffset: 0
   m_WalkableMask: 4294967295
-  m_ObstacleAvoidanceType: 2
+  m_ObstacleAvoidanceType: 1
 --- !u!114 &7928091582841232714
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -146,8 +146,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9f4d86b25aebf2441b088bb762f60bf9, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  leftDrive: 0
-  rightDrive: 0
+  targetDirection: {x: 0, y: 0}
   turretTarget: {x: 0, y: 0, z: 0}
   fireEvent:
     m_PersistentCalls:

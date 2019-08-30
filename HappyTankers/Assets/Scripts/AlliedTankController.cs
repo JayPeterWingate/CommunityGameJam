@@ -15,6 +15,7 @@ public class AlliedTankController : AITankController
 	private CityScript GetRandomTarget()
 	{
 		IEnumerable<CityScript> livingCitiesInLevel = m_levelSpawned.GetComponentsInChildren<CityScript>().Where(city => !city.isDead);
+		if(livingCitiesInLevel == null) { return null; }
 		return livingCitiesInLevel.Skip(Random.Range(0, livingCitiesInLevel.Count() - 1)).First();
 	}
 	private void OnEnable()
@@ -48,12 +49,16 @@ public class AlliedTankController : AITankController
 	}
 	private void TargetCity()
 	{
-		SetTarget(m_target.transform.position + new Vector3(0.5f, 0, 0.5f));
+		if (m_target)
+		{
+			SetTarget(m_target.transform.position + new Vector3(0.5f, 0, 0.5f));
+		}
+		
 	}
 	// Update is called once per frame
 	void Update()
     {
-		if(m_target.isDead)
+		if(m_target && m_target.isDead)
 		{
 			m_target = GetRandomTarget();
 		}
