@@ -24,7 +24,14 @@ public class LevelProgression : MonoBehaviour
 		m_cityCount -= 1;
 		if(m_cityCount == 0 && OnLevelComplete != null)
 		{
-			OnLevelComplete.Invoke();
+            PlayerScript.playerRef.transform.Find("Tank").GetComponent<TankScript>().TeleportOut();
+            StartCoroutine(DelayedLevelCompletion());
 		}
 	}
+
+    private IEnumerator DelayedLevelCompletion()
+    {
+        yield return new WaitForSeconds(TankScript.TeleportWaitTime);
+        OnLevelComplete.Invoke();
+    }
 }

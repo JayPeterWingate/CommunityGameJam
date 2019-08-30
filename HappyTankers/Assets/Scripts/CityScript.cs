@@ -20,8 +20,10 @@ public class CityScript : BlockScript
 	[SerializeField] private SpriteRenderer m_onFireSprite;
 
     [SerializeField] private Animator m_FakeAIAnimation;
+    [SerializeField] private Animator m_FakeAITeleportAnimation;
+    [SerializeField] private AudioSource m_FakeAIAudio;
 
-	public bool isDead = false;
+    public bool isDead = false;
 	float m_redPerc = 0;
 
 	// Start is called before the first frame update
@@ -75,6 +77,18 @@ public class CityScript : BlockScript
     public void AnimateFakeAI(bool isHappy)
     {
         m_FakeAIAnimation.SetBool("AnimateFakeAI", true);
+    }
+    public void AnimateFakeAITeleport()
+    {
+        m_FakeAITeleportAnimation.SetBool("TeleportOut", true);
+        m_FakeAIAudio.clip = SoundController.Instance.chirpTeleport;
+        m_FakeAIAudio.Play();
+        //TODO Play sound
+    }
+
+    public void AnimateFakeAIShoot()
+    {
+        //TODO Play sound
     }
 
     override public void WasHit(int strength)

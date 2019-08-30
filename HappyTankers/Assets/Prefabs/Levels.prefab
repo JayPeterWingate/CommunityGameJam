@@ -364,11 +364,6 @@ PrefabInstance:
       propertyPath: m_Name
       value: UL8
       objectReference: {fileID: 0}
-    - target: {fileID: 8817868501435084618, guid: 066116fd347d6c548b61d11d466e5e36,
-        type: 3}
-      propertyPath: m_levelMap
-      value: 
-      objectReference: {fileID: 2800000, guid: cfedf026ac1197047bee4f5c43816745, type: 3}
     - target: {fileID: 2055820960022555945, guid: 066116fd347d6c548b61d11d466e5e36,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -1206,6 +1201,11 @@ PrefabInstance:
       propertyPath: m_Name
       value: L1
       objectReference: {fileID: 0}
+    - target: {fileID: 8817868501435084618, guid: 066116fd347d6c548b61d11d466e5e36,
+        type: 3}
+      propertyPath: m_levelMap
+      value: 
+      objectReference: {fileID: 2800000, guid: 2fd36e26663d61748b44df8f40b2e99f, type: 3}
     - target: {fileID: 2055820960022555945, guid: 066116fd347d6c548b61d11d466e5e36,
         type: 3}
       propertyPath: m_LocalPosition.x

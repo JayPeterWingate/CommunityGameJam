@@ -22,6 +22,7 @@ public class TankController : MonoBehaviour
 
 public class TankScript : MonoBehaviour
 {
+    public static float TeleportWaitTime = 1.5f;
 	public static List<TankScript> TankList = new List<TankScript>();
 	[SerializeField] Transform m_leftTread;
 	[SerializeField] Transform m_rightTread;
@@ -37,6 +38,9 @@ public class TankScript : MonoBehaviour
 	[SerializeField] Transform m_shield;
 	[SerializeField] Renderer[] m_renderers;
 	[SerializeField] SpriteRenderer[] m_sprites;
+    [SerializeField] Animator m_animator;
+    [SerializeField] AudioSource m_tankAudioHappy;
+    [SerializeField] AudioSource m_turretAudioHappy;
 	bool m_isFiring = false;
 	bool m_isShielding = false;
 	bool m_isTakingDamage = false;
@@ -116,7 +120,30 @@ public class TankScript : MonoBehaviour
 
 	}
 
-	private void FireMainBattleCannon()
+    public void TeleportOut()
+    {
+        paused = true;
+        DestroyBullets();
+        m_animator.SetBool("TeleportOut", true);
+        m_tankAudioHappy.clip = SoundController.Instance.chirpTeleport;
+        m_tankAudioHappy.Play();
+    }
+    public void TeleportIn()
+    {
+        m_animator.SetBool("TeleportOut", false);
+        m_animator.SetBool("TeleportIn", true);
+        m_tankAudioHappy.clip = SoundController.Instance.chirpTeleport;
+        m_tankAudioHappy.Play();
+        StartCoroutine(TPInDelayed());
+    }
+    private IEnumerator TPInDelayed()
+    {
+        yield return new WaitForSeconds(TeleportWaitTime);
+        paused = false;
+        m_animator.SetBool("TeleportIn", false);
+    }
+
+    private void FireMainBattleCannon()
 	{
 		if(!m_isFiring && !m_isShielding && !m_isTakingDamage && !paused)
 		{

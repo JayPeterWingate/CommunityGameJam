@@ -20,6 +20,12 @@ public class SoundController : MonoBehaviour
 
     [SerializeField] private AudioClip[] m_distantFireClips;
 
+    public AudioClip chirpSmallFire;
+    public AudioClip chirpBigFire;
+    public AudioClip chirpTeleport;
+    public AudioClip chirpDie;
+    public AudioClip chirpHitCity;
+
     private int m_distantFireQueue = 0;
     private AudioClip m_distantFireClip;
     private float m_distantFireVol;

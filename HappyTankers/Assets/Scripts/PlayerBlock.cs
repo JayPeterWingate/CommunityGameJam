@@ -29,11 +29,15 @@ public class PlayerBlock : BlockScript
 	}
 	public void TeleportPlayer()
 	{
-		PlayerScript.playerRef.transform.Find("Tank").GetComponent<Rigidbody>().velocity = new Vector3();
+        TankScript player = PlayerScript.playerRef.transform.Find("Tank").GetComponent<TankScript>();
 
-		PlayerScript.playerRef.transform.Find("Tank").GetComponent<Rigidbody>().MovePosition(transform.position);
+        player.GetComponent<Rigidbody>().velocity = new Vector3();
+
+        player.GetComponent<Rigidbody>().MovePosition(transform.position);
 		PlayerScript.playerRef.GetComponent<PlayerScript>().startPos = transform.position;
-		for (int i = 0; i < transform.childCount; i++)
+        if (player.paused) { player.TeleportIn(); }
+
+        for (int i = 0; i < transform.childCount; i++)
 		{
 			transform.GetChild(i).gameObject.SetActive(false);
 		}
