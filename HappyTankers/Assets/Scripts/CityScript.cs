@@ -111,6 +111,6 @@ public class CityScript : BlockScript
             m_smoke.Play();
             m_explosion.Play();
         }
-		GetComponent<NavMeshObstacle>().carving = !broken;
+		// GetComponent<NavMeshObstacle>().carving = !broken;
     }
 }

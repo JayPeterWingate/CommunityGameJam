@@ -48,7 +48,7 @@ public class AlliedTankController : AITankController
 	}
 	private void TargetCity()
 	{
-		SetDestinationNear(m_target.transform.position, 2f);
+		SetTarget(m_target.transform.position + new Vector3(0.5f, 0, 0.5f));
 	}
 	// Update is called once per frame
 	void Update()
