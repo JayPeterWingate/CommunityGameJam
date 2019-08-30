@@ -6,8 +6,7 @@ using UnityEngine.Events;
 
 public class TankController : MonoBehaviour
 {
-	public float leftDrive;
-	public float rightDrive;
+	public Vector2 targetDirection;
 	public Vector3 turretTarget;
 
 	public UnityEvent fireEvent = new UnityEvent();
@@ -49,6 +48,7 @@ public class TankScript : MonoBehaviour
     Rigidbody m_body;
     public Color color;
     public bool paused = false;
+	Vector3 m_lastDirection = new Vector3(0,0,1);
 
     // Start is called before the first frame update
     void Start()
@@ -103,20 +103,29 @@ public class TankScript : MonoBehaviour
     {
         if (m_controller && !paused)
         {
-            m_body.AddTorque(transform.up * m_rotatePower * (m_controller.leftDrive - m_controller.rightDrive));
-            Debug.DrawRay(m_leftTread.position, m_leftTread.position + transform.TransformDirection(new Vector3(0, 0, m_controller.leftDrive * m_horsePower)));
-            Debug.DrawRay(m_rightTread.position, m_rightTread.position + transform.rotation * (new Vector3(0, 0, m_controller.rightDrive * m_horsePower)));
+			Vector3 direction = new Vector3(m_controller.targetDirection.x, 0, m_controller.targetDirection.y);
+			m_body.AddForce(direction * m_horsePower);
+			if (direction == new Vector3())
+			{
+				direction = m_lastDirection;
+			} else
+			{
+				m_lastDirection = direction;
 
-            m_body.AddForceAtPosition(transform.TransformDirection(new Vector3(0, 0, m_controller.leftDrive * m_horsePower)), m_leftTread.position);
-            m_body.AddForceAtPosition(transform.TransformDirection(new Vector3(0, 0, m_controller.rightDrive * m_horsePower)), m_rightTread.position);
+			}
+			
+			Vector3 targetRot = new Vector3(direction.x, transform.position.y, direction.z);
 
-            // [TODO] get a smoother looking rotation
+			transform.rotation = (Quaternion.RotateTowards(transform.rotation, Quaternion.LookRotation(direction), Time.time * m_rotatePower));
+
+			// [TODO] get a smoother looking rotation
             Vector3 targetPosition = new Vector3(m_controller.turretTarget.x, m_turret.position.y, m_controller.turretTarget.z);
             var dir = targetPosition - m_turret.position;
             dir.y = 0.0f;
             m_turret.rotation = Quaternion.RotateTowards(m_turret.rotation, Quaternion.LookRotation(dir), Time.time * m_turretRotateSpeed);
+			
 
-        }
+		}
 
 
     }
