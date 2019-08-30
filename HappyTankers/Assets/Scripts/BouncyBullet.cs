@@ -4,13 +4,13 @@ using UnityEngine;
 
 public class BouncyBullet : MonoBehaviour
 {
-    private Vector3 m_direction;
-    private float m_speed;
+    [SerializeField] private Vector3 m_direction;
+    [SerializeField] private float m_speed;
     private int m_bounceCount = 0;
 
     public void InitialSetup(Vector3 d, float s = 5)
     {
-        m_direction = d + new Vector3(Random.Range(-0.25f,0.25f),0, Random.Range(-0.25f, 0.25f));
+        m_direction = d.normalized + new Vector3(Random.Range(-0.25f,0.25f),0, Random.Range(-0.25f, 0.25f));
         m_speed = s;
     }
 

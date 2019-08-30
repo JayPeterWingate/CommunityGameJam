@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.AI;
+using UnityEngine.Events;
 
 public class CityScript : BlockScript
 {
@@ -18,12 +19,19 @@ public class CityScript : BlockScript
 	[SerializeField] private SpriteRenderer m_happySprite;
 	[SerializeField] private SpriteRenderer m_onFireSprite;
 
+    [SerializeField] private Animator m_FakeAIAnimation;
+
 	public bool isDead = false;
 	float m_redPerc = 0;
 
 	// Start is called before the first frame update
 	void Start()
     {
+        if (m_FakeAIAnimation != null)
+        {
+            FilterManager.OnChange.AddListener(AnimateFakeAI);
+        }
+
         m_healthyBuildings = new GameObject[4];
         m_brokenBuildings = new GameObject[4];
 
@@ -57,9 +65,19 @@ public class CityScript : BlockScript
         SetBreakCity(false);
 		m_level.GetComponent<LevelProgression>().RegisterCity();
         //StartCoroutine(TestBreak());
+
+        if (isDead)
+        {
+            SetBreakCity(true);
+        }
     }
 
-	override public void WasHit(int strength)
+    public void AnimateFakeAI(bool isHappy)
+    {
+        m_FakeAIAnimation.SetBool("AnimateFakeAI", true);
+    }
+
+    override public void WasHit(int strength)
 	{
 		if (isDead == false)
 		{
