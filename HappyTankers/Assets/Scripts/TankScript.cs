@@ -8,7 +8,7 @@ public class TankController : MonoBehaviour
 {
 	public Vector2 targetDirection;
 	public Vector3 turretTarget;
-
+	public bool boost;
 	public UnityEvent fireEvent = new UnityEvent();
     public UnityEvent strongFireEvent = new UnityEvent();
 	public UnityEvent shieldEvent = new UnityEvent();
@@ -49,9 +49,10 @@ public class TankScript : MonoBehaviour
     public Color color;
     public bool paused = false;
 	Vector3 m_lastDirection = new Vector3(0,0,1);
+	[SerializeField] float m_boostMultiplier;
 
-    // Start is called before the first frame update
-    void Start()
+	// Start is called before the first frame update
+	void Start()
     {
         TankList.Add(this);
         m_currentTarget = new Vector3();
@@ -104,7 +105,14 @@ public class TankScript : MonoBehaviour
         if (m_controller && !paused)
         {
 			Vector3 direction = new Vector3(m_controller.targetDirection.x, 0, m_controller.targetDirection.y);
-			m_body.AddForce(direction * m_horsePower);
+			float power = m_horsePower;
+			if (m_body.velocity.magnitude < 0.05)
+			{
+				power *= m_boostMultiplier;
+				print("This is fired");
+			}
+				
+			m_body.AddForce(direction * power);
 			if (direction == new Vector3())
 			{
 				direction = m_lastDirection;
@@ -114,7 +122,7 @@ public class TankScript : MonoBehaviour
 
 			}
 			
-
+			
 			transform.rotation = (Quaternion.RotateTowards(transform.rotation, Quaternion.LookRotation(direction), Time.time * m_rotatePower));
 
 			// [TODO] get a smoother looking rotation

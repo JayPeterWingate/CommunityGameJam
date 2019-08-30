@@ -17,8 +17,7 @@ public class PlayerScript : TankController
 
 	public Texture2D m_darkReadyCursor;
 	public Texture2D m_happyReadyCursor;
-
-
+	
 	private void Awake()
 	{
 		playerRef = gameObject;
@@ -30,7 +29,7 @@ public class PlayerScript : TankController
 			Vector2 input = ctr.ReadValue<Vector2>();
 			targetDirection = input;
 		};
-		controls.Player.MovementAxis.canceled += ctr => { targetDirection = new Vector2(); };
+		controls.Player.MovementAxis.canceled += ctr => { targetDirection = new Vector2();};
 		controls.Player.RotateTurret.performed += ctr =>
 		{
 			Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
