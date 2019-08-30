@@ -114,7 +114,6 @@ public class TankScript : MonoBehaviour
 
 			}
 			
-			Vector3 targetRot = new Vector3(direction.x, transform.position.y, direction.z);
 
 			transform.rotation = (Quaternion.RotateTowards(transform.rotation, Quaternion.LookRotation(direction), Time.time * m_rotatePower));
 
