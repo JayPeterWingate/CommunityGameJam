@@ -18,7 +18,7 @@ public class CityScript : BlockScript
 	[SerializeField] private SpriteRenderer m_happySprite;
 	[SerializeField] private SpriteRenderer m_onFireSprite;
 
-	bool isDead = false;
+	public bool isDead = false;
 	float m_redPerc = 0;
 
 	// Start is called before the first frame update

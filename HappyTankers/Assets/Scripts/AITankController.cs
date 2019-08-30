@@ -11,27 +11,25 @@ public class AITankController : TankController
 
 	bool m_hasPath;
 	bool m_lookForEnemies = true;
+	public GameObject m_levelSpawned;
 	public UnityEvent TargetReached { get; private set; }
+
 	// Start is called before the first frame update
 	protected void Init()
     {
 		print("HIT");
 		TargetReached = new UnityEvent();
-		TankList =
+		/*TankList =
 		(from tank in TankScript.TankList
 		 where tank.transform.parent == transform.parent && tank.color != color
-		 select tank);
-		StartCoroutine(CheckForEnemies());
-
-		SetRandomDirection();
-		TargetReached.AddListener(SetRandomDirection);
-
+		 select tank);*/
 	}
-	protected void SetRandomDirection()
+	
+	protected void SetDestinationNear(Vector3 pos, float range)
 	{
-		float x = Random.Range(-6, 6);
-		float z = Random.Range(-6, 6);
-		SetTarget(PlayerScript.playerRef.transform.Find("Tank").position + new Vector3(x, 0, z));
+		float x = Random.Range(-range, range);
+		float z = Random.Range(-range, range);
+		SetTarget( pos + new Vector3(x, 0, z));
 	}
 	protected void Destruct()
 	{
@@ -41,33 +39,7 @@ public class AITankController : TankController
 		}
 		
 	}
-	IEnumerator CheckForEnemies()
-	{
-		while (m_lookForEnemies)
-		{
-			yield return new WaitForSeconds(1);
-			bool canSee = false;
-			foreach (TankScript tank in TankList)
-			{
-				Ray ray = new Ray(transform.position, tank.transform.position);
-				RaycastHit info;
-				if (Physics.Raycast(ray, out info))
-				{
-					if (info.collider.gameObject == tank.gameObject)
-					{
-						canSee = true;
-						break;
-					}
-				}
-			}
-			if (canSee) {
-				// TODO Shoot enemy
-
-			}
-
-		}
-			
-	}
+	
 
     // Update is called once per frame
     public void Tick()

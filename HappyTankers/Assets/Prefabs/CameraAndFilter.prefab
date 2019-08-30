@@ -293,7 +293,7 @@ GameObject:
   - component: {fileID: 3891065788701905087}
   - component: {fileID: 3891065788701905084}
   - component: {fileID: 3891065788701905085}
-  m_Layer: 0
+  m_Layer: 5
   m_Name: HappyBorderT
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -460,8 +460,6 @@ MonoBehaviour:
   m_transitionaryCamera: {fileID: 8567531501448084189}
   m_plane: {fileID: 2461031907347631013}
   m_border: {fileID: 6162716053106242300}
-  m_darkCursor: {fileID: 2800000, guid: c3b7d2444a6927343af6ec36a4344612, type: 3}
-  m_happyCursor: {fileID: 2800000, guid: 66865323dae595044a004bf0037eb51b, type: 3}
   m_blueScreen: {fileID: 5127930014908370599}
 --- !u!1 &3891065789525822315
 GameObject:
@@ -505,7 +503,7 @@ GameObject:
   - component: {fileID: 3891065789572258982}
   - component: {fileID: 3891065789572258987}
   - component: {fileID: 3891065789572258980}
-  m_Layer: 9
+  m_Layer: 5
   m_Name: HappyBorderBack
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -613,7 +611,7 @@ GameObject:
   - component: {fileID: 3891065789856268724}
   - component: {fileID: 3891065789856268729}
   - component: {fileID: 3891065789856268730}
-  m_Layer: 0
+  m_Layer: 5
   m_Name: HappyBorderR
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -798,7 +796,7 @@ GameObject:
   - component: {fileID: 7591224447821017355}
   - component: {fileID: 5484246610157286662}
   - component: {fileID: 1294885138757376433}
-  m_Layer: 0
+  m_Layer: 5
   m_Name: HappyBorderR (1)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -875,7 +873,7 @@ GameObject:
   - component: {fileID: 3553053826280069669}
   - component: {fileID: 3855694236715389649}
   - component: {fileID: 1955803853007805774}
-  m_Layer: 0
+  m_Layer: 5
   m_Name: HappyBorderT (1)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1024,7 +1022,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 198540828726254434}
-  m_Layer: 0
+  m_Layer: 5
   m_Name: Border
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1112,7 +1110,7 @@ Camera:
   m_Depth: 0
   m_CullingMask:
     serializedVersion: 2
-    m_Bits: 513
+    m_Bits: 545
   m_RenderingPath: -1
   m_TargetTexture: {fileID: 8400000, guid: 53cd96e0bb3a6fb42bc2146135e95816, type: 2}
   m_TargetDisplay: 0

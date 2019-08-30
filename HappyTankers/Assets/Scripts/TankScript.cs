@@ -82,7 +82,7 @@ public class TankScript : MonoBehaviour
 	}
 	void SetVisuals(bool isHappy)
 	{
-		for(int i = 0; i < m_renderers.Length; i++)
+		/*for(int i = 0; i < m_renderers.Length; i++)
 		{
 			bool shouldBeActive = isHappy ?
 				m_renderers[i].gameObject.layer == 9
@@ -90,7 +90,7 @@ public class TankScript : MonoBehaviour
 				m_renderers[i].gameObject.layer == 10||
 				m_renderers[i].gameObject.layer == 12;
 			m_renderers[i].enabled = shouldBeActive;
-		}
+		}*/
 		m_controller.SetCursor(isHappy, m_isFiring);
 	}
     // Update is called once per frame
