@@ -72,9 +72,9 @@ public class LevelManager : MonoBehaviour
     
     [SerializeField] private LevelGridElements m_gridElements;
 
-    public int m_levelW = 26;
-    public int m_levelH = 16;
-    public int m_worldSize = 200;
+    static public int m_levelW = 26;
+    static public int m_levelH = 16;
+    static public int m_worldSize = 200;
 
     public GameObject GetPrefabFromColor(Color col)
     {

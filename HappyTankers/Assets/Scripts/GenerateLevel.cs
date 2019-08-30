@@ -43,9 +43,9 @@ public class GenerateLevel : MonoBehaviour
     {
         if (m_levelMap != null)
         {
-            for (int x = 0; x < m_manager.m_levelW; x++)
+            for (int x = 0; x < LevelManager.m_levelW; x++)
             {
-                for (int y = 0; y < m_manager.m_levelH; y++)
+                for (int y = 0; y < LevelManager.m_levelH; y++)
                 {
                     SpawnObject(x, y);
                 }
@@ -71,7 +71,7 @@ public class GenerateLevel : MonoBehaviour
         if (prefab != null)
         {
             prefab.GetComponent<BlockScript>().m_level = gameObject;
-            m_levelBlocks.Add(Instantiate(prefab, transform.position + new Vector3(x - m_manager.m_levelW / 2, 0, y - m_manager.m_levelH / 2), transform.rotation, transform).GetComponent<BlockScript>());
+            m_levelBlocks.Add(Instantiate(prefab, transform.position + new Vector3(x - LevelManager.m_levelW / 2, 0, y - LevelManager.m_levelH / 2), transform.rotation, transform).GetComponent<BlockScript>());
 
         }
     }

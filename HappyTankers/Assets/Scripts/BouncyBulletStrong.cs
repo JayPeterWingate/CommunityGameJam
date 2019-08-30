@@ -27,11 +27,29 @@ public class BouncyBulletStrong : MonoBehaviour
         }
     }
 
+    private void DeleteIfOutOfView()
+    {
+        Vector3 b = transform.position;
+        Vector3 c = CameraScript.Instance.transform.position;
+        float hOff = (LevelManager.m_levelW / 2) + 6;
+        float vOff = (LevelManager.m_levelH / 2) + 6;
+        if (b.x < c.x - hOff || b.x > c.x + hOff || b.z < c.z - vOff || b.z > c.z + vOff)
+        {
+            Destroy(gameObject);
+        }
+        hOff = (LevelManager.m_levelW / 2);
+        vOff = (LevelManager.m_levelH / 2);
+        bool camOutsideRoom = (c.x < -hOff || c.x > hOff || c.z < -vOff || c.z > vOff);
+        if (FilterManager.IsAlmostDark && camOutsideRoom && !(b.x < -hOff || b.x > hOff || b.z < -vOff || b.z > vOff))
+        {
+            Destroy(gameObject);
+        }
+    }
 
     // Update is called once per frame
     void Update()
     {
-
+        DeleteIfOutOfView();
         RaycastHit hit;
         Physics.Linecast(transform.position, transform.position + m_direction * m_speed * Time.deltaTime, out hit, ~(1 << 14), QueryTriggerInteraction.UseGlobal);
         if (hit.collider != null)

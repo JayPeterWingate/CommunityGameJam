@@ -5,6 +5,7 @@ using UnityEngine;
 
 public class CameraScript : MonoBehaviour
 {
+    public static CameraScript Instance;
     Animator m_animator;
     float m_timer = 0;
     Vector3 m_targetPos;
@@ -16,6 +17,7 @@ public class CameraScript : MonoBehaviour
 
     void Start()
     {
+        Instance = this;
         m_animator = GetComponent<Animator>();
         m_targetPos = transform.position;
 		float verticleHeight = m_camera.orthographicSize * 2.0f;
@@ -47,6 +49,7 @@ public class CameraScript : MonoBehaviour
         for (int i = 0; i < TankScript.TankList.Count; i++)
         {
             TankScript.TankList[i].paused = true;
+            TankScript.TankList[i].DestroyBullets();
         }
         StartCoroutine(RF2_ActuallyRemoveFilter());
     }
