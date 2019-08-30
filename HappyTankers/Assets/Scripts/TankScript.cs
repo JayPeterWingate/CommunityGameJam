@@ -23,70 +23,71 @@ public class TankController : MonoBehaviour
 public class TankScript : MonoBehaviour
 {
     public static float TeleportWaitTime = 1.5f;
-	public static List<TankScript> TankList = new List<TankScript>();
-	[SerializeField] Transform m_leftTread;
-	[SerializeField] Transform m_rightTread;
- 	[SerializeField] TankController m_controller;
-	[SerializeField] float m_horsePower;
-	[SerializeField] float m_rotatePower;
-	[SerializeField] float m_turretRotateSpeed;
-	[SerializeField] Transform m_turret;
-	[SerializeField] Transform m_bulletSpawn;
-	[SerializeField] GameObject m_bulletPrefab;
+    public static List<TankScript> TankList = new List<TankScript>();
+    [SerializeField] Transform m_leftTread;
+    [SerializeField] Transform m_rightTread;
+    [SerializeField] TankController m_controller;
+    [SerializeField] float m_horsePower;
+    [SerializeField] float m_rotatePower;
+    [SerializeField] float m_turretRotateSpeed;
+    [SerializeField] Transform m_turret;
+    [SerializeField] Transform m_bulletSpawn;
+    [SerializeField] GameObject m_bulletPrefab;
     [SerializeField] GameObject m_strongBulletPrefab;
-	[SerializeField] List<GameObject> m_bulletList;
-	[SerializeField] Transform m_shield;
-	[SerializeField] Renderer[] m_renderers;
-	[SerializeField] SpriteRenderer[] m_sprites;
+    [SerializeField] List<GameObject> m_bulletList;
+    [SerializeField] Transform m_shield;
+    [SerializeField] Renderer[] m_renderers;
+    [SerializeField] SpriteRenderer[] m_sprites;
+    [SerializeField] SpriteRenderer[] m_teleportSquares;
     [SerializeField] Animator m_animator;
     [SerializeField] AudioSource m_tankAudioHappy;
     [SerializeField] AudioSource m_turretAudioHappy;
-	bool m_isFiring = false;
-	bool m_isShielding = false;
-	bool m_isTakingDamage = false;
-	Vector3 m_currentTarget;
-	Rigidbody m_body;
-	public Color color;
+    bool m_isFiring = false;
+    bool m_isShielding = false;
+    bool m_isTakingDamage = false;
+    Vector3 m_currentTarget;
+    Rigidbody m_body;
+    public Color color;
     public bool paused = false;
 
-	// Start is called before the first frame update
+    // Start is called before the first frame update
     void Start()
-	{
-		TankList.Add(this);
-		m_currentTarget = new Vector3();
-		m_body = GetComponent<Rigidbody>();
-		if (m_controller.fireEvent != null)
-		{
-			m_controller.fireEvent.AddListener(FireMainBattleCannon);
-		}
+    {
+        TankList.Add(this);
+        m_currentTarget = new Vector3();
+        m_body = GetComponent<Rigidbody>();
+        if (m_controller.fireEvent != null)
+        {
+            m_controller.fireEvent.AddListener(FireMainBattleCannon);
+        }
         if (m_controller.strongFireEvent != null)
         {
             m_controller.strongFireEvent.AddListener(FireSecondaryStrongBattleCannon);
         }
         if (m_controller.shieldEvent != null)
-		{
-			m_controller.shieldEvent.AddListener(ActiveShield);
-		}
-		
-		for(int i = 0; i < m_renderers.Length; i++)
-		{
-			m_renderers[i].material.color = m_controller.color;
-		}
-		for(int i = 0; i < m_sprites.Length; i++)
-		{
-			m_sprites[i].color = m_controller.color;
-		}
-		color = m_controller.color;
-		m_bulletList = new List<GameObject>();
+        {
+            m_controller.shieldEvent.AddListener(ActiveShield);
+        }
 
-		m_shield.gameObject.SetActive(false);
+        for (int i = 0; i < m_renderers.Length; i++)
+        {
+            m_renderers[i].material.color = m_controller.color;
+        }
+        for (int i = 0; i < m_sprites.Length; i++)
+        {
+            m_sprites[i].color = m_controller.color;
+        }
+        color = m_controller.color;
+        m_bulletList = new List<GameObject>();
 
-		SetVisuals(true);
-		FilterManager.OnChange.AddListener(SetVisuals);
-	}
-	void SetVisuals(bool isHappy)
-	{
-		/*for(int i = 0; i < m_renderers.Length; i++)
+        m_shield.gameObject.SetActive(false);
+
+        SetVisuals(true);
+        FilterManager.OnChange.AddListener(SetVisuals);
+    }
+    void SetVisuals(bool isHappy)
+    {
+        /*for(int i = 0; i < m_renderers.Length; i++)
 		{
 			bool shouldBeActive = isHappy ?
 				m_renderers[i].gameObject.layer == 9
@@ -95,41 +96,49 @@ public class TankScript : MonoBehaviour
 				m_renderers[i].gameObject.layer == 12;
 			m_renderers[i].enabled = shouldBeActive;
 		}*/
-		m_controller.SetCursor(isHappy, m_isFiring);
-	}
+        m_controller.SetCursor(isHappy, m_isFiring);
+    }
     // Update is called once per frame
     void FixedUpdate()
     {
-		if (m_controller && !paused)
-		{
-			m_body.AddTorque(transform.up * m_rotatePower * (m_controller.leftDrive - m_controller.rightDrive));
-			Debug.DrawRay(m_leftTread.position, m_leftTread.position + transform.TransformDirection(new Vector3(0, 0, m_controller.leftDrive * m_horsePower)));
-			Debug.DrawRay(m_rightTread.position, m_rightTread.position + transform.rotation * (new Vector3(0, 0, m_controller.rightDrive * m_horsePower)));
+        if (m_controller && !paused)
+        {
+            m_body.AddTorque(transform.up * m_rotatePower * (m_controller.leftDrive - m_controller.rightDrive));
+            Debug.DrawRay(m_leftTread.position, m_leftTread.position + transform.TransformDirection(new Vector3(0, 0, m_controller.leftDrive * m_horsePower)));
+            Debug.DrawRay(m_rightTread.position, m_rightTread.position + transform.rotation * (new Vector3(0, 0, m_controller.rightDrive * m_horsePower)));
 
-			m_body.AddForceAtPosition(transform.TransformDirection(new Vector3(0, 0, m_controller.leftDrive * m_horsePower)), m_leftTread.position);
-			m_body.AddForceAtPosition(transform.TransformDirection(new Vector3(0, 0, m_controller.rightDrive * m_horsePower )), m_rightTread.position);
+            m_body.AddForceAtPosition(transform.TransformDirection(new Vector3(0, 0, m_controller.leftDrive * m_horsePower)), m_leftTread.position);
+            m_body.AddForceAtPosition(transform.TransformDirection(new Vector3(0, 0, m_controller.rightDrive * m_horsePower)), m_rightTread.position);
 
-			// [TODO] get a smoother looking rotation
-			Vector3 targetPosition = new Vector3(m_controller.turretTarget.x, m_turret.position.y, m_controller.turretTarget.z);
-			var dir = targetPosition - m_turret.position;
-			dir.y = 0.0f;
-			m_turret.rotation = Quaternion.RotateTowards(m_turret.rotation, Quaternion.LookRotation(dir), Time.time * m_turretRotateSpeed);
+            // [TODO] get a smoother looking rotation
+            Vector3 targetPosition = new Vector3(m_controller.turretTarget.x, m_turret.position.y, m_controller.turretTarget.z);
+            var dir = targetPosition - m_turret.position;
+            dir.y = 0.0f;
+            m_turret.rotation = Quaternion.RotateTowards(m_turret.rotation, Quaternion.LookRotation(dir), Time.time * m_turretRotateSpeed);
 
-		}
+        }
 
 
-	}
+    }
 
-    public void TeleportOut()
+    public void TeleportOut(bool death = false)
     {
+        for (int i =0; i < m_teleportSquares.Length; i++)
+        {
+            m_teleportSquares[i].color = death ? Color.red : Color.white;
+        }
         paused = true;
         DestroyBullets();
         m_animator.SetBool("TeleportOut", true);
-        m_tankAudioHappy.clip = SoundController.Instance.chirpTeleport;
+        m_tankAudioHappy.clip = death ? SoundController.Instance.chirpDie : SoundController.Instance.chirpTeleport;
         m_tankAudioHappy.Play();
     }
     public void TeleportIn()
     {
+        for (int i = 0; i < m_teleportSquares.Length; i++)
+        {
+            m_teleportSquares[i].color = Color.white;
+        }
         m_animator.SetBool("TeleportOut", false);
         m_animator.SetBool("TeleportIn", true);
         m_tankAudioHappy.clip = SoundController.Instance.chirpTeleport;
@@ -144,20 +153,20 @@ public class TankScript : MonoBehaviour
     }
 
     private void FireMainBattleCannon()
-	{
-		if(!m_isFiring && !m_isShielding && !m_isTakingDamage && !paused)
-		{
-			try
-			{
-				PlayerScript playerController = (PlayerScript)m_controller;
-				StartCoroutine(FireBullets(10, 0.05f, 1.0f, false));
-			} catch {
-				StartCoroutine(FireBullets(1, 0.05f, 0.5f, false));
-			};
-			
-		}
-		
-	}
+    {
+        if (!m_isFiring && !m_isShielding && !m_isTakingDamage && !paused)
+        {
+            try
+            {
+                PlayerScript playerController = (PlayerScript)m_controller;
+                StartCoroutine(FireBullets(10, 0.05f, 1.0f, false));
+            } catch {
+                StartCoroutine(FireBullets(1, 0.05f, 0.5f, false));
+            };
+
+        }
+
+    }
     private void FireSecondaryStrongBattleCannon()
     {
         if (!m_isFiring && !m_isShielding && !m_isTakingDamage && !paused)
@@ -167,63 +176,76 @@ public class TankScript : MonoBehaviour
 
     }
     private IEnumerator FireBullets(int bulletCount, float spawnGap, float cooldown, bool strong)
-	{
-		m_isFiring = true;
-		m_controller.SetCursor(FilterManager.IsHappy, false);
-		for (int i = 0; i < bulletCount; i++)
-		{
+    {
+        m_isFiring = true;
+        m_controller.SetCursor(FilterManager.IsHappy, false);
+        for (int i = 0; i < bulletCount; i++)
+        {
             if (strong)
             {
                 BouncyBulletStrong bullet = Instantiate(m_strongBulletPrefab, m_bulletSpawn.position, m_turret.rotation).GetComponent<BouncyBulletStrong>();
                 bullet.InitialSetup(bullet.transform.forward);
-				m_bulletList.Add(bullet.gameObject);
+                m_bulletList.Add(bullet.gameObject);
             }
             else
             {
                 BouncyBullet bullet = Instantiate(m_bulletPrefab, m_bulletSpawn.position, m_turret.rotation).GetComponent<BouncyBullet>();
                 bullet.InitialSetup(bullet.transform.forward);
-				m_bulletList.Add(bullet.gameObject);
-			}
+                m_bulletList.Add(bullet.gameObject);
+            }
             yield return new WaitForSeconds(spawnGap);
-		}
-		yield return new WaitForSeconds(cooldown);
-		m_controller.SetCursor(FilterManager.IsHappy, true);
-		m_isFiring = false;
-	}
-	private void ActiveShield()
-	{
-		if (!m_isFiring && !m_isShielding && !m_isTakingDamage)
-		{
-			StartCoroutine(StartShield(0.1f, 1f, 0.1f, new Vector3(5f, 5f, 5f)));
-		}
-	}
-	private IEnumerator StartShield(float rise, float stay, float close, Vector3 size)
-	{
-		m_isShielding = true;
-		float current = 0;
-		m_shield.gameObject.SetActive(true);
-		while(current < rise)
-		{
-			m_shield.transform.localScale = Vector3.Lerp(new Vector3(), size, current / rise);
-			current += Time.deltaTime;
-			yield return new WaitForEndOfFrame();
-		}
-		yield return new WaitForSeconds(stay);
-		current = 0;
-		while (current < close)
-		{
-			current += Time.deltaTime;
-			m_shield.transform.localScale = Vector3.Lerp(size, new Vector3(), current / close);
-			yield return new WaitForEndOfFrame();
-		}
+        }
+        yield return new WaitForSeconds(cooldown);
+        m_controller.SetCursor(FilterManager.IsHappy, true);
+        m_isFiring = false;
+    }
+    private void ActiveShield()
+    {
+        if (!m_isFiring && !m_isShielding && !m_isTakingDamage)
+        {
+            StartCoroutine(StartShield(0.1f, 1f, 0.1f, new Vector3(5f, 5f, 5f)));
+        }
+    }
+    private IEnumerator StartShield(float rise, float stay, float close, Vector3 size)
+    {
+        m_isShielding = true;
+        float current = 0;
+        m_shield.gameObject.SetActive(true);
+        while (current < rise)
+        {
+            m_shield.transform.localScale = Vector3.Lerp(new Vector3(), size, current / rise);
+            current += Time.deltaTime;
+            DestroyBulletsInShield(m_shield.transform.localScale.x * (1.55f / 5));
+            yield return new WaitForEndOfFrame();
+        }
+        yield return new WaitForSeconds(stay);
+        current = 0;
+        while (current < close)
+        {
+            current += Time.deltaTime;
+            m_shield.transform.localScale = Vector3.Lerp(size, new Vector3(), current / close);
+            DestroyBulletsInShield(m_shield.transform.localScale.x * (1.55f / 5));
+            yield return new WaitForEndOfFrame();
+        }
 
-		m_shield.gameObject.SetActive(false);
-		m_isShielding = false;
-	}
-	public void DestroyBullets()
-	{
-		m_bulletList.ForEach((GameObject obj) => Destroy(obj));
-	}
+        m_shield.gameObject.SetActive(false);
+        m_isShielding = false;
+    }
+    public void DestroyBullets()
+    {
+        m_bulletList.ForEach((GameObject obj) => Destroy(obj));
+    }
+
+    public void DestroyBulletsInShield(float shieldRad)
+    {
+        m_bulletList.ForEach((GameObject obj) =>
+        {
+            if (obj != null && (new Vector3(obj.transform.position.x, 0, obj.transform.position.z) - new Vector3(m_shield.position.x, 0, m_shield.position.z)).magnitude < shieldRad)
+            {
+                Destroy(obj);
+            }
+        });
+    }
 
 	public void Hit(GameObject bullet)
 	{
@@ -233,6 +255,12 @@ public class TankScript : MonoBehaviour
 			{
 				Destroy(bullet);
 				m_controller.lives -= 1;
+                if (FilterManager.IsHappy)
+                {
+                    m_tankAudioHappy.clip = SoundController.Instance.chirpHitCity;
+                    m_tankAudioHappy.Play();
+                }
+                
 			}
 			else
 			{
@@ -241,9 +269,8 @@ public class TankScript : MonoBehaviour
 					PlayerScript player = (PlayerScript)m_controller;
 					if (FilterManager.IsHappy)
 					{
-						DestroyBullets();
-						transform.position = player.startPos;
-						player.lives = 3;
+                        StartCoroutine(HandleHappyReset());
+                        player.lives = 3;
 					} else
 					{
 						FilterManager.TriggerDeath();
@@ -263,6 +290,21 @@ public class TankScript : MonoBehaviour
 			StartCoroutine(ResetDamage(1));
 		}
 	}
+
+    private IEnumerator HandleHappyReset()
+    {
+        DestroyBullets();
+        TeleportOut(true);
+        m_tankAudioHappy.clip = SoundController.Instance.chirpDie;
+        m_tankAudioHappy.Play();
+
+        yield return new WaitForSeconds(TeleportWaitTime);
+
+        PlayerScript player = (PlayerScript)m_controller;
+        transform.position = player.startPos;
+        TeleportIn();
+    }
+
 	IEnumerator ResetDamage(float resetTime)
 	{
 		bool onSwitch = true;

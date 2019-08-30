@@ -507,6 +507,7 @@ public class LevelManager : MonoBehaviour
             }
 
             GenerateLevel nextLevel = m_levels[i].GetComponent<GenerateLevel>();
+            nextLevel.SetShadowMode(false);
             m_gridElements.LevelCurrent = nextLevel;
             InLevelSlot(m_gridElements.LevelCurrent);
             nextLevel.SetActiveLevel(true);

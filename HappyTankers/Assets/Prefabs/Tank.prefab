@@ -1084,6 +1084,10 @@ MonoBehaviour:
   m_sprites:
   - {fileID: 4501197080762706745}
   - {fileID: 740687181680197735}
+  m_teleportSquares:
+  - {fileID: 7238287225505982343}
+  - {fileID: 3059958704465152604}
+  - {fileID: 2368831580500925181}
   m_animator: {fileID: 1697121802031915295}
   m_tankAudioHappy: {fileID: 7587531815998160000}
   m_turretAudioHappy: {fileID: 2537891571614887595}
