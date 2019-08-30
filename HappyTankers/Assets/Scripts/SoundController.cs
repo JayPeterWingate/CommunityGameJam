@@ -26,6 +26,8 @@ public class SoundController : MonoBehaviour
     public AudioClip chirpDie;
     public AudioClip chirpHitCity;
 
+    public AudioClip darkSmallFire;
+
     private int m_distantFireQueue = 0;
     private AudioClip m_distantFireClip;
     private float m_distantFireVol;

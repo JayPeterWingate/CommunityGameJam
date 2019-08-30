@@ -6,14 +6,28 @@ public class BouncyBullet : MonoBehaviour
 {
     [SerializeField] private Vector3 m_direction;
     [SerializeField] private float m_speed;
+    [SerializeField] private AudioSource m_happySound;
+    [SerializeField] private AudioSource m_darkSound;
+
     private int m_bounceCount = 0;
 
     public void InitialSetup(Vector3 d, float s = 5)
     {
         m_direction = d.normalized + new Vector3(Random.Range(-0.25f,0.25f),0, Random.Range(-0.25f, 0.25f));
         m_speed = s;
-    }
 
+        if (FilterManager.IsHappy)
+        {
+            m_happySound.clip = SoundController.Instance.chirpSmallFire;
+            m_happySound.Play();
+        }
+        else
+        {
+            m_darkSound.clip = SoundController.Instance.darkSmallFire;
+            m_darkSound.Play();
+        }
+
+    }
 
     // Update is called once per frame
     void Update()

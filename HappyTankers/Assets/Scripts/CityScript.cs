@@ -23,6 +23,9 @@ public class CityScript : BlockScript
     [SerializeField] private Animator m_FakeAITeleportAnimation;
     [SerializeField] private AudioSource m_FakeAIAudio;
 
+    [SerializeField] private AudioSource m_happyAudio;
+    [SerializeField] private AudioSource m_darkAudio;
+
     public bool isDead = false;
 	float m_redPerc = 0;
 
@@ -88,7 +91,8 @@ public class CityScript : BlockScript
 
     public void AnimateFakeAIShoot()
     {
-        //TODO Play sound
+        m_FakeAIAudio.clip = SoundController.Instance.chirpSmallFire;
+        m_FakeAIAudio.Play();
     }
 
     override public void WasHit(int strength)
@@ -124,6 +128,19 @@ public class CityScript : BlockScript
 
     private void SetBreakCity(bool broken)
     {
+        if (broken)
+        {
+            if (m_darkAudio != null && !FilterManager.IsHappy)
+            {
+                //TODO Dark building explosion
+            }
+            else if (m_happyAudio != null)
+            {
+                m_happyAudio.clip = SoundController.Instance.chirpHitCity;
+                m_happyAudio.Play();
+            }
+        }
+
         m_healthyBuildings[0].SetActive(!broken);
         m_healthyBuildings[1].SetActive(!broken);
         m_healthyBuildings[2].SetActive(!broken);

@@ -4,6 +4,9 @@ using UnityEngine;
 
 public class BouncyBulletStrong : MonoBehaviour
 {
+
+    [SerializeField] private AudioSource m_happySound;
+    [SerializeField] private AudioSource m_darkSound;
     private Vector3 m_direction;
     private float m_speed;
     private int m_bounceCount = 0;
@@ -12,6 +15,16 @@ public class BouncyBulletStrong : MonoBehaviour
     {
         m_direction = d;
         m_speed = s;
+
+        if (FilterManager.IsHappy)
+        {
+            m_happySound.clip = SoundController.Instance.chirpSmallFire;
+            m_happySound.Play();
+        }
+        else
+        {
+            //TODO Get dark heavy hit
+        }
     }
 
 
