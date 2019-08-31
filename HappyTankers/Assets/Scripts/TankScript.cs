@@ -279,6 +279,10 @@ public class TankScript : MonoBehaviour
 	{
 		if (!m_isTakingDamage)
 		{
+			if(!m_controller.isAI && !FilterManager.IsHappy)
+			{
+				UIController.instance.AddErrorScreen();
+			}
 			if (m_controller.lives > 1)
 			{
 				Destroy(bullet);
@@ -298,12 +302,8 @@ public class TankScript : MonoBehaviour
 					if (FilterManager.IsHappy)
 					{
                         StartCoroutine(HandleHappyReset());
-						UIController.instance.ChangeScore(-1000);
+						UIController.instance.ChangeScore(-10000);
                         player.lives = 4;
-					} else
-					{
-
-						FilterManager.TriggerDeath();
 					}
 					
 				}

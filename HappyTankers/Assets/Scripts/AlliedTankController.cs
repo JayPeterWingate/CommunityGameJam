@@ -15,15 +15,25 @@ public class AlliedTankController : AITankController
 	private CityScript GetRandomTarget()
 	{
 		IEnumerable<CityScript> livingCitiesInLevel = m_levelSpawned.GetComponentsInChildren<CityScript>().Where(city => !city.isDead);
-		if(livingCitiesInLevel == null) { return null; }
-		return livingCitiesInLevel.Skip(Random.Range(0, livingCitiesInLevel.Count() - 1)).First();
+		try
+		{
+			return livingCitiesInLevel.Skip(Random.Range(0, livingCitiesInLevel.Count() - 1)).First();
+		} catch
+		{
+			return null;
+		}
+		
 	}
 	private void OnEnable()
 	{
 		if (m_levelSpawned == null) { gameObject.SetActive(false); return; }
 		m_target = GetRandomTarget();
-		SetDestinationNear(m_target.transform.position + new Vector3(0.5f, 0.5f, 0.5f), 5.0f);
-		StartCoroutine(Aim());
+		if(m_target != null)
+		{
+			SetDestinationNear(m_target.transform.position + new Vector3(0.5f, 0.5f, 0.5f), 5.0f);
+			StartCoroutine(Aim());
+		}
+		
 	}
 	private IEnumerator Aim()
 	{

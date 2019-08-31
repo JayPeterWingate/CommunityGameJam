@@ -11,9 +11,9 @@ public class UIController : MonoBehaviour
 	[SerializeField] Image[] m_hearts;
 	[SerializeField] Sprite m_fullHeart;
 	[SerializeField] Sprite m_noHeart;
-
+	[SerializeField] GameObject m_ErrorPopup;
 	private int score;
-
+	private int errorCount = 0;
 	public static UIController instance;
 
 
@@ -44,5 +44,16 @@ public class UIController : MonoBehaviour
 	{
 		score += amount;
 		m_score.text = score.ToString();
+	}
+
+	public void AddErrorScreen()
+	{
+		errorCount += 1;
+		if (errorCount > 20) {
+			Application.Quit();
+		}
+		GameObject error = Instantiate(m_ErrorPopup,transform);
+		 
+		((RectTransform)error.transform).position = new Vector3(0,0, 0);
 	}
 }
