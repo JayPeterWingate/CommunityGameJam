@@ -112,6 +112,7 @@ public class TankScript : MonoBehaviour
 			m_renderers[i].enabled = shouldBeActive;
 		}*/
         m_controller.SetCursor(isHappy, m_isFiring);
+		m_controller.lives = 4;
     }
     // Update is called once per frame
     void FixedUpdate()

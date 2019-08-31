@@ -163,7 +163,7 @@ public class LevelManager : MonoBehaviour
 
     public void UnfilteredTransition(CamTransitionType type)
     {
-        if ((type == CamTransitionType.Room_Down || type == CamTransitionType.Room_Left || type == CamTransitionType.Room_Right || type == CamTransitionType.Room_Up)
+		if ((type == CamTransitionType.Room_Down || type == CamTransitionType.Room_Left || type == CamTransitionType.Room_Right || type == CamTransitionType.Room_Up)
             && (m_gridElements.camPos != CamPos.InRoom))
         {
             return; //Return if invalid transition request
@@ -174,7 +174,8 @@ public class LevelManager : MonoBehaviour
         {
             case CamTransitionType.HW_New:
                 {
-                    GameObject temp;
+					UIController.instance.AddErrorScreen();
+					GameObject temp;
                     Vector3 shiftVal = new Vector3(0,0,0);
                     switch (m_gridElements.camPos)
                     {

@@ -50,13 +50,18 @@ public class UIController : MonoBehaviour
 
 	public void AddErrorScreen()
 	{
+
 		if(errorCount >= 6) { return; }
 		if (errorCount > 4) {
 			StartCoroutine(FireContinious());
 		}
 		else
 		{
-			m_Errors[errorCount].SetActive(true);
+			if(errorCount != 0)
+			{
+				m_Errors[errorCount].SetActive(true);
+			}
+			
 			errorCount += 1;
 		}
 	}
