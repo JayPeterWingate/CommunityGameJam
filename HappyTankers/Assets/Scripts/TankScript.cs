@@ -15,8 +15,19 @@ public class TankController : MonoBehaviour
 	public Color color;
 	public bool isAI;
 	public virtual void SetCursor(bool happy, bool ready) { }
-
-	public int lives;
+	private int lifeCount = 4;
+	public int lives
+	{
+		get { return lifeCount; }
+		set
+		{
+			if (!isAI)
+			{
+				UIController.instance.ShowLives(value);
+			}
+			lifeCount = value;
+		}
+	}
 }
 
 public class TankScript : MonoBehaviour
@@ -268,7 +279,7 @@ public class TankScript : MonoBehaviour
 	{
 		if (!m_isTakingDamage)
 		{
-			if (m_controller.lives > 0)
+			if (m_controller.lives > 1)
 			{
 				Destroy(bullet);
 				m_controller.lives -= 1;
@@ -287,9 +298,11 @@ public class TankScript : MonoBehaviour
 					if (FilterManager.IsHappy)
 					{
                         StartCoroutine(HandleHappyReset());
-                        player.lives = 3;
+						UIController.instance.ChangeScore(-1000);
+                        player.lives = 4;
 					} else
 					{
+
 						FilterManager.TriggerDeath();
 					}
 					

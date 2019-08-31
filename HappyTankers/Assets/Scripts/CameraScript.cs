@@ -25,7 +25,7 @@ public class CameraScript : MonoBehaviour
 		float horizontalHeight = verticleHeight * Screen.width / Screen.height;
 
 		m_camera.cullingMask = 1 << 0 | 1 << 10;
-		m_plane.transform.localScale = new Vector3(horizontalHeight / 9, 1, verticleHeight / 9);
+		m_plane.transform.localScale = new Vector3(horizontalHeight / 9.5f, 1, verticleHeight / 10);
 		//m_camera.cullingMask = 1 << 9 | 1 << 8;
 		m_blueScreen.SetActive(false);
 		FilterManager.OnChange.AddListener(RF1_FreezeMovement);
@@ -80,6 +80,7 @@ public class CameraScript : MonoBehaviour
 		m_plane.SetActive(false);
 		m_border.SetActive(false);
 		m_camera.cullingMask = 1 << 0 | 1 << 10 | 1 << 12 | 1 << 13 | 1 << 15 | 1 << 8;
+		UIController.instance.HeavyHandedReveal(false);
 	}
 
 
