@@ -37,7 +37,7 @@ public class PlayerScript : TankController
 			// Save the info
 			RaycastHit hit;
 			// You successfully hi
-			if (Physics.Raycast(ray, out hit))
+			if (Physics.Raycast(ray, out hit, Mathf.Infinity, ~(1 << 14), QueryTriggerInteraction.Collide))
 			{
 				turretTarget = hit.point;
 				
