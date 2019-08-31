@@ -2747,35 +2747,65 @@ PrefabInstance:
       propertyPath: m_camera
       value: 
       objectReference: {fileID: 167269413}
-    - target: {fileID: 6666892297449015662, guid: 127c7e3f6f77a0646aead6f887820db4,
+    - target: {fileID: 4271455959669966408, guid: 127c7e3f6f77a0646aead6f887820db4,
         type: 3}
-      propertyPath: m_levelObjectCodedPrefabs.Array.data[16].colorCode.r
-      value: 0.2509804
+      propertyPath: m_Mesh
+      value: 
       objectReference: {fileID: 0}
-    - target: {fileID: 6666892297449015662, guid: 127c7e3f6f77a0646aead6f887820db4,
+    - target: {fileID: 683133552319780345, guid: 127c7e3f6f77a0646aead6f887820db4,
         type: 3}
-      propertyPath: m_levelObjectCodedPrefabs.Array.data[16].colorCode.g
-      value: 0.2509804
+      propertyPath: m_textInfo.characterCount
+      value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 6666892297449015662, guid: 127c7e3f6f77a0646aead6f887820db4,
+    - target: {fileID: 683133552319780345, guid: 127c7e3f6f77a0646aead6f887820db4,
         type: 3}
-      propertyPath: m_levelObjectCodedPrefabs.Array.data[16].colorCode.b
-      value: 0.2509804
+      propertyPath: m_textInfo.spaceCount
+      value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 6666892297449015662, guid: 127c7e3f6f77a0646aead6f887820db4,
+    - target: {fileID: 683133552319780345, guid: 127c7e3f6f77a0646aead6f887820db4,
         type: 3}
-      propertyPath: m_levelObjectCodedPrefabs.Array.data[17].colorCode.r
-      value: 0.5019608
+      propertyPath: m_textInfo.wordCount
+      value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 6666892297449015662, guid: 127c7e3f6f77a0646aead6f887820db4,
+    - target: {fileID: 683133552319780345, guid: 127c7e3f6f77a0646aead6f887820db4,
         type: 3}
-      propertyPath: m_levelObjectCodedPrefabs.Array.data[17].colorCode.g
-      value: 0.5019608
+      propertyPath: m_textInfo.lineCount
+      value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 6666892297449015662, guid: 127c7e3f6f77a0646aead6f887820db4,
+    - target: {fileID: 683133552319780345, guid: 127c7e3f6f77a0646aead6f887820db4,
         type: 3}
-      propertyPath: m_levelObjectCodedPrefabs.Array.data[17].colorCode.b
-      value: 0.5019608
+      propertyPath: m_textInfo.pageCount
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5063707000920912804, guid: 127c7e3f6f77a0646aead6f887820db4,
+        type: 3}
+      propertyPath: m_Mesh
+      value: 
+      objectReference: {fileID: 0}
+    - target: {fileID: 4847828942112844003, guid: 127c7e3f6f77a0646aead6f887820db4,
+        type: 3}
+      propertyPath: m_textInfo.characterCount
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4847828942112844003, guid: 127c7e3f6f77a0646aead6f887820db4,
+        type: 3}
+      propertyPath: m_textInfo.spaceCount
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4847828942112844003, guid: 127c7e3f6f77a0646aead6f887820db4,
+        type: 3}
+      propertyPath: m_textInfo.wordCount
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4847828942112844003, guid: 127c7e3f6f77a0646aead6f887820db4,
+        type: 3}
+      propertyPath: m_textInfo.lineCount
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4847828942112844003, guid: 127c7e3f6f77a0646aead6f887820db4,
+        type: 3}
+      propertyPath: m_textInfo.pageCount
+      value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 127c7e3f6f77a0646aead6f887820db4, type: 3}

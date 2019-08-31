@@ -54,6 +54,7 @@ public class TankScript : MonoBehaviour
     [SerializeField] Animator m_animator;
     [SerializeField] AudioSource m_tankAudioHappy;
     [SerializeField] AudioSource m_turretAudioHappy;
+	[SerializeField] GameObject[] m_lights;
     bool m_isFiring = false;
     bool m_isShielding = false;
     bool m_isTakingDamage = false;
@@ -124,6 +125,10 @@ public class TankScript : MonoBehaviour
 			if (m_body.velocity.magnitude < 0.05)
 			{
 				power *= m_boostMultiplier;
+			}
+			for (int i = 0; i < m_lights.Length; i++)
+			{
+				m_lights[i].SetActive(m_body.velocity.magnitude > 0.05);
 			}
 			if (!m_controller.isAI)
 			{
