@@ -9601,6 +9601,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   targetDirection: {x: 0, y: 0}
   turretTarget: {x: 0, y: 0, z: 0}
+  boost: 0
   fireEvent:
     m_PersistentCalls:
       m_Calls: []
@@ -9760,6 +9761,16 @@ PrefabInstance:
         type: 3}
       propertyPath: m_rotatePower
       value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 7572879795259128528, guid: d3d45c3e34f7c40479403475941f9267,
+        type: 3}
+      propertyPath: paused
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7572879795259128528, guid: d3d45c3e34f7c40479403475941f9267,
+        type: 3}
+      propertyPath: m_boostMultiplier
+      value: 2
       objectReference: {fileID: 0}
     - target: {fileID: 8864040992825522329, guid: d3d45c3e34f7c40479403475941f9267,
         type: 3}

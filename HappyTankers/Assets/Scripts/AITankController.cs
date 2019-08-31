@@ -47,6 +47,8 @@ public class AITankController : TankController
 
 		// Pathing update
 		if (m_hasPath == true) {
+			m_agent.velocity = Vector3.zero;
+			targetDirection = m_agent.steeringTarget;
 			if (m_agent.remainingDistance < m_agent.stoppingDistance && TargetReached != null)
 			{
 				m_hasPath = false;

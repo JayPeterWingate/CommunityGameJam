@@ -29,7 +29,7 @@ public class AlliedTankController : AITankController
 	{
 		while (gameObject.activeInHierarchy)
 		{
-			yield return new WaitForSeconds(1);
+			yield return new WaitForSeconds(5);
 			IEnumerable<CityScript> livingCitiesInLevel = m_levelSpawned.GetComponentsInChildren<CityScript>().Where(city => !city.isDead);
 			foreach (CityScript target in livingCitiesInLevel)
 			{
@@ -39,12 +39,14 @@ public class AlliedTankController : AITankController
 				if(Physics.Raycast(ray,out info))
 				{
 					m_target = target;
-					turretTarget = target.transform.position;
-					StartCoroutine(FireRound());
+					turretTarget = target.transform.position + new Vector3(0.5f, 0.5f, 0.5f);
+					
 					break;
 				}
 				
 			}
+			yield return new WaitForSeconds(1);
+			StartCoroutine(FireRound());
 		}
 	}
 	private void TargetCity()
