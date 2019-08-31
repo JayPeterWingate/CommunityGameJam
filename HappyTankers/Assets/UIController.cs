@@ -43,7 +43,8 @@ public class UIController : MonoBehaviour
 	}
 	public void ChangeScore(int amount)
 	{
-		score += amount;
+		
+		score = Mathf.Max(score + amount,0);
 		m_score.text = score.ToString();
 	}
 

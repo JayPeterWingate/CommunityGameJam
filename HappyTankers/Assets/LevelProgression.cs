@@ -22,7 +22,7 @@ public class LevelProgression : MonoBehaviour
 	public void DestroyCity()
 	{
 		m_cityCount -= 1;
-		UIController.instance.ChangeScore(100);
+		UIController.instance.ChangeScore(1000);
 		if(m_cityCount == 0 && OnLevelComplete != null && !(!FilterManager.IsHappy || FilterManager.IsAlmostDark))
 		{
             PlayerScript.playerRef.transform.Find("Tank").GetComponent<TankScript>().TeleportOut();
