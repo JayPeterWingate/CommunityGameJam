@@ -13,6 +13,7 @@ public class CameraScript : MonoBehaviour
 	[SerializeField] GameObject m_transitionaryCamera;
 	[SerializeField] GameObject m_plane;
 	[SerializeField] GameObject m_border;
+    [SerializeField] GameObject m_mist;
 	public GameObject m_blueScreen;
 
     void Start()
@@ -59,6 +60,7 @@ public class CameraScript : MonoBehaviour
         yield return new WaitForSeconds(4f);
         m_camera.cullingMask = 1 << 10 | 1 << 13 | 1 << 15 | 1 << 8;
         m_animator.SetBool("RemoveFilter", true);
+        m_mist.SetActive(true);
         StartCoroutine(RF3_SombreFullStart());
     }
 
