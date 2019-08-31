@@ -17,6 +17,7 @@ public class GenerateLevel : MonoBehaviour
     [SerializeField] LevelTriggerScript m_triggerBot;
 
     [SerializeField] GameObject m_happyCover;
+    [SerializeField] GameObject m_happyLetterbox;
 
     // Start is called before the first frame update
     void Start()
@@ -105,5 +106,6 @@ public class GenerateLevel : MonoBehaviour
         //TODO area shadows
         Debug.Log("Area shadow mode: " + setting);
         m_happyCover.SetActive(setting);
+        m_happyLetterbox.SetActive(!setting);
     }
 }
