@@ -237,7 +237,8 @@ public class TankScript : MonoBehaviour
     private IEnumerator StartShield(float rise, float stay, float close, Vector3 size)
     {
         m_isShielding = true;
-        float current = 0;
+		m_shield.GetComponentInChildren<SpriteRenderer>().color = Color.HSVToRGB(UnityEngine.Random.value, 0.5f, 1);
+		float current = 0;
         m_shield.gameObject.SetActive(true);
         while (current < rise)
         {

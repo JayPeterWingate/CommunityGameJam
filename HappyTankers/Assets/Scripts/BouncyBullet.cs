@@ -20,7 +20,8 @@ public class BouncyBullet : MonoBehaviour
 
         if (FilterManager.IsHappy)
         {
-            m_happySound.clip = SoundController.Instance.chirpSmallFire;
+			GetComponentInChildren<SpriteRenderer>().color = Color.HSVToRGB(Random.value, 1, 1);
+			m_happySound.clip = SoundController.Instance.chirpSmallFire;
             m_happySound.Play();
         }
         else
