@@ -5792,9 +5792,7 @@ PrefabInstance:
     - target: {fileID: 6663872675696083897, guid: cf4ffb7cac786ae4bb80500d280658e5,
         type: 3}
       propertyPath: m_text
-      value: 'Filter renderer failed
-
-        Player now aware'
+      value: '[Terminator Command] \n Terminator Tank 3459 Return to your city block'
       objectReference: {fileID: 0}
     - target: {fileID: 1848632482694807608, guid: cf4ffb7cac786ae4bb80500d280658e5,
         type: 3}
@@ -5985,9 +5983,7 @@ PrefabInstance:
     - target: {fileID: 6663872675696083897, guid: cf4ffb7cac786ae4bb80500d280658e5,
         type: 3}
       propertyPath: m_text
-      value: 'Level Exception
-
-        Player out of bounds'
+      value: '[System Diagnostic] \n Attempting reboot of systems'
       objectReference: {fileID: 0}
     - target: {fileID: 1848632482694807608, guid: cf4ffb7cac786ae4bb80500d280658e5,
         type: 3}
@@ -8214,9 +8210,7 @@ PrefabInstance:
     - target: {fileID: 6663872675696083897, guid: cf4ffb7cac786ae4bb80500d280658e5,
         type: 3}
       propertyPath: m_text
-      value: 'System Diagnostics
-
-        Analysis [Failed]'
+      value: '[System Diagnostic] \n Alerting high command of rouge Agent'
       objectReference: {fileID: 0}
     - target: {fileID: 1848632482694807608, guid: cf4ffb7cac786ae4bb80500d280658e5,
         type: 3}
@@ -10047,7 +10041,7 @@ PrefabInstance:
     - target: {fileID: 7077533124465528599, guid: cf4ffb7cac786ae4bb80500d280658e5,
         type: 3}
       propertyPath: m_AnchoredPosition.y
-      value: -159.88002
+      value: -159.88
       objectReference: {fileID: 0}
     - target: {fileID: 7077533124465528599, guid: cf4ffb7cac786ae4bb80500d280658e5,
         type: 3}
@@ -11192,9 +11186,8 @@ PrefabInstance:
     - target: {fileID: 6663872675696083897, guid: cf4ffb7cac786ae4bb80500d280658e5,
         type: 3}
       propertyPath: m_text
-      value: 'Player Exception
-
-        unexpected Player behaviour'
+      value: '[System Diagnostic] /n Visual distortion field failure detected. Pilot
+        is Aware'
       objectReference: {fileID: 0}
     - target: {fileID: 1848632482694807608, guid: cf4ffb7cac786ae4bb80500d280658e5,
         type: 3}

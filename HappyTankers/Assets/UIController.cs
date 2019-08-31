@@ -57,11 +57,8 @@ public class UIController : MonoBehaviour
 		}
 		else
 		{
-			if(errorCount != 0)
-			{
-				m_Errors[errorCount].SetActive(true);
-			}
-			
+			m_Errors[errorCount].SetActive(true);
+					
 			errorCount += 1;
 		}
 	}
