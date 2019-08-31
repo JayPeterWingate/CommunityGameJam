@@ -54,6 +54,7 @@ public class BouncyBullet : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        m_direction = new Vector3(m_direction.x, 0, m_direction.z);
         DeleteIfOutOfView();
         RaycastHit hit;
         Physics.Linecast(transform.position, transform.position + m_direction * m_speed * Time.deltaTime, out hit, ~(1 << 14), QueryTriggerInteraction.Collide);

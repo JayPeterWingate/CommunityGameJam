@@ -360,7 +360,13 @@ public class LevelManager : MonoBehaviour
                                 }
                             default: break;
                         }
-                        OutLevelSlot(OLSInput.x, OLSInput.y).SetActiveLevel(false);
+                        GenerateLevel LevelAvoided = OutLevelSlot(OLSInput.x, OLSInput.y);
+                        if (LevelAvoided != m_gridElements.LevelLast)
+                        {
+                            m_gridElements.LevelLast.SetActiveLevel(false);
+                            m_gridElements.LevelLast = LevelAvoided;
+                        }
+                        
                     }
                     m_gridElements.camPos = CamPos.InRoom;
                     break;
