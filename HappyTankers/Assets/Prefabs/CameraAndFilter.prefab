@@ -5767,22 +5767,22 @@ PrefabInstance:
     - target: {fileID: 6663872675696083897, guid: cf4ffb7cac786ae4bb80500d280658e5,
         type: 3}
       propertyPath: m_textInfo.characterCount
-      value: 39
+      value: 69
       objectReference: {fileID: 0}
     - target: {fileID: 6663872675696083897, guid: cf4ffb7cac786ae4bb80500d280658e5,
         type: 3}
       propertyPath: m_textInfo.spaceCount
-      value: 5
+      value: 11
       objectReference: {fileID: 0}
     - target: {fileID: 6663872675696083897, guid: cf4ffb7cac786ae4bb80500d280658e5,
         type: 3}
       propertyPath: m_textInfo.wordCount
-      value: 6
+      value: 10
       objectReference: {fileID: 0}
     - target: {fileID: 6663872675696083897, guid: cf4ffb7cac786ae4bb80500d280658e5,
         type: 3}
       propertyPath: m_textInfo.lineCount
-      value: 2
+      value: 3
       objectReference: {fileID: 0}
     - target: {fileID: 6663872675696083897, guid: cf4ffb7cac786ae4bb80500d280658e5,
         type: 3}

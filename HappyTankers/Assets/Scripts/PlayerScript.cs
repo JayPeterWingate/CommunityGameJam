@@ -42,6 +42,12 @@ public class PlayerScript : TankController
 				
 			}
 		};
+		controls.Player.XBoxRotateTurret.performed += crt =>
+		{
+			Vector2 read = crt.ReadValue<Vector2>();
+			Vector3 target = new Vector3(read.x, 0, read.y) * 10 + transform.Find("Tank").position;
+			turretTarget = target;
+		};
 		controls.Player.Fire.performed += crt => fireEvent.Invoke();
         controls.Player.FireStrong.performed += crt => strongFireEvent.Invoke();
         controls.Player.Shield.performed += crt => shieldEvent.Invoke();

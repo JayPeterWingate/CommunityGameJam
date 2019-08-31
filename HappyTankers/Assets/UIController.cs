@@ -31,7 +31,7 @@ public class UIController : MonoBehaviour
 		}
 		else
 		{
-			m_scoreTitle.text = "Casulties:";
+			m_scoreTitle.text = "Casualties:";
 		}
 	}
 	public void ShowLives(int number)
