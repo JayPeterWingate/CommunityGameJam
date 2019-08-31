@@ -311,13 +311,16 @@ public class LevelManager : MonoBehaviour
                         m_currentUFLIndex++;
                         m_gridElements.LevelNext = m_unfilteredLevelGenerations[m_currentUFLIndex];
                     }
-                    //TODO Unhardcode this level 3 spot
+					else
+					{
+						PlayerBlock.PlayerStarter.ActivateEnemy();
+					}
+					//TODO Unhardcode this level 3 spot
 
-                    //TODO activate and darken next level
+					//TODO activate and darken next level
 
-                    PlayerBlock.PlayerStarter.ActivateEnemy();
 
-                    if (FilterManager.IsHappy) { FilterManager.IsHappy = false; }
+					if (FilterManager.IsHappy) { FilterManager.IsHappy = false; }
                     break;
                 }
             case CamTransitionType.HW_Old:

@@ -7,7 +7,7 @@ using System.Linq;
 public class AITankController : TankController
 {
 	IEnumerable<TankScript> TankList;
-	[SerializeField]NavMeshAgent m_agent;
+	[SerializeField] protected NavMeshAgent m_agent;
 
 	bool m_hasPath;
 	bool m_lookForEnemies = true;
@@ -19,6 +19,7 @@ public class AITankController : TankController
     {
 		print("HIT");
 		TargetReached = new UnityEvent();
+		isAI = true;
 		/*TankList =
 		(from tank in TankScript.TankList
 		 where tank.transform.parent == transform.parent && tank.color != color
@@ -27,9 +28,8 @@ public class AITankController : TankController
 	
 	protected void SetDestinationNear(Vector3 pos, float range)
 	{
-		float x = Random.Range(-range, range);
-		float z = Random.Range(-range, range);
-		SetTarget( pos + new Vector3(x, 0, z));
+		Vector3 randomPoint = Random.onUnitSphere * range;
+		SetTarget( new Vector3(pos.x + randomPoint.x, pos.y, pos.z + randomPoint.z));
 	}
 	protected void Destruct()
 	{
@@ -47,8 +47,18 @@ public class AITankController : TankController
 
 		// Pathing update
 		if (m_hasPath == true) {
-			m_agent.velocity = Vector3.zero;
-			targetDirection = m_agent.steeringTarget;
+			try
+			{
+				Vector3 dir = m_agent.steeringTarget - transform.Find("Tank").position;
+				targetDirection = new Vector2(dir.x, dir.z);
+			}
+			catch
+			{
+
+			}
+			
+			
+			
 			if (m_agent.remainingDistance < m_agent.stoppingDistance && TargetReached != null)
 			{
 				m_hasPath = false;
@@ -66,7 +76,10 @@ public class AITankController : TankController
 	{
 		//print("Got a path");
 		m_hasPath = true;
-		if(m_agent.isOnNavMesh)
+		if (m_agent.isOnNavMesh)
+		{
 			m_agent.SetDestination(target);
+		}
+		
 	}
 }

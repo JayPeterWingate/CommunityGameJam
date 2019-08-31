@@ -22,7 +22,7 @@ public class AlliedTankController : AITankController
 	{
 		if (m_levelSpawned == null) { gameObject.SetActive(false); return; }
 		m_target = GetRandomTarget();
-		SetDestinationNear(m_target.transform.position, 0f);
+		SetDestinationNear(m_target.transform.position + new Vector3(0.5f, 0.5f, 0.5f), 5.0f);
 		StartCoroutine(Aim());
 	}
 	private IEnumerator Aim()
@@ -53,7 +53,7 @@ public class AlliedTankController : AITankController
 	{
 		if (m_target)
 		{
-			SetTarget(m_target.transform.position + new Vector3(0.5f, 0, 0.5f));
+			SetDestinationNear(m_target.transform.position + new Vector3(0.5f, 0, 0.5f), 2.0f);
 		}
 		
 	}
@@ -76,5 +76,10 @@ public class AlliedTankController : AITankController
 	private void OnDestroy()
 	{
 		Destruct();
+	}
+
+	private void OnDrawGizmosSelected()
+	{
+		Gizmos.DrawSphere(m_agent.destination, 5f);
 	}
 }

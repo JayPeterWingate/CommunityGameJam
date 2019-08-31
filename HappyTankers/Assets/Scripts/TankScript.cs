@@ -13,7 +13,7 @@ public class TankController : MonoBehaviour
     public UnityEvent strongFireEvent = new UnityEvent();
 	public UnityEvent shieldEvent = new UnityEvent();
 	public Color color;
-
+	public bool isAI;
 	public virtual void SetCursor(bool happy, bool ready) { }
 
 	public int lives;
@@ -104,15 +104,16 @@ public class TankScript : MonoBehaviour
     {
         if (m_controller && !paused)
         {
-			Vector3 direction = new Vector3(m_controller.targetDirection.x, 0, m_controller.targetDirection.y);
+			Vector3 direction = new Vector3(m_controller.targetDirection.x, 0, m_controller.targetDirection.y).normalized;
 			float power = m_horsePower;
 			if (m_body.velocity.magnitude < 0.05)
 			{
 				power *= m_boostMultiplier;
-				print("This is fired");
 			}
-				
-			m_body.AddForce(direction * power);
+			if (!m_controller.isAI)
+			{
+				m_body.AddForce(direction * power);
+			}
 			if (direction == new Vector3())
 			{
 				direction = m_lastDirection;

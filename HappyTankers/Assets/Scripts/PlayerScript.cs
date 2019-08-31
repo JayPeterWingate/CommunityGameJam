@@ -20,6 +20,7 @@ public class PlayerScript : TankController
 	
 	private void Awake()
 	{
+		isAI = false;
 		playerRef = gameObject;
 		color = new Color(1, 1, 1);
 		controls = new MasterControl();
