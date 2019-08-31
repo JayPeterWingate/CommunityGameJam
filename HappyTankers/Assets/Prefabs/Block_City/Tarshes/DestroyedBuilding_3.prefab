@@ -11,7 +11,7 @@ GameObject:
   - component: {fileID: 6613144782550112950}
   - component: {fileID: 2782550136821096576}
   - component: {fileID: 8476077895572544633}
-  m_Layer: 0
+  m_Layer: 10
   m_Name: DestroyedBuilding_3
   m_TagString: Untagged
   m_Icon: {fileID: 0}
