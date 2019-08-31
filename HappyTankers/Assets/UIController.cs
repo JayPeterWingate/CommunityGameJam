@@ -11,7 +11,8 @@ public class UIController : MonoBehaviour
 	[SerializeField] Image[] m_hearts;
 	[SerializeField] Sprite m_fullHeart;
 	[SerializeField] Sprite m_noHeart;
-	[SerializeField] GameObject m_ErrorPopup;
+	[SerializeField] GameObject[] m_Errors;
+	[SerializeField] Transform m_ContiniousErrorParent;
 	private int score;
 	private int errorCount = 0;
 	public static UIController instance;
@@ -48,12 +49,25 @@ public class UIController : MonoBehaviour
 
 	public void AddErrorScreen()
 	{
-		errorCount += 1;
-		if (errorCount > 20) {
-			Application.Quit();
+		if(errorCount >= 6) { return; }
+		if (errorCount > 4) {
+			StartCoroutine(FireContinious());
 		}
-		GameObject error = Instantiate(m_ErrorPopup,transform);
-		 
-		((RectTransform)error.transform).position = new Vector3(0,0, 0);
+		else
+		{
+			m_Errors[errorCount].SetActive(true);
+			errorCount += 1;
+		}
+	}
+
+	IEnumerator FireContinious()
+	{
+		for(int i = 0; i < m_ContiniousErrorParent.childCount; i++)
+		{
+			yield return new WaitForSeconds(0.05f);
+			m_ContiniousErrorParent.GetChild(i).gameObject.SetActive(true);
+		}
+		yield return new WaitForSeconds(1);
+		Application.Quit();
 	}
 }

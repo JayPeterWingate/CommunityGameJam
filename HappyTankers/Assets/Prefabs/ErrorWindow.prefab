@@ -86,7 +86,6 @@ GameObject:
   - component: {fileID: 7077533124465528599}
   - component: {fileID: 8825872811184356611}
   - component: {fileID: 8936612997593170465}
-  - component: {fileID: 3004030422543749031}
   m_Layer: 0
   m_Name: ErrorWindow
   m_TagString: Untagged
@@ -112,7 +111,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: -429.05, y: 250.44998}
+  m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: 277.90002, y: 138.1}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &8825872811184356611
@@ -152,19 +151,6 @@ MonoBehaviour:
   m_FillClockwise: 1
   m_FillOrigin: 0
   m_UseSpriteMesh: 0
---- !u!114 &3004030422543749031
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 4401575271892565058}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: b1caa68f2b361c4428f830280d687fa0, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  m_text: {fileID: 6663872675696083897}
 --- !u!1 &5140817907752766807
 GameObject:
   m_ObjectHideFlags: 0
@@ -259,8 +245,8 @@ MonoBehaviour:
   m_outlineColor:
     serializedVersion: 2
     rgba: 4278190080
-  m_fontSize: 18
-  m_fontSizeBase: 18
+  m_fontSize: 20.4
+  m_fontSizeBase: 20.4
   m_fontWeight: 400
   m_enableAutoSizing: 0
   m_fontSizeMin: 18
