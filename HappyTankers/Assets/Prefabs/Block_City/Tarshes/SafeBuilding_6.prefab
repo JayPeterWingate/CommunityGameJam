@@ -105,7 +105,6 @@ GameObject:
   - component: {fileID: 1400986475047227031}
   - component: {fileID: 7938240279119541409}
   - component: {fileID: 4401919072230819928}
-  - component: {fileID: -3258181557531360881}
   m_Layer: 10
   m_Name: SafeBuilding_6
   m_TagString: Untagged
@@ -173,19 +172,3 @@ MeshRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
---- !u!208 &-3258181557531360881
-NavMeshObstacle:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2677975048912370820}
-  m_Enabled: 1
-  serializedVersion: 3
-  m_Shape: 1
-  m_Extents: {x: 4, y: 4.372, z: 4}
-  m_MoveThreshold: 0.1
-  m_Carve: 0
-  m_CarveOnlyStationary: 1
-  m_Center: {x: 0, y: 4.2770004, z: -0.11100001}
-  m_TimeToStationary: 0.5
