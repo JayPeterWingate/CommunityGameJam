@@ -64,6 +64,14 @@ public class MasterControl : IInputActionCollection
                     ""expectedControlType"": """",
                     ""processors"": """",
                     ""interactions"": """"
+                },
+                {
+                    ""name"": ""Escape"",
+                    ""type"": ""Button"",
+                    ""id"": ""4e09a2eb-478c-4d88-aac2-3a615e5d2281"",
+                    ""expectedControlType"": """",
+                    ""processors"": """",
+                    ""interactions"": """"
                 }
             ],
             ""bindings"": [
@@ -231,6 +239,17 @@ public class MasterControl : IInputActionCollection
                     ""action"": ""MovementAxis"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": true
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""06bfcc3f-cac9-40c7-92df-12b08839c821"",
+                    ""path"": ""<Keyboard>/escape"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""Escape"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
                 }
             ]
         }
@@ -275,6 +294,7 @@ public class MasterControl : IInputActionCollection
         m_Player_Shield = m_Player.GetAction("Shield");
         m_Player_FireStrong = m_Player.GetAction("FireStrong");
         m_Player_MovementAxis = m_Player.GetAction("MovementAxis");
+        m_Player_Escape = m_Player.GetAction("Escape");
     }
 
     ~MasterControl()
@@ -330,6 +350,7 @@ public class MasterControl : IInputActionCollection
     private readonly InputAction m_Player_Shield;
     private readonly InputAction m_Player_FireStrong;
     private readonly InputAction m_Player_MovementAxis;
+    private readonly InputAction m_Player_Escape;
     public struct PlayerActions
     {
         private MasterControl m_Wrapper;
@@ -340,6 +361,7 @@ public class MasterControl : IInputActionCollection
         public InputAction @Shield => m_Wrapper.m_Player_Shield;
         public InputAction @FireStrong => m_Wrapper.m_Player_FireStrong;
         public InputAction @MovementAxis => m_Wrapper.m_Player_MovementAxis;
+        public InputAction @Escape => m_Wrapper.m_Player_Escape;
         public InputActionMap Get() { return m_Wrapper.m_Player; }
         public void Enable() { Get().Enable(); }
         public void Disable() { Get().Disable(); }
@@ -367,6 +389,9 @@ public class MasterControl : IInputActionCollection
                 MovementAxis.started -= m_Wrapper.m_PlayerActionsCallbackInterface.OnMovementAxis;
                 MovementAxis.performed -= m_Wrapper.m_PlayerActionsCallbackInterface.OnMovementAxis;
                 MovementAxis.canceled -= m_Wrapper.m_PlayerActionsCallbackInterface.OnMovementAxis;
+                Escape.started -= m_Wrapper.m_PlayerActionsCallbackInterface.OnEscape;
+                Escape.performed -= m_Wrapper.m_PlayerActionsCallbackInterface.OnEscape;
+                Escape.canceled -= m_Wrapper.m_PlayerActionsCallbackInterface.OnEscape;
             }
             m_Wrapper.m_PlayerActionsCallbackInterface = instance;
             if (instance != null)
@@ -389,6 +414,9 @@ public class MasterControl : IInputActionCollection
                 MovementAxis.started += instance.OnMovementAxis;
                 MovementAxis.performed += instance.OnMovementAxis;
                 MovementAxis.canceled += instance.OnMovementAxis;
+                Escape.started += instance.OnEscape;
+                Escape.performed += instance.OnEscape;
+                Escape.canceled += instance.OnEscape;
             }
         }
     }
@@ -419,5 +447,6 @@ public class MasterControl : IInputActionCollection
         void OnShield(InputAction.CallbackContext context);
         void OnFireStrong(InputAction.CallbackContext context);
         void OnMovementAxis(InputAction.CallbackContext context);
+        void OnEscape(InputAction.CallbackContext context);
     }
 }

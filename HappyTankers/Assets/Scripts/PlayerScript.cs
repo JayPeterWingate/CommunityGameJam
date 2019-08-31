@@ -3,8 +3,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.InputSystem;
-
-
+using UnityEngine.SceneManagement;
 
 public class PlayerScript : TankController
 {
@@ -46,6 +45,7 @@ public class PlayerScript : TankController
 		controls.Player.Fire.performed += crt => fireEvent.Invoke();
         controls.Player.FireStrong.performed += crt => strongFireEvent.Invoke();
         controls.Player.Shield.performed += crt => shieldEvent.Invoke();
+		controls.Player.Escape.performed += crt => SceneManager.LoadScene(0);
 	}
 
 	public override void SetCursor(bool happy, bool ready) =>	Cursor.SetCursor(happy? ready ? m_happyReadyCursor : m_happyCursor : ready ? m_darkReadyCursor : m_darkCursor, new Vector2(32, 32), CursorMode.Auto);

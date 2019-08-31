@@ -174,7 +174,7 @@ public class LevelManager : MonoBehaviour
         {
             case CamTransitionType.HW_New:
                 {
-					UIController.instance.AddErrorScreen();
+					
 					GameObject temp;
                     Vector3 shiftVal = new Vector3(0,0,0);
                     switch (m_gridElements.camPos)
@@ -425,7 +425,8 @@ public class LevelManager : MonoBehaviour
             if (!FilterManager.IsHappy) {
                 m_currentUFLIndex++;
                 m_gridElements.LevelNext = m_unfilteredLevelGenerations[m_currentUFLIndex];
-            }
+				UIController.instance.AddErrorScreen();
+			}
             Debug.Log("NextLevelIndex = " + m_currentUFLIndex);
         }
         else
