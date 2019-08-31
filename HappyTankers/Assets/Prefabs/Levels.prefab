@@ -166,6 +166,10 @@ MonoBehaviour:
   - colorCode: {r: 0, g: 0.5019608, b: 0, a: 1}
     prefab: {fileID: 1563858386014756603, guid: 8a7d3ae47d37bad4b9ded9f7335b4e0c,
       type: 3}
+  - colorCode: {r: 0.25, g: 0.25, b: 0.25, a: 1}
+    prefab: {fileID: 829868989969212873, guid: 2b5b3fdc2d1fea7458ef0651f87b6930, type: 3}
+  - colorCode: {r: 0.5, g: 0.5, b: 0.5, a: 1}
+    prefab: {fileID: 829868989969212873, guid: bf13a379c8ad1334a8b54adcad132186, type: 3}
   m_levels:
   - {fileID: 1784690414850277822}
   - {fileID: 307300578237859232}
