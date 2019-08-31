@@ -181,7 +181,7 @@ MonoBehaviour:
   - {fileID: 4863852148935936327}
   - {fileID: 4863852147844867951}
   m_chip: {fileID: 8300000, guid: 575845ac3b1137c42ad282fd70ea8f55, type: 3}
-  m_strings: {fileID: 8300000, guid: 7cf654dc3da0cef42a90fee56cdd58b3, type: 3}
+  m_strings: {fileID: 8300000, guid: c26029b6664b96e4984423e6e17fc75b, type: 3}
   m_rock: {fileID: 8300000, guid: f1bbf2b45e0c8204a9145f2d122db3fa, type: 3}
   m_static: {fileID: 8300000, guid: 412d6d664cf02b1429940a5a4bfe79be, type: 3}
   m_rain: {fileID: 8300000, guid: 35edd560528d12c4bbee34247f60ff70, type: 3}

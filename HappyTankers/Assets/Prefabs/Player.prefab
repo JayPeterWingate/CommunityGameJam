@@ -65,7 +65,6 @@ MonoBehaviour:
       Culture=neutral, PublicKeyToken=null
   color: {r: 1, g: 1, b: 1, a: 1}
   isAI: 0
-  lives: 3
   startPos: {x: 0, y: 0, z: 0}
   m_darkCursor: {fileID: 2800000, guid: c3b7d2444a6927343af6ec36a4344612, type: 3}
   m_happyCursor: {fileID: 2800000, guid: 66865323dae595044a004bf0037eb51b, type: 3}
@@ -112,8 +111,8 @@ BoxCollider:
   m_IsTrigger: 0
   m_Enabled: 1
   serializedVersion: 2
-  m_Size: {x: 0.9999999, y: 1.0000001, z: 1}
-  m_Center: {x: 0, y: 0.00000023841858, z: 0}
+  m_Size: {x: 1.71, y: 5.51, z: 1.56}
+  m_Center: {x: 0, y: 2.07, z: -0.19}
 --- !u!65 &1474566752
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -123,7 +122,7 @@ BoxCollider:
   m_GameObject: {fileID: 7196062198206430265}
   m_Material: {fileID: 0}
   m_IsTrigger: 0
-  m_Enabled: 1
+  m_Enabled: 0
   serializedVersion: 2
   m_Size: {x: 0.9999999, y: 1.0000001, z: 1}
   m_Center: {x: 0, y: 0.00000023841858, z: 0}
@@ -211,18 +210,28 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 7572879795259128528, guid: d3d45c3e34f7c40479403475941f9267,
         type: 3}
-      propertyPath: paused
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 7572879795259128528, guid: d3d45c3e34f7c40479403475941f9267,
-        type: 3}
       propertyPath: m_boostMultiplier
       value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 7572879795729595922, guid: d3d45c3e34f7c40479403475941f9267,
+        type: 3}
+      propertyPath: m_Name
+      value: BodyAndCollider
       objectReference: {fileID: 0}
     - target: {fileID: 8864040992825522329, guid: d3d45c3e34f7c40479403475941f9267,
         type: 3}
       propertyPath: m_IsTrigger
       value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 7572879796893449971, guid: d3d45c3e34f7c40479403475941f9267,
+        type: 3}
+      propertyPath: m_Enabled
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7572879795876887380, guid: d3d45c3e34f7c40479403475941f9267,
+        type: 3}
+      propertyPath: m_Enabled
+      value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: d3d45c3e34f7c40479403475941f9267, type: 3}

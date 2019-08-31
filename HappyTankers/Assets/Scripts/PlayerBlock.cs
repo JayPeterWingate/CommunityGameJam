@@ -33,7 +33,7 @@ public class PlayerBlock : BlockScript
 
         player.GetComponent<Rigidbody>().velocity = new Vector3();
 
-        player.GetComponent<Rigidbody>().MovePosition(transform.position);
+        player.GetComponent<Rigidbody>().MovePosition(transform.position + new Vector3(0,1f,0));
 		PlayerScript.playerRef.GetComponent<PlayerScript>().startPos = transform.position;
         if (player.paused) { player.TeleportIn(); }
 

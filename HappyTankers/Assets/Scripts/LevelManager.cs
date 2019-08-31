@@ -325,7 +325,6 @@ public class LevelManager : MonoBehaviour
                 }
             case CamTransitionType.HW_Old:
                 {
-                    m_gridElements.camPos = CamPos.InRoom;
                     m_camera.LerpMoveFocus(m_gridElements.worldCentre);
                     m_gridElements.LevelCurrent.SetShadowMode(false);
 
@@ -363,6 +362,7 @@ public class LevelManager : MonoBehaviour
                         }
                         OutLevelSlot(OLSInput.x, OLSInput.y).SetActiveLevel(false);
                     }
+                    m_gridElements.camPos = CamPos.InRoom;
                     break;
                 }
             case CamTransitionType.Room_Left:
