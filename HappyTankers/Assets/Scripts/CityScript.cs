@@ -37,6 +37,18 @@ public class CityScript : BlockScript
             FilterManager.OnChange.AddListener(AnimateFakeAI);
         }
 
+        m_healthyBuildings = new GameObject[1];
+        m_brokenBuildings = new GameObject[1];
+
+        m_healthyBuildings[0] = Instantiate(m_healthyCityPrefabs[Random.Range(0, m_healthyCityPrefabs.Length)]
+            , transform.position + new Vector3(0.5f, 0, 0.5f), Quaternion.Euler(new Vector3(0, 90 * Random.Range(0, 4), 0)));
+
+        m_brokenBuildings[0] = Instantiate(m_brokenCityPrefabs[Random.Range(0, m_brokenCityPrefabs.Length)]
+            , transform.position + new Vector3(0.5f, 0, 0.5f), Quaternion.Euler(new Vector3(0, 90 * Random.Range(0, 4), 0)));
+
+        m_healthyBuildings[0].transform.parent = m_dark.transform;
+        m_brokenBuildings[0].transform.parent = m_dark.transform;
+        /*
         m_healthyBuildings = new GameObject[4];
         m_brokenBuildings = new GameObject[4];
 
@@ -66,7 +78,7 @@ public class CityScript : BlockScript
         m_brokenBuildings[1].transform.parent = m_dark.transform;
         m_brokenBuildings[2].transform.parent = m_dark.transform;
         m_brokenBuildings[3].transform.parent = m_dark.transform;
-
+        */
         SetBreakCity(false);
 		m_level.GetComponent<LevelProgression>().RegisterCity();
         //StartCoroutine(TestBreak());
@@ -144,6 +156,10 @@ public class CityScript : BlockScript
         }
 
         m_healthyBuildings[0].SetActive(!broken);
+
+        m_brokenBuildings[0].SetActive(broken);
+        /*
+        m_healthyBuildings[0].SetActive(!broken);
         m_healthyBuildings[1].SetActive(!broken);
         m_healthyBuildings[2].SetActive(!broken);
         m_healthyBuildings[3].SetActive(!broken);
@@ -152,15 +168,15 @@ public class CityScript : BlockScript
         m_brokenBuildings[1].SetActive(broken);
         m_brokenBuildings[2].SetActive(broken);
         m_brokenBuildings[3].SetActive(broken);
-
-		m_happySprite.enabled = !broken;
+        */
+        m_happySprite.enabled = !broken;
 		m_onFireSprite.enabled = broken;
 
         if (broken)
         {
             m_fire.Play();
             m_smoke.Play();
-            m_explosion.Play();
+            //m_explosion.Play();
         }
 		// GetComponent<NavMeshObstacle>().carving = !broken;
     }
