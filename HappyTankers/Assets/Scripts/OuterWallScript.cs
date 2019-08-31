@@ -6,13 +6,13 @@ using UnityEngine.AI;
 public class OuterWallScript : BlockScript
 {
     [SerializeField] SpriteRenderer m_happySprite;
-    int m_health = 2;
+    int m_health = 1;
 	// Start is called before the first frame update
 	void Start()
 	{
 		SetBreakWall(false);
 #if UNITY_EDITOR
-		transform.position = new Vector3(0,-10,0);
+		// transform.position = new Vector3(0,-10,0);
 #endif
 	}
 
