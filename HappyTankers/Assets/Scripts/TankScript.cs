@@ -14,7 +14,9 @@ public class TankController : MonoBehaviour
 	public UnityEvent shieldEvent = new UnityEvent();
 	public Color color;
 	public bool isAI;
-	public virtual void SetCursor(bool happy, bool ready) { }
+   
+
+    public virtual void SetCursor(bool happy, bool ready) { }
 	private int lifeCount = 4;
 	public int lives
 	{
@@ -61,9 +63,10 @@ public class TankScript : MonoBehaviour
     public bool paused = false;
 	Vector3 m_lastDirection = new Vector3(0,0,1);
 	[SerializeField] float m_boostMultiplier;
+    public bool allowHeavy = false;
 
-	// Start is called before the first frame update
-	void Start()
+    // Start is called before the first frame update
+    void Start()
     {
         TankList.Add(this);
         m_currentTarget = new Vector3();
@@ -131,7 +134,6 @@ public class TankScript : MonoBehaviour
 			} else
 			{
 				m_lastDirection = direction;
-
 			}
 			
 			
@@ -197,7 +199,7 @@ public class TankScript : MonoBehaviour
     }
     private void FireSecondaryStrongBattleCannon()
     {
-        if (!m_isFiring && !m_isShielding && !m_isTakingDamage && !paused)
+        if (!m_isFiring && !m_isShielding && !m_isTakingDamage && !paused && allowHeavy)
         {
             StartCoroutine(FireBullets(1, 0.05f, 1.0f, true));
         }

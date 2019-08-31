@@ -521,7 +521,13 @@ public class LevelManager : MonoBehaviour
             InLevelSlot(m_gridElements.LevelCurrent);
             nextLevel.SetActiveLevel(true);
 			TankScript.TankList.ForEach((TankScript tank) => tank.DestroyBullets());
-			if (PlayerBlock.PlayerStarter != null)
+
+            if (i == 3)
+            {
+                PlayerScript.playerRef.transform.Find("Tank").GetComponent<TankScript>().allowHeavy = true;
+            }
+
+            if (PlayerBlock.PlayerStarter != null)
 			{
 				PlayerBlock.PlayerStarter.TeleportPlayer();
 			}			
